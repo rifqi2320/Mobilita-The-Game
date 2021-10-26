@@ -1,7 +1,7 @@
 #include "../src/item.h"
 #include <stdio.h>
 
-int main() {
+void main() {
   Item I;
   CreateItem(&I, 'N', 2, 2, 'A', 'B');
   printf(isItemArrived(I, 3) ? "I has arrived " : "I hasn't arrived ");
