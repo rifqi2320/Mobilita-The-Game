@@ -1,40 +1,84 @@
-#include <stdio.h>
-#include "tokenmachine.h"
 #include "charmachine.h"
+#include "item.h"
+#include "matrix.h"
+#include "point.h"
+#include "tokenmachine.h"
+#include <stdio.h>
 
 char currentChar;
 boolean endToken;
 Token currentToken;
 
-void inputAdjacency() {
+Token nextToken() {
+  Token tempToken;
+  if (!endToken) {
+    tempToken = currentToken;
+    advToken();
+  }
+  return Token;
+}
 
-};
-/* Menerima input matriks adjacency dan membuat matriks peta sejumlah (N+1)X(N+1) dengan N : jumlah bangunan
-Format yaitu biner (0,1) misalnya di baris ke-1 terdapat 0 0 1 0 berarti 
-nilai 1 yaitu kolom ke 2 atau bangunan ke-2 (B) dapat dicapai oleh bangunan ke-1 (A)
-*/
+void inputMain(char dir[] /*Masukkin output config*/) {
+  int i, j, k; // Iterator
+  int N, M;    // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
+  int L;       // Jumlah Gedung (4 <= L <= 26)
+  int P;       // Jumlah Pesanan (5 <= P <= 30)
 
-void inputBangunan() {
+  // Item sementara
+  char temptype;
+  int temptArrival;
+  char templPickup;
+  char templDropoff;
+  Item tempItem;
 
-};
-/* Menerima daftar Bangunan beserta koordinatnya untuk digunakan membuat Map
-Format input misalny "A 1 2" berarti bangunan A berada di kooordinat 1,2 
-*/
+  Matrix m;
+  startToken(dir);
+  POINT tempListPoint[27]; // Nanti diganti pake list dynamic of point buat
+                           // building
+  Item tempListItem[30];   // Nanti diganti pake linked list of Item buat daftar
+                           // pesanan
 
-void inputPesanan() {
+  // Input Ukuran Matriks
+  N = nextToken().val;
+  M = nextToken().val;
 
-};
-/* Menerima daftar pesanan yaitu berbagai item : normal, perishable, heavy, VIP item 
-Jika input merupakan perishable maka disertai dengan waktu expire item tersebut 
-Format input misalny "1 M B H" berarti waktu pesanan masuk yaitu waktu ke-1,
-lokasi pick-up di M dan lokasi drop-off di B, dan merupakan heavy item 
-*/
+  // Input lokasi HQ
+  tempListPoint[0] = MakePOINT(nextToken().val, nextToken().val); // Ganti
+                                                                  // setter
 
-void inputMain() {
+  // Input jumlah bangunan
+  L = nextToken().val;
 
-};
-/* Menerima konfigurasi file */
+  // Input karakter dan lokasi bangunan
+  for (i = 1; i <= L; i++) {
+    tempListPoint[i] =
+        MakePoint(nextToken().val, nextToken().val); // Ganti Setter
+  })
 
-void inputMain() {
-    
+  // Input adjacency matrix
+  CreateMatrix(N, M, &m);
+  for (i = 0; i < N; i++) {
+    for (j = 0; j < M; j++) {
+      ELMT(m, i, j) = nextToken().val;
+    }
+  }
+
+  // Input jumlah pesanan
+  P = nextToken().val;
+
+  // Input item pesanan
+  for (i = 0; i < P; i++) {
+    temptArrival = nextToken().val;
+    temptype = nextToken().tkn;
+    templPickup = nextToken().tkn;
+    templDropoff = nextToken().tkn;
+    if (temptype != 'P') {
+      temptPerish = TIME_UNDEF;
+    } else {
+      temptPerish = nextToken().val;
+    }
+    CreateItem(&tempItem, temptype, temptArrival, temptPerish, templPickup,
+               templDropoff);
+    tempListItem[i] = tempItem; // Ganti setter
+  }
 };

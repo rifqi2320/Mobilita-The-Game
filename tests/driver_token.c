@@ -1,27 +1,28 @@
-#include "../src/tokenmachine.h"
+#include "../src/charmachine.c"
+#include "../src/tokenmachine.c"
 #include <stdio.h>
 
 int main() {
-	startToken();
-	if (endToken) {
-        printf("Ekspresi kosong\n");
-        return 0;
-	}
-    
+  startToken("dummy.txt");
+  if (endToken) {
+    printf("Ekspresi kosong\n");
+    return 0;
+  }
+
+  if (currentToken.tkn == 'b') {
+    printf("%d ", currentToken.val);
+  } else {
+    printf("%c ", currentToken.tkn);
+  }
+
+  while (!endToken) {
     if (currentToken.tkn == 'b') {
-        printf("%d ", currentToken.val);
+      printf("%d ", currentToken.val);
     } else {
-        printf("%c ", currentToken.tkn);
+      printf("%c ", currentToken.tkn);
     }
+    advToken();
+  }
 
-    while (!endToken) {
-        if (currentToken.tkn == 'b') {
-            printf("%d ", currentToken.val);
-        } else {
-            printf("%c ", currentToken.tkn);
-        }
-        advToken();
-    }
-
-	return 0;
+  return 0;
 }

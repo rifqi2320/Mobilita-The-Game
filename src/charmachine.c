@@ -7,39 +7,40 @@
 char currentChar;
 boolean eot;
 
-static FILE * tape;
+static FILE *tape;
 static int retval;
 
 void start() {
-    /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
-    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
-    I.S. : sembarang
-    F.S. : currentChar adalah karakter pertama pada pita
-    Jika currentChar != MARK maka EOP akan padam (false)
-    Jika currentChar = MARK maka EOP akan menyala (true) */
+  /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
+  Karakter pertama yang ada pada pita posisinya adalah pada jendela.
+  I.S. : sembarang
+  F.S. : currentChar adalah karakter pertama pada pita
+  Jika currentChar != MARK maka EOP akan padam (false)
+  Jika currentChar = MARK maka EOP akan menyala (true) */
 
-	/* Algoritma */
-	tape = stdin;
-	adv();
+  /* Algoritma */
+  tape = stdin;
+  adv();
 }
 
-void startWithPath( /* char* path */) {
-	/* Algoritma */
-    // fopen diganti PATH
-	tape = fopen("test/a.txt", "r");
-	adv();
+void startWithPath(char dir[]) {
+  /* Algoritma */
+  // fopen diganti PATH
+  tape = fopen(dir, "r");
+  adv();
 }
 
 void adv() {
-    /* Pita dimajukan satu karakter. 
-    I.S. : Karakter pada jendela = currentChar, currentChar != MARK
-    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama, currentChar mungkin = MARK
-	Jika  currentChar = MARK maka EOP akan menyala (true) */
+  /* Pita dimajukan satu karakter.
+  I.S. : Karakter pada jendela = currentChar, currentChar != MARK
+  F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
+  currentChar mungkin = MARK Jika  currentChar = MARK maka EOP akan menyala
+  (true) */
 
-	/* Algoritma */
-	retval = fscanf(tape,"%c", &currentChar);
-    if (retval == -1) { // Jika sudah EOF
-        currentChar = TEXTMARK;
-        fclose(tape);
- 	}
+  /* Algoritma */
+  retval = fscanf(tape, "%c", &currentChar);
+  if (retval == -1) { // Jika sudah EOF
+    currentChar = TEXTMARK;
+    fclose(tape);
+  }
 }
