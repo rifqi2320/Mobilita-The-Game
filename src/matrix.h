@@ -26,3 +26,5 @@ void CreateMatrix(int nRow, int nCol, Matrix *m);
 #define ROWS(M) (M).rowEff
 #define COLS(M) (M).colEff
 #define ELMT(M, i, j) (M).contents[(i)][(j)]
+
+#endif

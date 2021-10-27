@@ -3,19 +3,38 @@
 #include "matrix.h"
 #include "point.h"
 #include "tokenmachine.h"
+#include "wordmachine.h"
 #include <stdio.h>
 
 char currentChar;
 boolean endToken;
 Token currentToken;
+Word currentWord;
+
+boolean validateWord(Word w, char a[]) {
+  boolean eq = true;
+  int i = 0;
+  while (eq && i < w.length) {
+    if (w.contents[i] != a[i]) {
+      eq = false;
+    }
+    i++;
+  }
+  return eq;
+}
+
+Word nextInput() {
+  startWord();
+  return currentWord;
+}
 
 Token nextToken() {
   Token tempToken;
   if (!endToken) {
-    tempToken = currentToken;
     advToken();
+    tempToken = currentToken;
   }
-  return Token;
+  return tempToken;
 }
 
 void inputMain(char dir[] /*Masukkin output config*/) {
@@ -27,16 +46,19 @@ void inputMain(char dir[] /*Masukkin output config*/) {
   // Item sementara
   char temptype;
   int temptArrival;
+  int temptPerish;
   char templPickup;
   char templDropoff;
   Item tempItem;
 
-  Matrix m;
-  startToken(dir);
+  Matrix m; // Nanti diganti pake Matrix dari argument biar jadi output
+
   POINT tempListPoint[27]; // Nanti diganti pake list dynamic of point buat
                            // building
   Item tempListItem[30];   // Nanti diganti pake linked list of Item buat daftar
                            // pesanan
+
+  startToken(dir);
 
   // Input Ukuran Matriks
   N = nextToken().val;
@@ -51,14 +73,15 @@ void inputMain(char dir[] /*Masukkin output config*/) {
 
   // Input karakter dan lokasi bangunan
   for (i = 1; i <= L; i++) {
+    nextToken().tkn;
     tempListPoint[i] =
-        MakePoint(nextToken().val, nextToken().val); // Ganti Setter
-  })
+        MakePOINT(nextToken().val, nextToken().val); // Ganti Setter
+  }
 
   // Input adjacency matrix
   CreateMatrix(N, M, &m);
-  for (i = 0; i < N; i++) {
-    for (j = 0; j < M; j++) {
+  for (i = 0; i <= L; i++) {
+    for (j = 0; j <= L; j++) {
       ELMT(m, i, j) = nextToken().val;
     }
   }
@@ -69,9 +92,9 @@ void inputMain(char dir[] /*Masukkin output config*/) {
   // Input item pesanan
   for (i = 0; i < P; i++) {
     temptArrival = nextToken().val;
-    temptype = nextToken().tkn;
     templPickup = nextToken().tkn;
     templDropoff = nextToken().tkn;
+    temptype = nextToken().tkn;
     if (temptype != 'P') {
       temptPerish = TIME_UNDEF;
     } else {

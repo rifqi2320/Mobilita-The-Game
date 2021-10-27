@@ -29,4 +29,9 @@ void adv();
           currentChar mungkin = MARK
           Jika  currentChar = MARK maka EOP akan menyala (true) */
 
+void ignoreBlank();
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang 
+   F.S. : currentChar ≠ BLANK*/
+
 #endif

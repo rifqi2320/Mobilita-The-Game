@@ -6,6 +6,7 @@
 
 #include "boolean.h"
 #include "charmachine.h"
+#include "wordmachine.h"
 
 // #define CAPACITY 
 #define BLANK ' '
@@ -18,11 +19,6 @@ typedef struct {
 /* Token Machine State */
 extern boolean endToken;
 extern Token currentToken;
-
-void ignoreBlank();
-/* Mengabaikan satu atau beberapa BLANK
-   I.S. : currentChar sembarang 
-   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
 
 void startToken();
 /* I.S. : currentChar sembarang 

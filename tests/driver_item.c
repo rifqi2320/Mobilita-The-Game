@@ -1,4 +1,4 @@
-#include "../src/item.h"
+#include "../src/item.c"
 #include <stdio.h>
 
 void main() {

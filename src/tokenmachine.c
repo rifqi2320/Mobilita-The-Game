@@ -7,15 +7,6 @@ char currentChar;
 boolean endToken = false;
 Token currentToken;
 
-void ignoreBlank() {
-  /* Mengabaikan satu atau beberapa BLANK
-     I.S. : currentChar sembarang
-     F.S. : currentChar ≠ BLANK dan currentChar != LINEMARK */
-  while (currentChar == BLANK || currentChar == LINEMARK) {
-    adv();
-  }
-}
-
 void copyToken() {
   /* Mengakuisisi Token dan menyimpan hasilnya dalam currentToken
       I.S. : currentChar adalah karakter pertama dari Token
@@ -51,7 +42,6 @@ void startToken(char dir[]) {
     endToken = true;
   } else {
     endToken = false;
-    copyToken();
   }
 }
 
