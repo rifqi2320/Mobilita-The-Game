@@ -14,3 +14,8 @@ void addScore(int val){
     //algoritma
     skor += val;
 }
+void cetakSkor(){
+    /*I.S. skor terdefinisi*/
+    /*F.S. mencetak skor ke layar*/
+    printf("Waktu: %d",skor);
+}

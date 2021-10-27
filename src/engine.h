@@ -10,5 +10,7 @@ extern int skor;//skor Mobita
 void addScore(int val);
 /*I.S. val terdefinisi*/
 /*F.S. nilai skor bertambah sebesar val*/
-
+void cetakSkor();
+/*I.S. skor terdefinisi*/
+/*F.S. mencetak skor ke layar*/
 #endif
