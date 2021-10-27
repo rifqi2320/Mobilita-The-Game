@@ -5,6 +5,7 @@
 #include "tokenmachine.h"
 #include "wordmachine.h"
 #include <stdio.h>
+#include "list_linked.h"
 
 char currentChar;
 boolean endToken;
@@ -55,8 +56,12 @@ void inputMain(char dir[] /*Masukkin output config*/) {
 
   POINT tempListPoint[27]; // Nanti diganti pake list dynamic of point buat
                            // building
+                           /*
   Item tempListItem[30];   // Nanti diganti pake linked list of Item buat daftar
                            // pesanan
+  */
+  List tempListItem;       //list untuk menyimpan daftar pesanan
+
 
   startToken(dir);
 
@@ -86,6 +91,8 @@ void inputMain(char dir[] /*Masukkin output config*/) {
     }
   }
 
+  //Menginisialisasi List Item
+  CreateList(&tempListItem);
   // Input jumlah pesanan
   P = nextToken().val;
 
@@ -102,6 +109,7 @@ void inputMain(char dir[] /*Masukkin output config*/) {
     }
     CreateItem(&tempItem, temptype, temptArrival, temptPerish, templPickup,
                templDropoff);
-    tempListItem[i] = tempItem; // Ganti setter
+    insertFirst(&tempListItem,tempItem);
+   // tempListItem[i] = tempItem; // Ganti setter
   }
 };
