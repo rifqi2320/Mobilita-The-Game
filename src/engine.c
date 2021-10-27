@@ -14,11 +14,6 @@ void addScore(int val){
     //algoritma
     skor += val;
 }
-void cetakWaktu(){
-    /*I.S. waktu terdefinisi*/
-    /*F.S. mencetak waktu sekarang ke layar*/
-    printf("Waktu: %d",skor);
-}
 void addTime(float multiplier){
     /* I.S. multiplier terdefinisi */
     /* F.S. waktu bertambah sebesar (1*multiplier)*/

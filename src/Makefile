@@ -24,5 +24,8 @@ tokenmachine.o: tokenmachine.c tokenmachine.h
 io.o: io.c io.h
 	gcc -c io.c
 
+engine.o: engine.c engine.h
+	gcc -c engine.c
+
 clean:
 	rm *.o *.exe

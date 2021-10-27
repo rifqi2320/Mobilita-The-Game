@@ -10,9 +10,6 @@ extern int skor;//skor Mobita
 void addScore(int val);
 /*I.S. val terdefinisi*/
 /*F.S. nilai skor bertambah sebesar val*/
-void cetakWaktu();
-/*I.S. waktu terdefinisi*/
-/*F.S. mencetak waktu sekarang ke layar*/
 void addTime(float multiplier);
 /* I.S. multiplier terdefinisi */
 /* F.S. waktu bertambah sebesar (1*multiplier)*/
