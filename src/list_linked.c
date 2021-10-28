@@ -121,6 +121,37 @@ void insertLast(List *l, ElType val){
         }
     }
 }
+void insertPrio(List *l, ElType val){
+    /* I.S. l mungkin kosong */
+    /* F.S. Melakukan alokasi sebuah elemen dan */
+    /* memasukkan elemen tersebut ke list dengan urutannya dipengaruhi waktu pesanan masuk,semakin kecil waktunya,semakin di "depan" elemen berada */
+    /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
+    //kamus lokal
+    Address x;//node baru dengan info berisi val yang ingin ditambahkan
+    Address p;//pointer untuk traversal
+    //algoritma
+    x = newNode(val);
+    if(x!=NULL){//jika alokasi sukses
+        if(isEmpty(*l)){//jika l kosong
+            FIRST(*l)=x;
+        }
+        else{//l tidak kosong
+            p = FIRST(*l);
+            while(NEXT(p)!=NULL && (x->info.tArrival > p->info.tArrival)){//selama belum sampe elemen terakhir dan ada yg waktu datangnya lebih kecil atau sama dengan si val
+                p = NEXT(p);
+            }
+            // udah sampai di alamat terakhir atau elemen sesudahnya lebih besar waktu tibanya
+            //jika di elemen terakhir
+            if(NEXT(p)==NULL){
+                NEXT(p)=x;
+            }
+            else if(val.tArrival>p->info.tArrival){
+                NEXT(x) = NEXT(p);
+                NEXT(p) = NEXT(x);
+            }
+        }
+    }
+}
 void insertAt(List *l, ElType val, int idx){
 /* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Melakukan alokasi sebuah elemen dan */
@@ -275,31 +306,12 @@ List concat(List l1, List l2){
     }
     else{//l1 dan l2 tidak kosong
         CreateList(&l3);
-       // printf("\n\n\n");
-        //displayList(l3);
-       // x = FIRST(l1);
         for(i=0;i<length(l1);i++){//isi l1
             insertLast(&l3,getElmt(l1,i));
-         //   displayList(l3);
         }
-       // printf("\n\n\n");
         for(i=0;i<length(l2);i++){//isi l2
             insertLast(&l3,getElmt(l2,i));
-        //    displayList(l3);
         }
-        /*
-        while(x!=NULL){//isi l1
-            insertLast(&l3,getElmt(l1,i));
-            i++;
-            x = NEXT(x);
-        }
-        x = FIRST(l2);
-        i=0;
-        while(x!=NULL){//isi l2
-            insertLast(&l3,getElmt(l2,i));
-            i++;
-            x = NEXT(x);
-        }*/
     }
     return l3;
 }

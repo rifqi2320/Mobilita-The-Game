@@ -109,7 +109,6 @@ void inputMain(char dir[] /*Masukkin output config*/) {
     }
     CreateItem(&tempItem, temptype, temptArrival, temptPerish, templPickup,
                templDropoff);
-    insertFirst(&tempListItem,tempItem);
-   // tempListItem[i] = tempItem; // Ganti setter
+    insertPrio(&tempListItem,tempItem);
   }
 };
