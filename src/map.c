@@ -3,7 +3,12 @@
 #include <stdio.h>
 
 /* ********** KONSTRUKTOR ********** */
-void CreateMap(int N, int M, POINT HQ, ListBuilding LB, Map *PT) {
+char getChar(int idx) {
+   char symbol = (char)('A' + idx - 1);
+   return symbol;
+}
+
+void CreateMap(Map *PT, int N, int M, POINT HQ, ListBuilding LB) {
     ROWMap(*PT) = N+2;
     COLMap(*PT) = M+2;
 
@@ -36,22 +41,21 @@ void CreateMap(int N, int M, POINT HQ, ListBuilding LB, Map *PT) {
     }
 };
 
-void displayMap(Building NobitaLoc, Todolist l, Matrix M, Map *PT) {
+void displayMap(Map *PT, Building NobitaLoc, Todolist l, Matrix m) {
     int xaxis = XCOORD(NobitaLoc);
     int yaxis = YCOORD(NobitaLoc);
     int name = NAME(NobitaLoc);
     Graph g;
-    CreateGraph(&g);
-    LoadGraph(&g);
+    LoadGraph(&g, m);
     for (int i = 1; i < ROWMap(*PT); i++) {
         for (int j = 1; j < COLMap(*PT); j++) {
             if (ELMTMap(*PT, i, j) != ' ') {
                 if (i == xaxis && j = yaxis) {
                     print_yellow(name);
-                } else if (isConnected(i, xaxis, g) && /* tidak todolist*/) {
+                } else if (isConnected(g, i, xaxis) && /* tidak todolist*/) { // diganti building dapet pickup dropoff
                     char c = getChar(i);
                     print_green(c)
-                } else if (/*todolist*/) {
+                } else if (/*todolist*/) { // diganti buat dapet pickup dropoff
                     char from, dest;
                     print_red(from);
                     print_blue(dest);
@@ -60,9 +64,6 @@ void displayMap(Building NobitaLoc, Todolist l, Matrix M, Map *PT) {
                     print_black(c);
                 }
             }
-            // Todolist Print Warna
-            // fungsi getChar
-            // fungsi isConnected
         }
     }
 };

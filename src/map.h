@@ -3,6 +3,7 @@
 
 #include "matrix.h"
 #include "point.h"
+#include "graph.h"
 #include "listbuilding.h"
 #include "todolist.h"
 #include "pcolor.h"
@@ -33,9 +34,9 @@ typedef struct
 #define ELMTMap(PT, i, j) (PT).contents[(i)][(j)]
 
 /* ********** KONSTRUKTOR ********** */
-void CreateMap(int N, int M, POINT HQ, ListBuilding LB, Map *PT);
+void CreateMap(Map *PT, int N, int M, POINT HQ, ListBuilding LB);
 
-void displayMap(Building NobitaLoc, Todolist l, Matrix M, Map *PT);
+void displayMap(Map *PT, Building NobitaLoc, Todolist l, Matrix M);
 
 char getChar(int idx);
 
