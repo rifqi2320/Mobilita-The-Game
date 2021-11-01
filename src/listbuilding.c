@@ -4,29 +4,29 @@
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
-void CreateListBuilding(ListDin *l, int capacity) {
-    BUFFER(*l) = (int*)malloc(capacity*sizeof(ElType));
-    CAPACITY(*l) = capacity;
+void CreateListBuilding(ListBuilding *l, int capacity) {
+    BUFFERListB(*l) = (int*)malloc(capacity*sizeof(ElType));
+    CAPACITYListB(*l) = capacity;
     for (int i=0; i<capacity; i++) {
-        ELMT(*l, i) = VAL_UNDEF;
+        ELMTListB(*l, i) = VAL_UNDEF;
     }
 };
 /* I.S. l sembarang, capacity > 0 */
 /* F.S. Terbentuk list l kosong dengan kapasitas capacity + 1 */
 /* Proses: Inisialisasi semua elemen list l dengan VAL_UNDEF */
 
-void dealocate(ListDin *l) {
+void dealocateListBuilding(ListBuilding *l) {
     free(l);
-    CAPACITY(*l) = 0;
+    CAPACITYListB(*l) = 0;
 };
 /* I.S. l terdefinisi; */
 /* F.S. TI(l) dikembalikan ke system, CAPACITY(l)=0; nEff(l)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int length(ListDin l) {
+int lengthListBuilding(ListBuilding l) {
     int i=0,len=0;
-    while (ELMT(l, i)!=VAL_UNDEF && i<CAPACITY(l)) {
+    while (ELMTListB(l, i)!=VAL_UNDEF && i<CAPACITYListB(l)) {
         len++;
         i++;
     }

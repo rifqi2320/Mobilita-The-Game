@@ -32,24 +32,24 @@ typedef struct
                                              dan l.buffer[nEff-1] != VAL_UNDEF */
 
 /* ********** SELEKTOR ********** */
-#define BUFFER(l) (l).buffer
-#define ELMT(l, i) (l).buffer[i]
-#define CAPACITY(l) (l).capacity
+#define BUFFERListB(l) (l).buffer
+#define ELMTListB(l, i) (l).buffer[i]
+#define CAPACITYListB(l) (l).capacity
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create list kosong  */
-void CreateListBuilding(ListDin *l, int capacity);
+void CreateListBuilding(ListBuilding *l, int capacity);
 /* I.S. l sembarang, capacity > 0 */
 /* F.S. Terbentuk list l kosong dengan kapasitas capacity + 1 */
 /* Proses: Inisialisasi semua elemen list l dengan VAL_UNDEF */
 
-void dealocate(ListDin *l);
+void dealocateListBuilding(ListBuilding *l);
 /* I.S. l terdefinisi; */
 /* F.S. TI(l) dikembalikan ke system, CAPACITY(l)=0; nEff(l)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int length(ListDin l);
+int lengthListBuilding(ListBuilding l);
 /* Mengirimkan banyaknya elemen efektif list */
 /* Mengirimkan nol jika list kosong */
 

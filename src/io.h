@@ -23,7 +23,13 @@ Format input misalny "A 1 2" berarti bangunan A berada di kooordinat 1,2
 /* Menerima daftar pesanan yaitu berbagai item : normal, perishable, heavy, VIP item 
 Jika input merupakan perishable maka disertai dengan waktu expire item tersebut 
 Format input misalny "1 M B H" berarti waktu pesanan masuk yaitu waktu ke-1,
-lokasi pick-up di M dan lokasi drop-off di B, dan merupakan heavy item 
+lokasi pick-up di M dan lokasi drop-off di B, dan merupakan heavy item
 */
+
+boolean validateWord(Word w, char a[]);
+
+Word nextInput();
+
+Token nextToken();
 
 #endif

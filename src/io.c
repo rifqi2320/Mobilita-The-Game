@@ -1,6 +1,7 @@
 #include "charmachine.h"
 #include "item.h"
 #include "matrix.h"
+#include "listbuilding.h"
 #include "point.h"
 #include "tokenmachine.h"
 #include "wordmachine.h"
@@ -38,7 +39,7 @@ Token nextToken() {
   return tempToken;
 }
 
-void inputMain(char dir[] /*Masukkin output config*/) {
+void inputMain(char dir[], ListBuilding *LB, Matrix *m, Building *HQ) {
   int i, j, k; // Iterator
   int N, M;    // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
   int L;       // Jumlah Gedung (4 <= L <= 26)
@@ -52,9 +53,8 @@ void inputMain(char dir[] /*Masukkin output config*/) {
   char templDropoff;
   Item tempItem;
 
-  Matrix m; // Nanti diganti pake Matrix dari argument biar jadi output
-
-  POINT tempListPoint[27]; // Nanti diganti pake list dynamic of point buat
+  ListBuilding LB;
+  CreateListBuilding(&LB, L); // Nanti diganti pake list dynamic of point buat
                            // building
                            /*
   Item tempListItem[30];   // Nanti diganti pake linked list of Item buat daftar
@@ -70,24 +70,26 @@ void inputMain(char dir[] /*Masukkin output config*/) {
   M = nextToken().val;
 
   // Input lokasi HQ
-  tempListPoint[0] = MakePOINT(nextToken().val, nextToken().val); // Ganti
-                                                                  // setter
+  NAME(*HQ) = '8'
+  XCOORD(*HQ) = nextToken().val;
+  YCOORD(*HQ) = nextToken().val);
 
   // Input jumlah bangunan
   L = nextToken().val;
 
   // Input karakter dan lokasi bangunan
-  for (i = 1; i <= L; i++) {
-    nextToken().tkn;
-    tempListPoint[i] =
-        MakePOINT(nextToken().val, nextToken().val); // Ganti Setter
+  for (i = 0; i < CAPACITYListB(*LB); i++) {
+    char name = nextToken().tkn;
+    NAME(ELMT(*LB, i)) = name;
+    XCOORD(ELMTListB(*LB, i)) = nextToken().val;
+    YCOORD(ELMTListB(*LB, i)) = nextToken().val;
   }
 
   // Input adjacency matrix
-  CreateMatrix(N, M, &m);
+  CreateMatrix(N, M, m);
   for (i = 0; i <= L; i++) {
     for (j = 0; j <= L; j++) {
-      ELMT(m, i, j) = nextToken().val;
+      ELMT(*m, i, j) = nextToken().val;
     }
   }
 
