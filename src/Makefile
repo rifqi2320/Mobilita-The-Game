@@ -1,4 +1,4 @@
-modules = item.o tas.o matrix.o point.o
+modules = item.o tas.o matrix.o point.o inventory.o
 
 main: $(modules)
 	gcc -o main main.c $(modules)
@@ -26,6 +26,12 @@ io.o: io.c io.h
 
 engine.o: engine.c engine.h
 	gcc -c engine.c
+
+gadget.o: gadget.c gadget.h
+	gcc -c gadget.c
+
+inventory.o: inventory.c inventory.h
+	gcc -c inventory.c
 
 clean:
 	rm *.o *.exe
