@@ -53,21 +53,84 @@ void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga){
     }
 }
 
-void useGadget(LIST_GADGET *l,int i){
+void useGadget(LIST_GADGET *l,int i,Tas *t){
+    GADGET g;
     if(isIdxEff(*l,i)){
+        NAMA(g) = NAMAGADGET(*l,i);
+        HARGA(g) = HARGAGADGET(*l,i); 
         NAMAGADGET(*l,i)="-";
         HARGAGADGET(*l,i)=VAL_UNDEF;
     }
     else{
         printf("Tidak ada gadget yang dapat digunakan");
     }
+    process(g,t);
 }
+
 void displayBuy(LIST_GADGET l){
     printf("Gadget yang tersedia:\n");
     for(int i=0;i<JUMLAHGADGET;i++){
         printf("%d. %s (%d Yen)\n",i+1,NAMAGADGET(l,i),HARGAGADGET(l,i));
     }
 }
+
+void process(GADGET g,Tas *t){
+    if(NAMA(g) == "Kain Pembungkus Waktu"){
+        KainWaktu(t);
+    }
+    else if(NAMA(g) == "Senter Pembesar"){
+        SenterPembesar(t);
+    }
+    else if(NAMA(g)== "Pintu Kemana Saja"){
+        ;
+    }
+    else if(NAMA(g)== "Mesin Waktu"){
+        MesinWaktu();
+    }
+    else if(NAMA(g)== "Senter Pengecil"){
+        SenterPengecil(t);
+    }
+}
+
+void KainWaktu(Tas *t){
+    if(TOP(*t).type=="P"){
+        TOP(*t).tPerish=0;
+        TOP(*t).type="N";
+        printf("Senter Pengecil berhasil digunakan!");
+    }
+    else{
+            printf("Kain Pembungkus Waktu gagal digunakan!");
+    }
+}
+
+void SenterPembesar(Tas *t){
+    t->capacity *= 2;
+    if(t->capacity>100){
+        t->capacity=100;
+    }
+    printf("Senter Pembesar berhasil digunakan!");
+}
+
+void PintuKemanaSaja();
+
+void MesinWaktu(){
+    waktu-=50;
+    if(waktu<0){
+        waktu=0;
+    }
+    printf("Mesin Waktu berhasil digunakan!");
+}
+
+void SenterPengecil(Tas *t){
+    if(TOP(*t).type=="H"){
+        TOP(*t).type="N";
+        printf("Senter Pengecil berhasil digunakan!");
+    }
+    else{
+        printf("Senter Pengecil gagal digunakan!");
+    }
+}
+
 void displayInventory(LIST_GADGET l){
     for(int i=0;i<JUMLAHGADGET;i++){
         printf("%d. %s\n",i+1,NAMAGADGET(l,i));
