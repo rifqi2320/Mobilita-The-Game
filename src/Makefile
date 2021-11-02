@@ -15,6 +15,12 @@ tas.o: tas.c tas.h
 item.o: item.c item.h
 	gcc -c item.c
 
+graph.o: graph.c graph.h
+	gcc -c graph.c
+
+map.o: map.c map.h
+	gcc -c map.c
+
 charmachine.o: charmachine.c charmachine.h
 	gcc -c charmachine.c
 

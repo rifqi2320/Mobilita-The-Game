@@ -15,11 +15,6 @@
 #define ROW_MAX 20
 #define COL_MAX 30
 
-// Koordinat Headquarter
-// Ukuran Peta N+2xM+2 border *
-// List Dinamis Building
-// Warna Lokasi
-
 typedef struct
 {
    char contents[ROW_CAP][COL_CAP];

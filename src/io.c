@@ -53,10 +53,7 @@ void inputMain(char dir[], ListBuilding *LB, Matrix *m, Building *HQ) {
   char templDropoff;
   Item tempItem;
 
-  ListBuilding LB;
-  CreateListBuilding(&LB, L); // Nanti diganti pake list dynamic of point buat
-                           // building
-                           /*
+  /*
   Item tempListItem[30];   // Nanti diganti pake linked list of Item buat daftar
                            // pesanan
   */
@@ -72,7 +69,7 @@ void inputMain(char dir[], ListBuilding *LB, Matrix *m, Building *HQ) {
   // Input lokasi HQ
   NAME(*HQ) = '8'
   XCOORD(*HQ) = nextToken().val;
-  YCOORD(*HQ) = nextToken().val);
+  YCOORD(*HQ) = nextToken().val;
 
   // Input jumlah bangunan
   L = nextToken().val;
@@ -86,7 +83,6 @@ void inputMain(char dir[], ListBuilding *LB, Matrix *m, Building *HQ) {
   }
 
   // Input adjacency matrix
-  CreateMatrix(N, M, m);
   for (i = 0; i <= L; i++) {
     for (j = 0; j <= L; j++) {
       ELMT(*m, i, j) = nextToken().val;
