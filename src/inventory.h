@@ -3,7 +3,7 @@
 
 #include "boolean.h"
 #include "gadget.h"
-#include "engine.h"
+#include "mobita.h"
 #include "tas.h"
 
 #define JUMLAHGADGET 5
@@ -24,10 +24,10 @@ int length(LIST_GADGET l);
 boolean isIdxEff(LIST_GADGET l, int i);
 boolean isFull(LIST_GADGET l);
 void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga);
-void useGadget(LIST_GADGET *l,int i,Tas *t);
+void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB);
 void displayBuy(LIST_GADGET l);
 void displayInventory(LIST_GADGET l);
-void process(GADGET g,Tas *t);
+void process(GADGET g,Tas *t, MOBITA *MOB);
 void KainWaktu(Tas *t);
 void SenterPembesar(Tas *t);
 void PintuKemanaSaja();

@@ -53,18 +53,18 @@ void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga){
     }
 }
 
-void useGadget(LIST_GADGET *l,int i,Tas *t){
+void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB){
     GADGET g;
     if(isIdxEff(*l,i)){
         NAMA(g) = NAMAGADGET(*l,i);
         HARGA(g) = HARGAGADGET(*l,i); 
         NAMAGADGET(*l,i)="-";
         HARGAGADGET(*l,i)=VAL_UNDEF;
+        process(g,t,MOB);
     }
     else{
         printf("Tidak ada gadget yang dapat digunakan");
     }
-    process(g,t);
 }
 
 void displayBuy(LIST_GADGET l){
@@ -74,7 +74,7 @@ void displayBuy(LIST_GADGET l){
     }
 }
 
-void process(GADGET g,Tas *t){
+void process(GADGET g,Tas *t,MOBITA *MOB){
     if(NAMA(g) == "Kain Pembungkus Waktu"){
         KainWaktu(t);
     }
@@ -82,7 +82,7 @@ void process(GADGET g,Tas *t){
         SenterPembesar(t);
     }
     else if(NAMA(g)== "Pintu Kemana Saja"){
-        ;
+        PintuKemanaSaja(MOB);
     }
     else if(NAMA(g)== "Mesin Waktu"){
         MesinWaktu();
@@ -93,13 +93,18 @@ void process(GADGET g,Tas *t){
 }
 
 void KainWaktu(Tas *t){
-    if(TOP(*t).type=="P"){
-        TOP(*t).tPerish=0;
-        TOP(*t).type="N";
+    boolean used = false;
+    for(int i=IDX_TOP(*t);i<=0;i--){
+        if(t->buffer[i].type=="P"){
+        t->buffer[i].tPerish=0;
+        t->buffer[i].type="N";
         printf("Senter Pengecil berhasil digunakan!");
+        used = true;
+        break;
+        }
     }
-    else{
-            printf("Kain Pembungkus Waktu gagal digunakan!");
+    if(!used){
+            printf("Kain Pembungkus Waktu gagal digunakan!Kain terbuang.");
     }
 }
 
@@ -111,7 +116,13 @@ void SenterPembesar(Tas *t){
     printf("Senter Pembesar berhasil digunakan!");
 }
 
-void PintuKemanaSaja();
+void PintuKemanaSaja(MOBITA *MOB){
+    printf("Tentukan koordinat Tujuan: ");
+    int x,y;
+    scanf("%d %d",&x,&y);
+    Absis(Posisi(*MOB)) = x;
+    Ordinat(Posisi(*MOB)) = y;
+}
 
 void MesinWaktu(){
     waktu-=50;
@@ -122,12 +133,17 @@ void MesinWaktu(){
 }
 
 void SenterPengecil(Tas *t){
-    if(TOP(*t).type=="H"){
-        TOP(*t).type="N";
+    boolean used = false;
+    for(int i=IDX_TOP(*t);i<=0;i--){
+        if(t->buffer[i].type=="H"){
+        t->buffer[i].type="N";
         printf("Senter Pengecil berhasil digunakan!");
+        used = true;
+        break;
+        }
     }
-    else{
-        printf("Senter Pengecil gagal digunakan!");
+    if(!used){
+        printf("Senter Pengecil gagal digunakan!Senter terbuang.");
     }
 }
 
