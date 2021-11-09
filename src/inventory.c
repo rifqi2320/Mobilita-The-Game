@@ -93,18 +93,13 @@ void process(GADGET g,Tas *t,MOBITA *MOB){
 }
 
 void KainWaktu(Tas *t){
-    boolean used = false;
-    for(int i=IDX_TOP(*t);i<=0;i--){
-        if(t->buffer[i].type=="P"){
-        t->buffer[i].tPerish=0;
-        t->buffer[i].type="N";
+    if(TOP(*t).type=="P"){
+        TOP(*t).tPerish=0;
+        TOP(*t).type="N";
         printf("Senter Pengecil berhasil digunakan!");
-        used = true;
-        break;
-        }
     }
-    if(!used){
-            printf("Kain Pembungkus Waktu gagal digunakan!Kain terbuang.");
+    else{
+        printf("Kain Pembungkus Waktu gagal digunakan!Kain terbuang.");
     }
 }
 
@@ -133,16 +128,11 @@ void MesinWaktu(){
 }
 
 void SenterPengecil(Tas *t){
-    boolean used = false;
-    for(int i=IDX_TOP(*t);i<=0;i--){
-        if(t->buffer[i].type=="H"){
-        t->buffer[i].type="N";
+    if(TOP(*t).type=="H"){
+        TOP(*t).type="N";
         printf("Senter Pengecil berhasil digunakan!");
-        used = true;
-        break;
-        }
     }
-    if(!used){
+    else{
         printf("Senter Pengecil gagal digunakan!Senter terbuang.");
     }
 }
