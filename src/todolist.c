@@ -18,3 +18,15 @@ void deleteTodoListAt(Todolist *l, ElType *task){
 boolean isVIPinList(Todolist l){
     
 }
+
+void CreateInProgress(InprogressList *l){
+    CreateList(*l);
+}
+
+void addInProgress(InprogressList *l, ElType task){
+    insertLast(*l, task);
+}
+
+void deleteInProgressAt(InprogressList *l, ElType *task){
+    deleteAt(*l, indexOf(*l, *task), task);
+}
