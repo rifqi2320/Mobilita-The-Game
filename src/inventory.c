@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include "inventory.h"
+#include "engine.h"
+
+int waktu;
 
 void MakeListGadget(LIST_GADGET *l){
     for (int i=0;i<JUMLAHGADGET;i++){

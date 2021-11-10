@@ -2,7 +2,7 @@
 #include "engine.h"
 
 /* Variabel eksternal*/
-float waktu;//waktu yang dihabiskan Mobita
+int waktu;//waktu yang dihabiskan Mobita
 int skor;//skor Mobita
 
 
