@@ -1,13 +1,13 @@
-#ifndef LISTDINPOS_H
-#define LISTDINPOS_H
+#ifndef LISTBUILDING
+#define LISTBUILDING
 
 #include "boolean.h"
 #include "building.h"
 
 /*  Kamus Umum */
-#define IDX_UNDEF -1
+// #define IDX_UNDEF -1 <- gaperlu karena nanti di deklarasi di global
 /* Indeks tak terdefinisi*/
-#define VAL_UNDEF -999
+// #define VAL_UNDEF -999
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
@@ -52,5 +52,22 @@ void dealocateListBuilding(ListBuilding *l);
 int lengthListBuilding(ListBuilding l);
 /* Mengirimkan banyaknya elemen efektif list */
 /* Mengirimkan nol jika list kosong */
+
+void appendBuilding(ListBuilding *l, Building B);
+/* I.s. l dan B terdefinisi */
+/* F.S. Building akan dimasukkan ke dalam list building */
+
+void copyListBuilding(ListBuilding lIn, ListBuilding *lOut);
+/* I.S. lIn terdefinisi */
+/* F.S. terbentuk list baru lOut yang sama persis dengan lIn */
+
+void growListBuilding(ListBuilding *l, int num);
+/* I.S. l terdefinisi */
+/* F.S. realokasi list input yang lebih besar */
+/*      kapasitasnya sebesar CAPACITY(*l) + num*/
+
+void shrinkListBuilding(ListBuilding *l, int num);
+/* I.S. l terdefinisi num > capacity *l */
+/* F.S. */
 
 #endif
