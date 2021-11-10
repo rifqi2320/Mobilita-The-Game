@@ -32,10 +32,10 @@ void displayMap(Map PT, Building NobitaLoc, Todolist l) {
         if (!isMARKBuilding(tempB)) {
           if (isEqualBuilding(NobitaLoc, tempB)) {
             print_yellow(NAMEBUILDING(tempB));
-          } else if (true /*isInPickup(tempB)*/) {
-            print_red(NAMEBUILDING(tempB));
-          } else if (true /*istodolist(tempB)*/) {
+          } else if (true /* drop off*/) {
             print_blue(NAMEBUILDING(tempB));
+          } else if (isInPickupSpot(tempB,l)) {
+            print_red(NAMEBUILDING(tempB));
           } else if (isConnected(PT, NobitaLoc, tempB)) {
             print_green(NAMEBUILDING(tempB));
           } else {

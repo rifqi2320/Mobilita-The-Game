@@ -2,6 +2,9 @@
 #define TODOLIST_H
 
 #include "list_linked.h"
+#include "building.h"
+#include "item.h"
+#include "tas.h"
 
 typedef List Todolist;
 
@@ -30,6 +33,15 @@ void deleteInProgressAt(InprogressList *l, Item *task);
 
 void displayInProgress(InprogressList l);
 
+boolean isInPickupSpot(Building b,Todolist l);
+//menghasilkan true jika di spot tersebut ada item yang bisa di pick up
 
+void pickUpItem(Building b,Todolist l,Item *item);
+//mendequeue item paling awal masuk di lokasi b pada list 
 
+boolean isInDropoffSpot(Building b,Tas t);
+//menghasilkan true jika di spot tersebut ada item yang bisa di dropoff
+
+void dropOffItem(Building b,Todolist l,Tas t);
+//drop isi tas paling atas
 #endif

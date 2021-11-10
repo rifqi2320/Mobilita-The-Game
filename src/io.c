@@ -97,7 +97,7 @@ void inputMain(Word dir, Map *PT, List *tempListItem) {
     addBuilding(PT, tempB, i);
   }
 
-  // Input adjacency matrix
+  // Input adjacency matrix ke map
   for (i = 0; i <= L; i++) {
     for (j = 0; j <= L; j++) {
       ELMTMap(*PT, i, j) = nextToken().val;

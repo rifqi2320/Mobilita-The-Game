@@ -19,7 +19,7 @@ int main() {
   Word tempWord;
   ListBuilding lb;
   List listItem;
-  Matrix adjMatrix;
+  Map PT;
   Building HQ;
 
   while (!started) {
@@ -27,7 +27,7 @@ int main() {
     tempInt = wordToInt(nextInput());
     if (tempInt == 1) {
       tempWord = nextInput();
-      inputMain(tempWord,&lb,&adjMatrix,&HQ,&listItem); // kayaknya inputnya map aja
+      inputMain(tempWord,&PT,&listItem);
     } else if (tempInt == 2) {
       return 0;
     } else {
