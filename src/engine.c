@@ -22,3 +22,26 @@ void addTime(float multiplier){
     //algoritma
     waktu += multiplier;
 }
+void removePerishable(Tas *t,InprogressList *ip){
+    //menghapus semua elemen perishable di tas yang waktunya dah habis
+    //kamus lokal
+    int i;//variabel untuk kounter
+    int j;//variabel untuk kounter
+    //algoritma
+    if(!isTasEmpty(*t)){
+        i = 0;
+        while(i<=IDX_TOP(*t)){
+            if(t->buffer[i].type=='P' && t->buffer[i].tPerish==0){
+                //delete dari in progress list
+                deleteInProgressAt(ip, &(t->buffer[i]));
+                //delete isi
+                j = i;
+                while(j<IDX_TOP(*t)){
+                    t->buffer[j] = t->buffer[j+1];
+                    j++;
+                }
+                IDX_TOP(*t)--;
+            }
+            i++;
+        }
+}
