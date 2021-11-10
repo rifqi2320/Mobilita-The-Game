@@ -6,6 +6,7 @@
 #include "mobita.h"
 #include "tas.h"
 #include "listbuilding.h"
+#include "todolist.h"
 
 #define JUMLAHGADGET 5
 #define IDX_UNDEF -1
@@ -25,11 +26,11 @@ int lengthListGadget(LIST_GADGET l);
 boolean isIdxEff(LIST_GADGET l, int i);
 boolean isFull(LIST_GADGET l);
 void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga);
-void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,ListBuilding h);
+void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,InprogressList *ip, ListBuilding h);
 void displayBuy(LIST_GADGET l);
 void displayInventory(LIST_GADGET l);
-void process(GADGET gad,Tas *t, MOBITA *MOB,ListBuilding h);
-void KainWaktu(Tas *t);
+void process(GADGET gad,Tas *t, MOBITA *MOB,InprogressList *ip, ListBuilding h);
+void KainWaktu(Tas *t, InprogressList *ip);
 void SenterPembesar(Tas *t);
 void PintuKemanaSaja(MOBITA *MOB,ListBuilding h);
 void MesinWaktu();

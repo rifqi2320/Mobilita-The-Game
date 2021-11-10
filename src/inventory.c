@@ -56,14 +56,14 @@ void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga){
     }
 }
 
-void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,ListBuilding h){
+void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,InprogressList *ip, ListBuilding h){
     GADGET gad;
     if(isIdxEff(*l,i)){
         NAMA(gad) = NAMAGADGET(*l,i);
         HARGA(gad) = HARGAGADGET(*l,i); 
         NAMAGADGET(*l,i)="-";
         HARGAGADGET(*l,i)=VAL_UNDEF;
-        process(gad,t,MOB,h);
+        process(gad,t,MOB,ip,h);
     }
     else{
         printf("Tidak ada gadget yang dapat digunakan");
@@ -77,9 +77,9 @@ void displayBuy(LIST_GADGET l){
     }
 }
 
-void process(GADGET gad,Tas *t,MOBITA *MOB,ListBuilding h){
+void process(GADGET gad,Tas *t,MOBITA *MOB,InprogressList *ip, ListBuilding h){
     if(NAMA(gad) == "Kain Pembungkus Waktu"){
-        KainWaktu(t);
+        KainWaktu(t,ip);
     }
     else if(NAMA(gad) == "Senter Pembesar"){
         SenterPembesar(t);
@@ -95,9 +95,14 @@ void process(GADGET gad,Tas *t,MOBITA *MOB,ListBuilding h){
     }
 }
 
-void KainWaktu(Tas *t){
+void KainWaktu(Tas *t,InprogressList *ip){
     if(TOP(*t).type=='P'){
         TOP(*t).tPerish+=waktu-TOP(*t).tPickup;
+        Address now = FIRST(*ip);
+        while(NEXT(now)!=NULL){
+            now = NEXT(now);
+        }
+        INFO(now).tPerish+=waktu-TOP(*t).tPickup;
         printf("Senter Pengecil berhasil digunakan!");
     }
     else{
@@ -116,10 +121,7 @@ void SenterPembesar(Tas *t){
 void PintuKemanaSaja(MOBITA *MOB,ListBuilding h){
     boolean pindah = false;
     while(!pindah){
-        for(int i = 0;i<lengthListBuilding(h);i++){
-            printf("%d. (%d %d)\n",i+1,XCOORD(ELMTListB(h, i)),YCOORD(ELMTListB(h, i)));
-        }
-        printf("Tentukan koordinat Tujuan: ");
+        displayListBuilding(h);
         int x;
         scanf("%d",&x);
         if(x>0 && x<=lengthListBuilding(h)){
