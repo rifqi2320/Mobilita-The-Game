@@ -20,7 +20,7 @@ int length(Queue q){
 	return(IDX_TAIL(q) - IDX_HEAD(q)) + 1;
 }
 
-void enqueue(Queue *q, ElType val){
+void enqueue(Queue *q, Item val){
 	if (isEmpty(*q)){
 		IDX_HEAD(*q) = 0;
 		IDX_TAIL(*q) = 0;
@@ -46,7 +46,7 @@ void enqueue(Queue *q, ElType val){
 	}
 }
 
-void dequeue(Queue *q, ElType *val){
+void dequeue(Queue *q, Item *val){
 	*val = HEAD(*q);
 	if (IDX_HEAD(*q) == IDX_TAIL(*q)){
 		IDX_HEAD(*q) = -1;

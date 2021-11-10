@@ -13,7 +13,6 @@
 #define BUILDING_CAP 27
 
 /* Definisi elemen dan koleksi objek */
-typedef int IdxType; /* type indeks */
 typedef struct {
   Building *buffer; /* memori tempat penyimpan elemen (container) */
   int capacity;     /* ukuran elemen */

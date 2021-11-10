@@ -40,6 +40,8 @@ void displayMap(Map PT, Building NobitaLoc, Todolist l);
 
 boolean isConnected(Map PT, Building B1, Building B2);
 
+void addBuilding(Map *PT, Building B, int idx);
+
 #endif
 
 

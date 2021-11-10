@@ -5,13 +5,18 @@
 #define INPUT_OUTPUT_H
 
 #include "boolean.h"
+#include "point.h"
+#include "matrix.h"
+#include "item.h"
+#include "map.h"
+#include "building.h"
+#include "listbuilding.h"
+#include "list_linked.h"
 #include "charmachine.h"
 #include "tokenmachine.h"
-#include "listbuilding.h"
-#include "matrix.h"
-#include "list_linked.h"
+#include "wordmachine.h"
 
-void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *tempListItem);
+void inputMain(Word dir, Map *PT, List *tempListItem);
 /* Menerima konfigurasi file */
 
 /* Menerima input matriks adjacency dan membuat matriks peta sejumlah (N+1)X(N+1) dengan N : jumlah bangunan
@@ -50,10 +55,6 @@ int wordToInt(Word w);
 /*
 Mengubah masukan ADT Word menjadi int yang akan dikembalikan fungsi
 */
-
-
-int wordToInt(Word w);
-
 
 Token nextToken();
 /*

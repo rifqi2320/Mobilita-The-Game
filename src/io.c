@@ -1,12 +1,4 @@
-#include "charmachine.h"
-#include "item.h"
-#include "list_linked.h"
-#include "listbuilding.h"
-#include "matrix.h"
-#include "point.h"
-#include "tokenmachine.h"
-#include "wordmachine.h"
-#include "building.h"
+#include "io.h"
 #include <stdio.h>
 
 char currentChar;
@@ -59,8 +51,8 @@ Token nextToken() {
   }
   return tempToken;
 }
-// kayaknya input mainnya map aja
-void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *tempListItem) {
+
+void inputMain(Word dir, Map *PT, List *tempListItem) {
   int i, j, k; // Iterator
   int N, M;    // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
   int L;       // Jumlah Gedung (4 <= L <= 26)
@@ -74,8 +66,11 @@ void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *tempLis
   char templDropoff;
   Item tempItem;
 
+  // Building sementara
+  Building tempB;
   /*
-  Item tempListItem[30];   // Nanti diganti pake linked list of Item buat daftar
+  Item tempListItem[30];   // Nanti diganti pake linked list of Item buat
+  daftar
                            // pesanan
   */
 
@@ -86,25 +81,26 @@ void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *tempLis
   M = nextToken().val;
 
   // Input lokasi HQ
-  NAMEBUILDING(*HQ) = '8';
-  XCOORD(*HQ) = nextToken().val;
-  YCOORD(*HQ) = nextToken().val;
+  CreateBuilding(&tempB, nextToken().val, nextToken().val, '8');
 
   // Input jumlah bangunan
   L = nextToken().val;
 
+  // Inisialisasi Map
+  CreateMap(PT, N, M, L);
+  addBuilding(PT, tempB, 0);
+
   // Input karakter dan lokasi bangunan
-  for (i = 0; i < CAPACITYListB(*LB); i++) {
+  for (i = 1; i <= L; i++) {
     char name = nextToken().tkn;
-    NAMEBUILDING(ELMTListB(*LB, i)) = name;
-    XCOORD(ELMTListB(*LB, i)) = nextToken().val;
-    YCOORD(ELMTListB(*LB, i)) = nextToken().val;
+    CreateBuilding(&tempB, nextToken().val, nextToken().val, name);
+    addBuilding(PT, tempB, i);
   }
 
   // Input adjacency matrix
   for (i = 0; i <= L; i++) {
     for (j = 0; j <= L; j++) {
-      ELMT(*m, i, j) = nextToken().val;
+      ELMTMap(*PT, i, j) = nextToken().val;
     }
   }
 
