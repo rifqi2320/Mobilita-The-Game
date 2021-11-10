@@ -1,12 +1,12 @@
 #include "charmachine.h"
 #include "item.h"
-#include "matrix.h"
+#include "list_linked.h"
 #include "listbuilding.h"
+#include "matrix.h"
 #include "point.h"
 #include "tokenmachine.h"
 #include "wordmachine.h"
 #include <stdio.h>
-#include "list_linked.h"
 
 char currentChar;
 boolean endToken;
@@ -25,6 +25,26 @@ boolean validateWord(Word w, char a[]) {
   return eq;
 }
 
+char *wordToString(Word w) {
+  char *buffer;
+  int i;
+  for (i = 0; i < w.length; i++) {
+    buffer[i] = w.contents[i];
+  }
+  buffer[w.length] = 0;
+  return buffer;
+}
+
+int wordToInt(Word w) {
+  int res = 0;
+  int i;
+  for (i = 0; i < w.length; i++) {
+    res *= 10;
+    res += w.contents[i] - '0';
+  }
+  return res;
+}
+
 Word nextInput() {
   startWord();
   return currentWord;
@@ -38,8 +58,8 @@ Token nextToken() {
   }
   return tempToken;
 }
-
-void inputMain(char dir[], ListBuilding *LB, Matrix *m, Building *HQ) {
+// kayaknya input mainnya map aja
+void inputMain(char *dir, ListBuilding *LB, Matrix *m, Building *HQ) {
   int i, j, k; // Iterator
   int N, M;    // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
   int L;       // Jumlah Gedung (4 <= L <= 26)
@@ -57,8 +77,7 @@ void inputMain(char dir[], ListBuilding *LB, Matrix *m, Building *HQ) {
   Item tempListItem[30];   // Nanti diganti pake linked list of Item buat daftar
                            // pesanan
   */
-  List tempListItem;       //list untuk menyimpan daftar pesanan
-
+  List tempListItem; // list untuk menyimpan daftar pesanan
 
   startToken(dir);
 
@@ -67,7 +86,7 @@ void inputMain(char dir[], ListBuilding *LB, Matrix *m, Building *HQ) {
   M = nextToken().val;
 
   // Input lokasi HQ
-  NAME(*HQ) = '8'
+  NAME(*HQ) = '8';
   XCOORD(*HQ) = nextToken().val;
   YCOORD(*HQ) = nextToken().val;
 
@@ -89,7 +108,7 @@ void inputMain(char dir[], ListBuilding *LB, Matrix *m, Building *HQ) {
     }
   }
 
-  //Menginisialisasi List Item
+  // Menginisialisasi List Item
   CreateList(&tempListItem);
   // Input jumlah pesanan
   P = nextToken().val;
@@ -107,6 +126,6 @@ void inputMain(char dir[], ListBuilding *LB, Matrix *m, Building *HQ) {
     }
     CreateItem(&tempItem, temptype, temptArrival, temptPerish, templPickup,
                templDropoff);
-    insertPrio(&tempListItem,tempItem);
+    insertPrio(&tempListItem, tempItem);
   }
 };

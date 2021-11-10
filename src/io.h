@@ -27,9 +27,35 @@ lokasi pick-up di M dan lokasi drop-off di B, dan merupakan heavy item
 */
 
 boolean validateWord(Word w, char a[]);
+/*
+Fungsi untuk membandingkan ADT Word dengan string yang diinput juga, 
+mengeluarkan true jika sama, false jika tidak
+*/
 
 Word nextInput();
+/*
+Menyalakan mesin kata dan mengakuisisi 1 input line selanjutnya
+dan mengembalikannya dalam bentuk Word
+*/
+
+char *wordToString(Word w);
+/*
+Mengubah masukan ADT Word menjadi string yang akan dikembalikan fungsi
+*/
+
+int wordToInt(Word w);
+/*
+Mengubah masukan ADT Word menjadi int yang akan dikembalikan fungsi
+*/
+
+
+int wordToInt(Word w);
+
 
 Token nextToken();
+/*
+Melanjutkan pembacaan ke token selanjutnya menggunakan mesintoken
+dan mengembalikan token yang diakuisisi
+*/
 
 #endif
