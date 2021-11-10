@@ -6,11 +6,19 @@
 typedef List Todolist;
 
 typedef List InprogressList;
-/*
-typedef task{
 
+typedef struct task{
+  char lPickup;   /*Lokasi pickup pesanan*/
+  char lDropoff;  /*Lokasi dropoff pesanan*/
+  char type;      /*Tipe item, N/H/P/V*/
+  int tPerish;    /*Waktu pesanan perish dari waktu angkut*/
 }Task;
-*/
+
+#define PICKUP(I) I.lPickup
+#define DROPOFF(I) I.lDropoff
+#define TYPE(I) I.type
+#define PERISH_TIME(I) I.tPerish
+
 void CreateTodoList(Todolist *l);
 
 void addTodoList(Todolist *l, ElType task);
