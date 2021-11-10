@@ -7,13 +7,7 @@ typedef List Todolist;
 
 typedef List InprogressList;
 
-typedef struct task{
-  char lPickup;   /*Lokasi pickup pesanan*/
-  char lDropoff;  /*Lokasi dropoff pesanan*/
-  char type;      /*Tipe item, N/H/P/V*/
-  int tPerish;    /*Waktu pesanan perish dari waktu angkut*/
-}Task;
-
+typedef Item ElType;
 #define PICKUP(I) I.lPickup
 #define DROPOFF(I) I.lDropoff
 #define TYPE(I) I.type
