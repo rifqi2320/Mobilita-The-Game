@@ -6,12 +6,13 @@
 #define LIST_H
 
 #include "boolean.h"
-#include "node.h"
+#include "constant.h"
 #include "item.h"
+#include "node.h"
+
 
 typedef Address List;
 
-#define IDX_UNDEF (-1)
 #define FIRST(l) (l)
 
 /* Definisi List : */
@@ -26,7 +27,7 @@ void CreateList(List *l);
 /* F.S. Terbentuk list kosong */
 
 /****************** TEST LIST KOSONG ******************/
-boolean isEmpty(List l);
+boolean isListEmpty(List l);
 /* Mengirim true jika list kosong */
 
 /****************** GETTER SETTER ******************/
@@ -59,15 +60,18 @@ void insertLast(List *l, Item val);
 /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
 void insertAt(List *l, Item val, int idx);
-/* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
+/* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu
+ * 0..length(l) */
 /* F.S. Melakukan alokasi sebuah elemen dan */
-/* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
+/* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i)
+ */
 /* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 
 void insertPrio(List *l, Item val);
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
-/* memasukkan elemen tersebut ke list dengan urutannya dipengaruhi waktu pesanan masuk,semakin kecil waktunya,semakin di "depan" elemen berada */
+/* memasukkan elemen tersebut ke list dengan urutannya dipengaruhi waktu pesanan
+ * masuk,semakin kecil waktunya,semakin di "depan" elemen berada */
 /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 /*** PENGHAPUSAN ELEMEN ***/
 void deleteFirst(List *l, Item *val);
@@ -84,9 +88,8 @@ void deleteAt(List *l, int idx, Item *val);
 /* F.S. val diset dengan elemen l pada indeks ke-idx. */
 /*      Elemen l pada indeks ke-idx dihapus dari l */
 
-
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-//void displayList(List l);
+// void displayList(List l);
 // void printInfo(List l);
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
@@ -98,7 +101,7 @@ int length(List l);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 /****************** PROSES TERHADAP LIST ******************/
-List concat(List l1, List l2) ;
+List concat(List l1, List l2);
 /* I.S. l1 dan l2 sembarang */
 /* F.S. l1 dan l2 kosong, l3 adalah hasil konkatenasi l1 & l2 */
 /* Konkatenasi dua buah list : l1 dan l2    */

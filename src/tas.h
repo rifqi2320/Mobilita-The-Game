@@ -3,8 +3,8 @@
 
 #include "boolean.h"
 #include "item.h"
+#include "constant.h"
 
-#define IDX_UNDEF -1
 #define MAXCAPACITY 100
 
 typedef struct {

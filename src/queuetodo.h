@@ -3,12 +3,12 @@
 
 #include "boolean.h"
 #include "item.h"
-#include<stdlib.h>
+#include <stdlib.h>
 
-typedef struct{
-    Item buffer[100]; 
-    int idxHead;
-    int idxTail;
+typedef struct {
+  Item buffer[100];
+  int idxHead;
+  int idxTail;
 } Queue;
 
 #define IDX_HEAD(q) (q).idxHead
@@ -18,9 +18,9 @@ typedef struct{
 
 void CreateQueue(Queue *q);
 
-boolean isEmpty(Queue q);
+boolean isQueueEmpty(Queue q);
 
-boolean isFull(Queue q);
+boolean isQueueFull(Queue q);
 
 void enqueue(Queue *q, Item val);
 

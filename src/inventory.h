@@ -7,10 +7,9 @@
 #include "tas.h"
 #include "listbuilding.h"
 #include "todolist.h"
+#include "constant.h"
 
 #define JUMLAHGADGET 5
-#define IDX_UNDEF -1
-#define VAL_UNDEF -999
 
 typedef GADGET ElType;
 typedef struct{
@@ -24,7 +23,7 @@ typedef struct{
 void MakeListGadget(LIST_GADGET *l);
 int lengthListGadget(LIST_GADGET l);
 boolean isIdxEff(LIST_GADGET l, int i);
-boolean isFull(LIST_GADGET l);
+boolean isLGFull(LIST_GADGET l);
 void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga);
 void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,InprogressList *ip, ListBuilding h);
 void displayBuy(LIST_GADGET l);

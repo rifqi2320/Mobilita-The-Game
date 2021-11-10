@@ -52,7 +52,7 @@ Token nextToken() {
   return tempToken;
 }
 
-void inputMain(Word dir, Map *PT, List *tempListItem) {
+void inputMain(Word dir, Map *PT, Queue *DP) {
   int i, j, k; // Iterator
   int N, M;    // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
   int L;       // Jumlah Gedung (4 <= L <= 26)
@@ -68,11 +68,6 @@ void inputMain(Word dir, Map *PT, List *tempListItem) {
 
   // Building sementara
   Building tempB;
-  /*
-  Item tempListItem[30];   // Nanti diganti pake linked list of Item buat
-  daftar
-                           // pesanan
-  */
 
   startToken(dir);
 
@@ -105,7 +100,7 @@ void inputMain(Word dir, Map *PT, List *tempListItem) {
   }
 
   // Menginisialisasi List Item
-  CreateList(tempListItem);
+  CreateQueue(DP);
   // Input jumlah pesanan
   P = nextToken().val;
 
@@ -122,6 +117,6 @@ void inputMain(Word dir, Map *PT, List *tempListItem) {
     }
     CreateItem(&tempItem, temptype, temptArrival, temptPerish, templPickup,
                templDropoff);
-    insertPrio(tempListItem, tempItem);
+    enqueue(DP, tempItem);
   }
 };

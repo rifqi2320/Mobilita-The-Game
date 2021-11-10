@@ -5,38 +5,39 @@
 #define INPUT_OUTPUT_H
 
 #include "boolean.h"
-#include "point.h"
-#include "matrix.h"
-#include "item.h"
-#include "map.h"
 #include "building.h"
-#include "listbuilding.h"
-#include "list_linked.h"
 #include "charmachine.h"
+#include "item.h"
+#include "list_linked.h"
+#include "listbuilding.h"
+#include "map.h"
+#include "point.h"
+#include "queuetodo.h"
 #include "tokenmachine.h"
 #include "wordmachine.h"
 
-void inputMain(Word dir, Map *PT, List *tempListItem);
+void inputMain(Word dir, Map *PT, Queue *DP);
 /* Menerima konfigurasi file */
 
-/* Menerima input matriks adjacency dan membuat matriks peta sejumlah (N+1)X(N+1) dengan N : jumlah bangunan
-Format yaitu biner (0,1) misalnya di baris ke-1 terdapat 0 0 1 0 berarti 
-nilai 1 yaitu kolom ke 2 atau bangunan ke-2 (B) dapat dicapai oleh bangunan ke-1 (A)
+/* Menerima input matriks adjacency dan membuat matriks peta sejumlah
+(N+1)X(N+1) dengan N : jumlah bangunan Format yaitu biner (0,1) misalnya di
+baris ke-1 terdapat 0 0 1 0 berarti nilai 1 yaitu kolom ke 2 atau bangunan ke-2
+(B) dapat dicapai oleh bangunan ke-1 (A)
 */
 
 /* Menerima daftar Bangunan beserta koordinatnya untuk digunakan membuat Map
-Format input misalny "A 1 2" berarti bangunan A berada di kooordinat 1,2 
+Format input misalny "A 1 2" berarti bangunan A berada di kooordinat 1,2
 */
 
-/* Menerima daftar pesanan yaitu berbagai item : normal, perishable, heavy, VIP item 
-Jika input merupakan perishable maka disertai dengan waktu expire item tersebut 
-Format input misalny "1 M B H" berarti waktu pesanan masuk yaitu waktu ke-1,
-lokasi pick-up di M dan lokasi drop-off di B, dan merupakan heavy item
+/* Menerima daftar pesanan yaitu berbagai item : normal, perishable, heavy, VIP
+item Jika input merupakan perishable maka disertai dengan waktu expire item
+tersebut Format input misalny "1 M B H" berarti waktu pesanan masuk yaitu waktu
+ke-1, lokasi pick-up di M dan lokasi drop-off di B, dan merupakan heavy item
 */
 
 boolean validateWord(Word w, char a[]);
 /*
-Fungsi untuk membandingkan ADT Word dengan string yang diinput juga, 
+Fungsi untuk membandingkan ADT Word dengan string yang diinput juga,
 mengeluarkan true jika sama, false jika tidak
 */
 
