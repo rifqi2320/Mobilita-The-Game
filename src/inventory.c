@@ -56,14 +56,14 @@ void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga){
     }
 }
 
-void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB){
-    GADGET g;
+void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,Graph *g){
+    GADGET gad;
     if(isIdxEff(*l,i)){
-        NAMA(g) = NAMAGADGET(*l,i);
-        HARGA(g) = HARGAGADGET(*l,i); 
+        NAMA(gad) = NAMAGADGET(*l,i);
+        HARGA(gad) = HARGAGADGET(*l,i); 
         NAMAGADGET(*l,i)="-";
         HARGAGADGET(*l,i)=VAL_UNDEF;
-        process(g,t,MOB);
+        process(gad,t,MOB,g);
     }
     else{
         printf("Tidak ada gadget yang dapat digunakan");
@@ -77,28 +77,27 @@ void displayBuy(LIST_GADGET l){
     }
 }
 
-void process(GADGET g,Tas *t,MOBITA *MOB){
-    if(NAMA(g) == "Kain Pembungkus Waktu"){
+void process(GADGET gad,Tas *t,MOBITA *MOB,Graph *g){
+    if(NAMA(gad) == "Kain Pembungkus Waktu"){
         KainWaktu(t);
     }
-    else if(NAMA(g) == "Senter Pembesar"){
+    else if(NAMA(gad) == "Senter Pembesar"){
         SenterPembesar(t);
     }
-    else if(NAMA(g)== "Pintu Kemana Saja"){
-        PintuKemanaSaja(MOB);
+    else if(NAMA(gad)== "Pintu Kemana Saja"){
+        PintuKemanaSaja(MOB,*g);
     }
-    else if(NAMA(g)== "Mesin Waktu"){
+    else if(NAMA(gad)== "Mesin Waktu"){
         MesinWaktu();
     }
-    else if(NAMA(g)== "Senter Pengecil"){
+    else if(NAMA(gad)== "Senter Pengecil"){
         SenterPengecil(t);
     }
 }
 
 void KainWaktu(Tas *t){
-    if(TOP(*t).type=="P"){
-        TOP(*t).tPerish=0;
-        TOP(*t).type="N";
+    if(TOP(*t).type=='P'){
+        TOP(*t).tPerish+=waktu-TOP(*t).tPickup;
         printf("Senter Pengecil berhasil digunakan!");
     }
     else{
@@ -114,12 +113,22 @@ void SenterPembesar(Tas *t){
     printf("Senter Pembesar berhasil digunakan!");
 }
 
-void PintuKemanaSaja(MOBITA *MOB){
-    printf("Tentukan koordinat Tujuan: ");
-    int x,y;
-    scanf("%d %d",&x,&y);
-    Absis(Posisi(*MOB)) = x;
-    Ordinat(Posisi(*MOB)) = y;
+void PintuKemanaSaja(MOBITA *MOB,Graph g){
+    boolean pindah = false;
+    while(!pindah){
+        printf("Tentukan koordinat Tujuan: ");
+        int x,y;
+        scanf("%d %d",&x,&y);
+        if(ELMTGraph(g,x,y)==1){
+            pindah = true;
+            printf("Mobita berhasil pindah ke (%d %d).\n",x,y);
+            Absis(Posisi(*MOB)) = x;
+            Ordinat(Posisi(*MOB)) = y;
+        }
+        else{
+            printf("Lokasi tidak ditemukan, silahkan ulangi.\n");
+        }
+    }
 }
 
 void MesinWaktu(){
@@ -130,13 +139,17 @@ void MesinWaktu(){
     printf("Mesin Waktu berhasil digunakan!");
 }
 
-void SenterPengecil(Tas *t){
-    if(TOP(*t).type=="H"){
-        TOP(*t).type="N";
+Item SenterPengecil(Tas *t){
+    Item C;
+    CreateItem(&C,'-', -1, -1, '-','-');
+    if(TOP(*t).type=='H'){
+        TOP(*t).type='N';
         printf("Senter Pengecil berhasil digunakan!");
+        return TOP(*t);
     }
     else{
         printf("Senter Pengecil gagal digunakan!Senter terbuang.");
+        return C;
     }
 }
 
