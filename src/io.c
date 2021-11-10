@@ -6,6 +6,7 @@
 #include "point.h"
 #include "tokenmachine.h"
 #include "wordmachine.h"
+#include "building.h"
 #include <stdio.h>
 
 char currentChar;
@@ -59,7 +60,7 @@ Token nextToken() {
   return tempToken;
 }
 // kayaknya input mainnya map aja
-void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *l) {
+void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *tempListItem) {
   int i, j, k; // Iterator
   int N, M;    // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
   int L;       // Jumlah Gedung (4 <= L <= 26)
@@ -77,7 +78,6 @@ void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *l) {
   Item tempListItem[30];   // Nanti diganti pake linked list of Item buat daftar
                            // pesanan
   */
-  List tempListItem; // list untuk menyimpan daftar pesanan
 
   startToken(dir);
 
@@ -86,7 +86,7 @@ void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *l) {
   M = nextToken().val;
 
   // Input lokasi HQ
-  NAME(*HQ) = '8';
+  NAMEBUILDING(*HQ) = '8';
   XCOORD(*HQ) = nextToken().val;
   YCOORD(*HQ) = nextToken().val;
 
@@ -96,7 +96,7 @@ void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *l) {
   // Input karakter dan lokasi bangunan
   for (i = 0; i < CAPACITYListB(*LB); i++) {
     char name = nextToken().tkn;
-    NAME(ELMT(*LB, i)) = name;
+    NAMEBUILDING(ELMTListB(*LB, i)) = name;
     XCOORD(ELMTListB(*LB, i)) = nextToken().val;
     YCOORD(ELMTListB(*LB, i)) = nextToken().val;
   }
@@ -109,7 +109,7 @@ void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *l) {
   }
 
   // Menginisialisasi List Item
-  CreateList(&tempListItem);
+  CreateList(tempListItem);
   // Input jumlah pesanan
   P = nextToken().val;
 
@@ -126,6 +126,6 @@ void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *l) {
     }
     CreateItem(&tempItem, temptype, temptArrival, temptPerish, templPickup,
                templDropoff);
-    insertPrio(&tempListItem, tempItem);
+    insertPrio(tempListItem, tempItem);
   }
 };
