@@ -24,6 +24,7 @@ void enqueue(Queue *q, ElType val){
 	if (isEmpty(*q)){
 		IDX_HEAD(*q) = 0;
 		IDX_TAIL(*q) = 0;
+        TAIL(*q) = val;
 	} else {
 		if (IDX_TAIL(*q)==100-1){
 			int i;
@@ -34,8 +35,15 @@ void enqueue(Queue *q, ElType val){
 			IDX_HEAD(*q) = 0;
 		}
 		IDX_TAIL(*q)++;
+        TAIL(*q) = val;
+
+        int j = IDX_TAIL(*q);
+        while(((*q).buffer[j-1].tArrival > val.tArrival) && (j != IDX_HEAD(*q))){
+            (*q).buffer[j] = (*q).buffer[j-1];
+            (*q).buffer[j-1] = val;
+            j--;
+        }
 	}
-	TAIL(*q) = val;
 }
 
 void dequeue(Queue *q, ElType *val){
