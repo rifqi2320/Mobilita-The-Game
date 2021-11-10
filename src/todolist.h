@@ -2,6 +2,8 @@
 #define TODOLIST_H
 
 #include "list_linked.h"
+#include "building.h"
+#include "item.h"
 
 typedef List Todolist;
 
@@ -30,6 +32,7 @@ void deleteInProgressAt(InprogressList *l, Item *task);
 
 void displayInProgress(InprogressList l);
 
-
+boolean isInPickupSpot(Building b,Todolist l);
+//menghasilkan true jika di spot tersebut ada item yang bisa di pick up
 
 #endif

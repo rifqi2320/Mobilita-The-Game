@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "todolist.h"
 #include "boolean.h"
+#include "todolist.h"
 
 void CreateTodoList(Todolist *l){
     CreateList(*l);
@@ -107,4 +107,24 @@ void displayInProgress(InprogressList l){
             idx++;
         }
     }
+}
+boolean isInPickupSpot(Building b,Todolist l){
+//menghasilkan true jika di spot tersebut ada item yang bisa di pick up
+    //kamus lokal
+    Address p;//pointer untuk traversal
+    boolean found;//menghasilkan true jika ada item di building tersebut
+    //algoritma
+    found = false;
+    if(!isEmpty(l) && !found){
+        p = FIRST(l);
+        while(p!=NULL){
+            if(p->info.lPickup==b.name){//kalau ketemu
+                found = true;
+            }
+            else{
+                p = NEXT(p);
+            }
+        }
+    }
+    return found;
 }
