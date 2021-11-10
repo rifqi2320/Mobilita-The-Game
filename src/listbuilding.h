@@ -76,4 +76,8 @@ void shrinkListBuilding(ListBuilding *l, int num);
 /* I.S. l terdefinisi num > capacity *l */
 /* F.S. */
 
+void displayListBuilding(ListBuilding l);
+/* I.S. l terdefinisi */
+/* F.S. menampilkan list building */
+
 #endif
