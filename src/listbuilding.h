@@ -10,12 +10,13 @@
 // #define VAL_UNDEF -999
 /* Nilai elemen tak terdefinisi*/
 
+#define BUILDING_CAP 27
+
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType; /* type indeks */
-typedef struct
-{
+typedef struct {
   Building *buffer; /* memori tempat penyimpan elemen (container) */
-  int capacity;  /* ukuran elemen */
+  int capacity;     /* ukuran elemen */
 } ListBuilding;
 /* Indeks yang digunakan [0..capacity-1] */
 /* Jika l adalah ListDin, cara deklarasi dan akses: */
@@ -29,7 +30,8 @@ typedef struct
   Definisi elemen terakhir yang terdefinisi: l.buffer[i] dengan i terbesar
                                              sehingga l.buffer[i] != VAL_UNDEF
   Definisi nEff: jumlah elemen efektif, di mana l.buffer[nEff] == VAL_UNDEF
-                                             dan l.buffer[nEff-1] != VAL_UNDEF */
+                                             dan l.buffer[nEff-1] != VAL_UNDEF
+*/
 
 /* ********** SELEKTOR ********** */
 #define BUFFERListB(l) (l).buffer
@@ -53,6 +55,11 @@ int lengthListBuilding(ListBuilding l);
 /* Mengirimkan banyaknya elemen efektif list */
 /* Mengirimkan nol jika list kosong */
 
+Building searchCoord(ListBuilding l, int X, int Y);
+/* Mengirimkan building yang mempunyai posisi (X,Y) */
+/* Jika tidak ditemukan akan mengeluarkan MARKBuilding */
+
+/* ********** OPERATOR  ********** */
 void appendBuilding(ListBuilding *l, Building B);
 /* I.s. l dan B terdefinisi */
 /* F.S. Building akan dimasukkan ke dalam list building */

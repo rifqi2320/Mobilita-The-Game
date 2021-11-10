@@ -7,9 +7,7 @@ void CreateListBuilding(ListBuilding *l, int capacity) {
   BUFFERListB(*l) = (Building *)malloc(capacity * sizeof(Building));
   CAPACITYListB(*l) = capacity;
   for (int i = 0; i < capacity; i++) {
-    XCOORD(ELMTListB(*l, i)) = 0;
-    YCOORD(ELMTListB(*l, i)) = 0;
-    NAMEBUILDING(ELMTListB(*l, i)) = 0;
+    ELMTListB(*l, i) = MARKBuilding();
   }
 };
 
@@ -21,12 +19,29 @@ void dealocateListBuilding(ListBuilding *l) {
 /* ********** SELEKTOR  ********** */
 int lengthListBuilding(ListBuilding l) {
   int i = 0, len = 0;
-  while (NAMEBUILDING(ELMTListB(l, i)) != 0 && i < CAPACITYListB(l)) {
+  while (!isMARKBuilding(ELMTListB(l, i)) && i < CAPACITYListB(l)) {
     len++;
     i++;
   }
   return len;
 };
+
+Building searchCoord(ListBuilding l, int X, int Y) {
+  int i = 0;
+  boolean found = false;
+  while (i < lengthListBuilding(l) && !found) {
+    if (XCOORD(ELMTListB(l, i)) == X && YCOORD(ELMTListB(l, i)) == Y) {
+      found = true;
+    } else {
+      i++;
+    }
+  }
+  if (found) {
+    return ELMTListB(l, i);
+  } else {
+    return MARKBuilding();
+  }
+}
 
 /* ********** OPERATOR  ********** */
 void appendBuilding(ListBuilding *l, Building B) {
