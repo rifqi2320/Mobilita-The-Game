@@ -2,7 +2,6 @@
 #include "engine.h"
 #include <stdio.h>
 
-
 int waktu;
 
 void MakeListGadget(LIST_GADGET *l) {
@@ -35,7 +34,7 @@ boolean isLGFull(LIST_GADGET l) {
   return false;
 }
 void buyGadget(LIST_GADGET *l, LIST_GADGET buy, int i, int harga) {
-  if (isFull(*l)) {
+  if (isLGFull(*l)) {
     printf("Inventory sudah penuh!\n");
   } else if (isIdxEff(buy, i)) {
     if (HARGAGADGET(buy, i) > harga) {

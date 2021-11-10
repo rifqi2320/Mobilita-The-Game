@@ -34,7 +34,7 @@ void displayMap(Map PT, Building NobitaLoc, Todolist l) {
             print_yellow(NAMEBUILDING(tempB));
           } else if (true /* drop off*/) {
             print_blue(NAMEBUILDING(tempB));
-          } else if (isInPickupSpot(tempB,l)) {
+          } else if (isInPickupSpot(tempB, l)) {
             print_red(NAMEBUILDING(tempB));
           } else if (isConnected(PT, NobitaLoc, tempB)) {
             print_green(NAMEBUILDING(tempB));
@@ -57,6 +57,6 @@ boolean isConnected(Map PT, Building B1, Building B2) {
 }
 
 void addBuilding(Map *PT, Building B, int idx) {
-  appendBuilding(&(LBMap(PT)), B);
-  setVal(&(MBMap(PT)), NAMEBUILDING(B), idx);
+  appendBuilding(&(LBMap(*PT)), B);
+  setVal(&(MBMap(*PT)), NAMEBUILDING(B), idx);
 }

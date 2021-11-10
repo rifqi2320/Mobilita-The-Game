@@ -1,9 +1,14 @@
-#include "building.h"
+#include "engine.h"
 #include "inventory.h"
 #include "io.h"
-#include "item.h"
 #include "list_linked.h"
 #include "listbuilding.h"
+#include "map.h"
+#include "mobita.h"
+#include "queuetodo.h"
+#include "tas.h"
+#include "todolist.h"
+
 #include <stdio.h>
 
 void displayHelp();
@@ -33,7 +38,6 @@ int main() {
     tempInt = wordToInt(nextInput());
     if (tempInt == 1) {
       tempWord = nextInput();
-
       // Inisialisasi seluruh object dan adt
       inputMain(tempWord, &PT, &DP); // Berdasarkan config
       CreateMobita(&mob);

@@ -69,7 +69,7 @@ void inputMain(Word dir, Map *PT, Queue *DP) {
   // Building sementara
   Building tempB;
 
-  startToken(dir);
+  startToken(wordToString(dir));
 
   // Input Ukuran Matriks
   N = nextToken().val;

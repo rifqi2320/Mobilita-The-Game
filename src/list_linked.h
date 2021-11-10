@@ -10,7 +10,6 @@
 #include "item.h"
 #include "node.h"
 
-
 typedef Address List;
 
 #define FIRST(l) (l)
@@ -97,7 +96,7 @@ void deleteAt(List *l, int idx, Item *val);
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 
-int length(List l);
+int lengthList(List l);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 
 /****************** PROSES TERHADAP LIST ******************/

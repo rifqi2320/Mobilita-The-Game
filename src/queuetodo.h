@@ -22,6 +22,8 @@ boolean isQueueEmpty(Queue q);
 
 boolean isQueueFull(Queue q);
 
+int lengthQueue(Queue q);
+
 void enqueue(Queue *q, Item val);
 
 void dequeue(Queue *q, Item *val);

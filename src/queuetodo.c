@@ -13,15 +13,15 @@ boolean isQueueFull(Queue q) {
   return (IDX_HEAD(q) == 0) && (IDX_TAIL(q) == 100 - 1);
 }
 
-int length(Queue q) {
-  if (isEmpty(q)) {
+int lengthQueue(Queue q) {
+  if (isQueueEmpty(q)) {
     return 0;
   }
   return (IDX_TAIL(q) - IDX_HEAD(q)) + 1;
 }
 
 void enqueue(Queue *q, Item val) {
-  if (isEmpty(*q)) {
+  if (isQueueEmpty(*q)) {
     IDX_HEAD(*q) = 0;
     IDX_TAIL(*q) = 0;
     TAIL(*q) = val;
