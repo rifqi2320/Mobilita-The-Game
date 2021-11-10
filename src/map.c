@@ -4,6 +4,7 @@
 /* ********** KONSTRUKTOR ********** */
 void CreateMap(Map *PT, int N, int M, int L) {
   ListBuilding LB;
+  MB mb;
   int i, j;
   NBMap(*PT) = L;
   WIDTHMap(*PT) = N;
@@ -13,6 +14,8 @@ void CreateMap(Map *PT, int N, int M, int L) {
       ELMTMap(*PT, i, j) = 0;
     }
   }
+  CreateMB(&mb);
+  MBMap(*PT) = mb;
   CreateListBuilding(&LB, L);
   LBMap(*PT) = LB;
 };
@@ -51,4 +54,9 @@ boolean isConnected(Map PT, Building B1, Building B2) {
   int i = getVal(MBMap(PT), NAMEBUILDING(B1));
   int j = getVal(MBMap(PT), NAMEBUILDING(B2));
   return ELMTMap(PT, i, j) == 1;
+}
+
+void addBuilding(Map *PT, Building B, int idx) {
+  appendBuilding(&(LBMap(PT)), B);
+  setVal(&(MBMap(PT)), NAMEBUILDING(B), idx);
 }
