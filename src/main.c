@@ -6,6 +6,8 @@
 #include "building.h"
 #include <stdio.h>
 
+void displayHelp();
+
 int main() {
   boolean started = false;
   printf("====MOBILITA====\n");
@@ -53,7 +55,7 @@ int main() {
     } else if (validateWord(tempWord, "INVENTORY")) {
 
     } else if (validateWord(tempWord, "HELP")) {
-
+            displayHelp();
     } else {
       printf("Masukkan Tidak Valid.\n");
     }
@@ -62,4 +64,16 @@ int main() {
   printf("OTSUKARE!!!\n");
   printf("SELAMAT, ANDA TELAH MENYELESAIKAN PERMAINAN INI!!\n");
   return 0;
+}
+
+void displayHelp(){
+  printf("1. MOVE -> Untuk berpindah ke lokasi selanjutnya\n");
+  printf("2. PICK_UP -> Untuk mengambil item di lokasi sekarang\n");
+  printf("3. DROP_OFF -> Untuk mengantar item ke lokasi sekarang\n");
+  printf("4. MAP -> Untuk memunculkan peta\n");
+  printf("5. TO_DO -> Untuk menampilkan pesanan yang masuk ke To Do List\n");
+  printf("6. IN_PROGRESS -> Untuk menampilkan pesanan yang sedang dikerjakan\n");
+  printf("7. BUY -> Untuk menampilkan gadget yang dapat dibeli lalu membelinya. Hanya dapat digunakan di Headquarter\n");
+  printf("8. INVENTORY -> Untuk melihat gadget yang dimiliki dan menggunakannya\n");
+  printf("9. HELP -> Untuk mengeluarkan list command dan kegunaannya\n");
 }
