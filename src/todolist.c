@@ -128,24 +128,33 @@ boolean isInPickupSpot(Building b,Todolist l){
     }
     return found;
 }
-Item pickUpItem(Building b,Todolist l){
+void pickUpItem(Building b,Todolist l,Item *item){
 //mendequeue item paling awal di list 
 //asumsi:Item sudah dipastikan ada melalui fungsi isInPickupSpot
     //kamus lokal
     Address p;//pointer untuk traversal
     int idx;//variabel untuk kounter
-    Item item;//item yang diambil
     //algoritma
     p = FIRST(l);
     idx = 0;
     while(p!=NULL){
         if(p->info.lPickup==b.name){
-            deleteAt(&l,idx,&item);
+            deleteAt(&l,idx,item);
         }
         else{
             p = NEXT(p);
             idx++;
         }
     }
-    return item;
+}
+boolean isInDropoffSpot(Building b,Tas t){
+//menghasilkan true jika di spot tersebut ada item yang bisa di dropoff
+    //kamus lokal
+    //algoritma
+    return (TOP(t).lDropoff==b.name);
+}
+
+void dropOffItem(Building b,Todolist l,Tas t){
+//drop isi tas paling atas
+
 }
