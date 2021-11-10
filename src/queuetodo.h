@@ -5,9 +5,8 @@
 #include "item.h"
 #include<stdlib.h>
 
-typedef Item ElType;
 typedef struct{
-    ElType buffer[100]; 
+    Item buffer[100]; 
     int idxHead;
     int idxTail;
 } Queue;
@@ -23,8 +22,8 @@ boolean isEmpty(Queue q);
 
 boolean isFull(Queue q);
 
-void enqueue(Queue *q, ElType val);
+void enqueue(Queue *q, Item val);
 
-void dequeue(Queue *q, ElType *val);
+void dequeue(Queue *q, Item *val);
 
 #endif
