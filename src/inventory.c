@@ -11,7 +11,7 @@ void MakeListGadget(LIST_GADGET *l){
     }
 }
 
-int length(LIST_GADGET l){
+int lengthListGadget(LIST_GADGET l){
     int ctr=0;
     for (int i=0;i<JUMLAHGADGET;i++){
         if(NAMAGADGET(l,i)!="-"){
@@ -28,7 +28,7 @@ boolean isIdxEff(LIST_GADGET l, int i){
     return false;
 }
 boolean isFull(LIST_GADGET l){
-    if(length(l)==JUMLAHGADGET){
+    if(lengthListGadget(l)==JUMLAHGADGET){
         return true;
     }
     return false;
@@ -142,17 +142,13 @@ void MesinWaktu(){
     printf("Mesin Waktu berhasil digunakan!");
 }
 
-Item SenterPengecil(Tas *t){
-    Item C;
-    CreateItem(&C,'-', -1, -1, '-','-');
+void SenterPengecil(Tas *t){
     if(TOP(*t).type=='H'){
-        TOP(*t).type='N';
+        TOP(*t).type='S';
         printf("Senter Pengecil berhasil digunakan!");
-        return TOP(*t);
     }
     else{
         printf("Senter Pengecil gagal digunakan!Senter terbuang.");
-        return C;
     }
 }
 

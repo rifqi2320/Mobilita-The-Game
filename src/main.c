@@ -4,6 +4,7 @@
 #include "list_linked.h"
 #include "matrix.h"
 #include "building.h"
+#include "inventory.h"
 #include <stdio.h>
 
 void displayHelp();

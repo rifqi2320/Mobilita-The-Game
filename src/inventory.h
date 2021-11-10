@@ -21,7 +21,7 @@ typedef struct{
 #define GADGET(G,i) (G).contents[(i)]
 
 void MakeListGadget(LIST_GADGET *l);
-int length(LIST_GADGET l);
+int lengthListGadget(LIST_GADGET l);
 boolean isIdxEff(LIST_GADGET l, int i);
 boolean isFull(LIST_GADGET l);
 void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga);
@@ -33,6 +33,6 @@ void KainWaktu(Tas *t);
 void SenterPembesar(Tas *t);
 void PintuKemanaSaja(MOBITA *MOB,ListBuilding h);
 void MesinWaktu();
-Item SenterPengecil(Tas *t);
+void SenterPengecil(Tas *t);
 
 #endif
