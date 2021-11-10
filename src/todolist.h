@@ -39,7 +39,7 @@ boolean isInPickupSpot(Building b,Todolist l);
 void pickUpItem(Building b,Todolist *l,Item *item,InprogressList *ip);
 //mendequeue item paling awal masuk di lokasi b pada list 
 
-boolean isInDropoffSpot(Building b,Tas t);
+boolean isInDropoffSpot(Building b,InprogressList *ip);
 //menghasilkan true jika di spot tersebut ada item yang bisa di dropoff
 
 void dropOffItem(Building b,InprogressList *ip,Tas *t);

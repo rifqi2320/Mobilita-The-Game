@@ -148,11 +148,23 @@ void pickUpItem(Building b,Todolist *l,Item *item,InprogressList *ip){
         }
     }
 }
-boolean isInDropoffSpot(Building b,Tas t){
+boolean isInDropoffSpot(Building b,InprogressList *ip){
 //menghasilkan true jika di spot tersebut ada item yang bisa di dropoff
     //kamus lokal
+    Address p;//pointer untuk traversal
+    boolean found;//menghasilkan true jika ada item yg bisa di dropoff
     //algoritma
-    return (TOP(t).lDropoff==b.name);
+    found = false;
+    p = FIRST(*ip);
+    while(p!=NULL && !found){
+        if(b.name==p->info.lDropoff){
+            found = true;
+        }
+        else{
+            p = NEXT(p);
+        }
+    }
+    return found;
 }
 
 void dropOffItem(Building b,InprogressList *ip,Tas *t){
