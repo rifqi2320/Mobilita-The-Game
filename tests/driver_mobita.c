@@ -9,14 +9,14 @@ int main(){
     addAbility(&MOB,'i');
     addAbility(&MOB,'r');
 
-    POINT a;
-    Absis(a) = 3;
-    Ordinat(a) = 3;
+    Building a;
+    XCOORD(a) = 3;
+    YCOORD(a) = 3;
 
     move(&MOB, a);
     removeAbility(&MOB,'s');
-    Absis(a) = 3;
-    Ordinat(a) = 2;
+    XCOORD(a) = 3;
+    YCOORD(a) = 2;
     move(&MOB, a);
 
     return 0;

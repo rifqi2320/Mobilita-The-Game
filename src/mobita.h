@@ -4,12 +4,14 @@
 #include "point.h"
 #include "engine.h"
 #include "listbuilding.h"
+#include "tas.h"
+#include "todolist.h"
 
 typedef struct{
     POINT Posisi;
     int Uang;
     float Speed;
-    int speedBoost;
+    float speedBoost;
     int incCapacity;
     int returnToSender;
 } MOBITA;
@@ -27,7 +29,7 @@ void CreateMobita(MOBITA *MOB);
 /*I.S. MOB sudah terdefinisi*/
 /*F.S. Terbentuk mobita sesuai definisi diatas*/
 
-void move(MOBITA *MOB, POINT dest);
+void move(MOBITA *MOB, Building dest);
 /*Memindahkan mobita ke posisi dest dan menambah waktu sesuai item dan ability yang dimiliki*/
 /*I.S. MOB terdefinisi dan dest ada di listbuilding*/
 /*F.S. Posisi MOB berubah jadi dest dan waktu bertambah sesuai item dan ability yang dimiliki*/
@@ -36,6 +38,8 @@ void addAbility(MOBITA *MOB, char s);
 
 void removeAbility(MOBITA *MOB, char s);
 
-void mobitaReturn(MOBITA *MOB);
+void mobitaReturn(MOBITA *MOB, Tas *t, Todolist *td, InprogressList *ip);
+
+void changeSpeed(MOBITA *MOB, float val);
 
 #endif

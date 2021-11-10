@@ -40,7 +40,7 @@ int main() {
     printf("ENTER COMMAND: ");
     tempWord = nextInput();
     if (validateWord(tempWord, "MOVE")) {
-      // MOVE
+      
     } else if (validateWord(tempWord, "PICK_UP")) {
 
     } else if (validateWord(tempWord, "DROP_OFF")) {
