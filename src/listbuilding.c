@@ -8,7 +8,9 @@ void CreateListBuilding(ListBuilding *l, int capacity) {
     BUFFERListB(*l) = (int*)malloc(capacity*sizeof(ElType));
     CAPACITYListB(*l) = capacity;
     for (int i=0; i<capacity; i++) {
-        ELMTListB(*l, i) = VAL_UNDEF;
+        XCOORD(ELMTListB(*l, i)) = 0;
+        YCOORD(ELMTListB(*l, i)) = 0;
+        NAME(ELMTListB(*l, i)) = 'X';
     }
 };
 /* I.S. l sembarang, capacity > 0 */
@@ -26,7 +28,7 @@ void dealocateListBuilding(ListBuilding *l) {
 /* *** Banyaknya elemen *** */
 int lengthListBuilding(ListBuilding l) {
     int i=0,len=0;
-    while (ELMTListB(l, i)!=VAL_UNDEF && i<CAPACITYListB(l)) {
+    while ( NAME(ELMTListB(*l, i)) != 'X' && i<CAPACITYListB(l)) {
         len++;
         i++;
     }
