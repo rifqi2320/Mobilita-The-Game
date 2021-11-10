@@ -20,7 +20,7 @@ void CreateMap(Map *PT, int N, int M, int L) {
   LBMap(*PT) = LB;
 };
 
-void displayMap(Map PT, Building NobitaLoc, Todolist l) {
+void displayMap(Map PT, Building NobitaLoc, Todolist l, Tas t) {
   int i, j;
   Building tempB;
   for (i = 0; i < WIDTHMap(PT) + 2; i++) {
@@ -32,7 +32,7 @@ void displayMap(Map PT, Building NobitaLoc, Todolist l) {
         if (!isMARKBuilding(tempB)) {
           if (isEqualBuilding(NobitaLoc, tempB)) {
             print_yellow(NAMEBUILDING(tempB));
-          } else if (true /* drop off*/) {
+          } else if (isInDropoffSpot(tempB,t)) {
             print_blue(NAMEBUILDING(tempB));
           } else if (isInPickupSpot(tempB, l)) {
             print_red(NAMEBUILDING(tempB));
