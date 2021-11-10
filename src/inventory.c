@@ -56,14 +56,14 @@ void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga){
     }
 }
 
-void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,Graph *g){
+void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,ListBuilding h){
     GADGET gad;
     if(isIdxEff(*l,i)){
         NAMA(gad) = NAMAGADGET(*l,i);
         HARGA(gad) = HARGAGADGET(*l,i); 
         NAMAGADGET(*l,i)="-";
         HARGAGADGET(*l,i)=VAL_UNDEF;
-        process(gad,t,MOB,g);
+        process(gad,t,MOB,h);
     }
     else{
         printf("Tidak ada gadget yang dapat digunakan");
@@ -77,7 +77,7 @@ void displayBuy(LIST_GADGET l){
     }
 }
 
-void process(GADGET gad,Tas *t,MOBITA *MOB,Graph *g){
+void process(GADGET gad,Tas *t,MOBITA *MOB,ListBuilding h){
     if(NAMA(gad) == "Kain Pembungkus Waktu"){
         KainWaktu(t);
     }
@@ -85,7 +85,7 @@ void process(GADGET gad,Tas *t,MOBITA *MOB,Graph *g){
         SenterPembesar(t);
     }
     else if(NAMA(gad)== "Pintu Kemana Saja"){
-        PintuKemanaSaja(MOB,*g);
+        PintuKemanaSaja(MOB,h);
     }
     else if(NAMA(gad)== "Mesin Waktu"){
         MesinWaktu();
@@ -113,17 +113,20 @@ void SenterPembesar(Tas *t){
     printf("Senter Pembesar berhasil digunakan!");
 }
 
-void PintuKemanaSaja(MOBITA *MOB,Graph g){
+void PintuKemanaSaja(MOBITA *MOB,ListBuilding h){
     boolean pindah = false;
     while(!pindah){
+        for(int i = 0;i<lengthListBuilding(h);i++){
+            printf("%d. (%d %d)\n",i+1,XCOORD(ELMTListB(h, i)),YCOORD(ELMTListB(h, i)));
+        }
         printf("Tentukan koordinat Tujuan: ");
-        int x,y;
-        scanf("%d %d",&x,&y);
-        if(ELMTGraph(g,x,y)==1){
+        int x;
+        scanf("%d",&x);
+        if(x>0 && x<=lengthListBuilding(h)){
             pindah = true;
-            printf("Mobita berhasil pindah ke (%d %d).\n",x,y);
-            Absis(Posisi(*MOB)) = x;
-            Ordinat(Posisi(*MOB)) = y;
+            printf("Mobita berhasil pindah ke (%d %d).\n",XCOORD(ELMTListB(h, x-1)),YCOORD(ELMTListB(h, x-1)));
+            Absis(Posisi(*MOB)) = XCOORD(ELMTListB(h, x-1));
+            Ordinat(Posisi(*MOB)) = YCOORD(ELMTListB(h, x-1));
         }
         else{
             printf("Lokasi tidak ditemukan, silahkan ulangi.\n");

@@ -5,7 +5,7 @@
 #include "gadget.h"
 #include "mobita.h"
 #include "tas.h"
-#include "graph.h"
+#include "listbuilding.h"
 
 #define JUMLAHGADGET 5
 #define IDX_UNDEF -1
@@ -25,13 +25,13 @@ int length(LIST_GADGET l);
 boolean isIdxEff(LIST_GADGET l, int i);
 boolean isFull(LIST_GADGET l);
 void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga);
-void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,Graph *g);
+void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,ListBuilding h);
 void displayBuy(LIST_GADGET l);
 void displayInventory(LIST_GADGET l);
-void process(GADGET gad,Tas *t, MOBITA *MOB,Graph *g);
+void process(GADGET gad,Tas *t, MOBITA *MOB,ListBuilding h);
 void KainWaktu(Tas *t);
 void SenterPembesar(Tas *t);
-void PintuKemanaSaja(MOBITA *MOB,Graph g);
+void PintuKemanaSaja(MOBITA *MOB,ListBuilding h);
 void MesinWaktu();
 Item SenterPengecil(Tas *t);
 
