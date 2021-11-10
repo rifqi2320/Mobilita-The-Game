@@ -7,6 +7,9 @@
 #include "boolean.h"
 #include "charmachine.h"
 #include "tokenmachine.h"
+#include "listbuilding.h"
+#include "matrix.h"
+#include "list_linked.h"
 
 void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *tempListItem);
 /* Menerima konfigurasi file */

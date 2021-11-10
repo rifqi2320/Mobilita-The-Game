@@ -1,7 +1,10 @@
-modules = item.o tas.o matrix.o point.o inventory.o
+modules = : charmachine.o item.o tas.o matrix.o point.o inventory.o listbuilding.o
 
 main: $(modules)
 	gcc -o main main.c $(modules)
+
+listbuilding.o: listbuilding.c listbuilding.h
+	gcc -c listbuilding.c
 
 matrix.o: matrix.c matrix.h
 	gcc -c matrix.c
