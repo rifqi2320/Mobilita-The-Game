@@ -16,3 +16,8 @@ Building MARKBuilding() {
 boolean isMARKBuilding(Building B) {
   return (XCOORD(B) == -1 && YCOORD(B) == -1 && NAMEBUILDING(B) == '0');
 }
+
+boolean isEqualBuilding(Building B1, Building B2) {
+  return (XCOORD(B1) == XCOORD(B2) && YCOORD(B1) == YCOORD(B2) &&
+          NAMEBUILDING(B1) == NAMEBUILDING(B2));
+}

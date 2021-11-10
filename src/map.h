@@ -1,10 +1,9 @@
 #ifndef Map_H
 #define Map_H
 
-#include "matrix.h"
 #include "point.h"
-#include "graph.h"
 #include "listbuilding.h"
+#include "mapbuilding.h"
 #include "todolist.h"
 #include "pcolor.h"
 #include <stdio.h>
@@ -17,24 +16,29 @@
 
 typedef struct
 {
-   char contents[ROW_CAP][COL_CAP];
-   int rowEff; /* banyaknya/ukuran baris yg terdefinisi */
-   int colEff; /* banyaknya/ukuran kolom yg terdefinisi */
+   char contents[BUILDING_CAP][BUILDING_CAP];
+   ListBuilding LB;
+   MB MapB;
+   int nBuilding; // jumlah 
+   int width; // Lebar map
+   int height; // Panjang map
 } Map;
 
 
 /* *** Notasi Akses: Selektor Map *** */
-#define ROWMap(PT) (PT).rowEff
-#define COLMap(PT) (PT).colEff
+#define WIDTHMap(PT) (PT).width
+#define HEIGHTMap(PT) (PT).height
+#define NBMap(PT) (PT).nBuilding
 #define ELMTMap(PT, i, j) (PT).contents[(i)][(j)]
+#define LBMap(PT) (PT).LB
+#define MBMap(PT) (PT).MapB
 
 /* ********** KONSTRUKTOR ********** */
-void CreateMap(Map *PT, int N, int M, POINT HQ, ListBuilding LB);
+void CreateMap(Map *PT, int N, int M, int L);
 
-void displayMap(Map *PT, Building NobitaLoc, Todolist l, Matrix M);
+void displayMap(Map PT, Building NobitaLoc, Todolist l);
 
-char getChar(int idx);
-
+boolean isConnected(Map PT, Building B1, Building B2);
 
 #endif
 

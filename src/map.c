@@ -1,69 +1,54 @@
 #include "map.h"
-#include "pcolor.h"
 #include <stdio.h>
 
 /* ********** KONSTRUKTOR ********** */
-char getChar(int idx) {
-   char symbol = (char)('A' + idx - 1);
-   return symbol;
+void CreateMap(Map *PT, int N, int M, int L) {
+  ListBuilding LB;
+  int i, j;
+  NBMap(*PT) = L;
+  WIDTHMap(*PT) = N;
+  HEIGHTMap(*PT) = M;
+  for (i = 0; i < L; i++) {
+    for (j = 0; j < L; j++) {
+      ELMTMap(*PT, i, j) = 0;
+    }
+  }
+  CreateListBuilding(&LB, L);
+  LBMap(*PT) = LB;
+};
+
+void displayMap(Map PT, Building NobitaLoc, Todolist l) {
+  int i, j;
+  Building tempB;
+  for (i = 0; i < WIDTHMap(PT) + 2; i++) {
+    for (j = 0; j < HEIGHTMap(PT) + 2; j++) {
+      if (i == 0 || j == 0 || i > WIDTHMap(PT) || j > HEIGHTMap(PT)) {
+        printf("*");
+      } else {
+        tempB = searchCoord(LBMap(PT), i, j);
+        if (!isMARKBuilding(tempB)) {
+          if (isEqualBuilding(NobitaLoc, tempB)) {
+            print_yellow(NAMEBUILDING(tempB));
+          } else if (true /*isInPickup(tempB)*/) {
+            print_red(NAMEBUILDING(tempB));
+          } else if (true /*istodolist(tempB)*/) {
+            print_blue(NAMEBUILDING(tempB));
+          } else if (isConnected(PT, NobitaLoc, tempB)) {
+            print_green(NAMEBUILDING(tempB));
+          } else {
+            printf("%c", NAMEBUILDING(tempB));
+          }
+        } else {
+          printf(" ");
+        }
+      }
+    }
+    printf("\n");
+  }
+};
+
+boolean isConnected(Map PT, Building B1, Building B2) {
+  int i = getVal(MBMap(PT), NAMEBUILDING(B1));
+  int j = getVal(MBMap(PT), NAMEBUILDING(B2));
+  return ELMTMap(PT, i, j) == 1;
 }
-
-void CreateMap(Map *PT, int N, int M, POINT HQ, ListBuilding LB) {
-    ROWMap(*PT) = N+2;
-    COLMap(*PT) = M+2;
-
-    for (int i = 0; i <= ROWMap(*PT); i++) {
-        for (int j = 0; j <= COLMap(*PT); j++) {
-            if (i == 0) {
-                ELMTMap(*PT, i, j) = '*';
-            } else if (j == 0) {
-                ELMTMap(*PT, i, j) = '*';
-            } else if (i == ROWMap(*PT)-1) {
-                ELMTMap(*PT, i, j) = '*';
-            } else if (j == COLMap(*PT)-1) {
-                ELMTMap(*PT, i, j) = '*';
-            } else {
-                if (i == Absis(HQ) && j == Ordinat(HQ)) {
-                    ELMTMap(*PT, i, j) = '8';
-                } else {
-                    ELMTMap(*PT, i, j) = ' ';
-                }
-            }
-        }
-    }
-
-    // Iterasi untuk menentukan lokasi headquarters, lokasi gedung - gedung
-    for (int i = 0; i < lengthListBuilding(LB); i++) {
-        int xaxis  = XCOORD(ELMTListB(LB, i));
-        int yaxis = YCOORD(ELMTListB(LB, i));
-
-        ELMTMap(*PT, xaxis, yaxis) = NAME(ELMTListB(LB, i));
-    }
-};
-
-void displayMap(Map *PT, Building NobitaLoc, Todolist l, Matrix m) {
-    int xaxis = XCOORD(NobitaLoc);
-    int yaxis = YCOORD(NobitaLoc);
-    int name = NAME(NobitaLoc);
-    Graph g;
-    LoadGraph(&g, m);
-    for (int i = 1; i < ROWMap(*PT); i++) {
-        for (int j = 1; j < COLMap(*PT); j++) {
-            if (ELMTMap(*PT, i, j) != ' ') {
-                if (i == xaxis && j = yaxis) {
-                    print_yellow(name);
-                } else if (isConnected(g, i, xaxis) && /* tidak todolist*/) { // diganti building dapet pickup dropoff
-                    char c = getChar(i);
-                    print_green(c)
-                } else if (/*todolist*/) { // diganti buat dapet pickup dropoff
-                    char from, dest;
-                    print_red(from);
-                    print_blue(dest);
-                } else {
-                    char c = getChar(i);
-                    print_black(c);
-                }
-            }
-        }
-    }
-};

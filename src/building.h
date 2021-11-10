@@ -4,8 +4,6 @@
 #include "point.h"
 #include <stdio.h>
 
-#define BUILDING_CAP 27
-
 typedef struct {
   POINT coordinate;
   char name;
@@ -26,5 +24,8 @@ Building MARKBuilding();
 
 boolean isMARKBuilding(Building B);
 /* Mengeluarkan true jika B merupakan MARKBuilding */
+
+boolean isEqualBuilding(Building B1, Building B2);
+/* Mengeluarkan true jika posisi dan nama B1 sama persis dengan B2 */
 
 #endif
