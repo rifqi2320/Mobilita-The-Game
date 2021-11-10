@@ -12,7 +12,13 @@ void CreateMobita(MOBITA *MOB){
 
 void move(MOBITA *MOB, POINT dest){
     Posisi(*MOB) = dest;
-    addTime(1);
+    addTime(Speed(*MOB));
+
+    if (speedBoost(*MOB) != 0)
+    {
+        speedBoost(*MOB)--;
+    }
+    
 }
 
 void addAbility(MOBITA *MOB, char s){
