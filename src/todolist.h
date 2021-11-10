@@ -35,4 +35,7 @@ void displayInProgress(InprogressList l);
 boolean isInPickupSpot(Building b,Todolist l);
 //menghasilkan true jika di spot tersebut ada item yang bisa di pick up
 
+Item pickUpItem(Building b,Todolist l);
+//mendequeue item paling awal di list 
+
 #endif

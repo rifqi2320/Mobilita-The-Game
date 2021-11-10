@@ -128,3 +128,24 @@ boolean isInPickupSpot(Building b,Todolist l){
     }
     return found;
 }
+Item pickUpItem(Building b,Todolist l){
+//mendequeue item paling awal di list 
+//asumsi:Item sudah dipastikan ada melalui fungsi isInPickupSpot
+    //kamus lokal
+    Address p;//pointer untuk traversal
+    int idx;//variabel untuk kounter
+    Item item;//item yang diambil
+    //algoritma
+    p = FIRST(l);
+    idx = 0;
+    while(p!=NULL){
+        if(p->info.lPickup==b.name){
+            deleteAt(&l,idx,&item);
+        }
+        else{
+            p = NEXT(p);
+            idx++;
+        }
+    }
+    return item;
+}
