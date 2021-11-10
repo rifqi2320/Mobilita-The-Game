@@ -8,7 +8,7 @@
 #include "charmachine.h"
 #include "tokenmachine.h"
 
-void inputMain(char dir[], ListBuilding *LB, Matrix *m, Building *HQ);
+void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *l);
 /* Menerima konfigurasi file */
 
 /* Menerima input matriks adjacency dan membuat matriks peta sejumlah (N+1)X(N+1) dengan N : jumlah bangunan

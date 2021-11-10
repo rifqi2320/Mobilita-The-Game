@@ -59,7 +59,7 @@ Token nextToken() {
   return tempToken;
 }
 // kayaknya input mainnya map aja
-void inputMain(char *dir, ListBuilding *LB, Matrix *m, Building *HQ) {
+void inputMain(Word dir, ListBuilding *LB, Matrix *m, Building *HQ,List *l) {
   int i, j, k; // Iterator
   int N, M;    // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
   int L;       // Jumlah Gedung (4 <= L <= 26)

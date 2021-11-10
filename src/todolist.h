@@ -6,7 +6,11 @@
 typedef List Todolist;
 
 typedef List InprogressList;
+/*
+typedef task{
 
+}Task;
+*/
 void CreateTodoList(Todolist *l);
 
 void addTodoList(Todolist *l, ElType task);

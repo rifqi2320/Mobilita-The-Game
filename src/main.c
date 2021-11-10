@@ -1,5 +1,9 @@
 #include "io.h"
 #include "item.h"
+#include "listbuilding.h"
+#include "list_linked.h"
+#include "matrix.h"
+#include "building.h"
 #include <stdio.h>
 
 int main() {
@@ -10,14 +14,18 @@ int main() {
   char tempChar;
   char *tempString;
   Word tempWord;
+  ListBuilding lb;
+  List listItem;
+  Matrix adjMatrix;
+  Building HQ;
 
   while (!started) {
     // Ngeoutput menu
     tempInt = wordToInt(nextInput());
     if (tempInt == 1) {
       tempWord = nextInput();
-      inputMain(tempWord); // kayaknya inputnya map aja
-    } else if (tempint == 2) {
+      inputMain(tempWord,&lb,&adjMatrix,&HQ,&listItem); // kayaknya inputnya map aja
+    } else if (tempInt == 2) {
       return 0;
     } else {
       printf("Output tidak valid.\n");
@@ -47,7 +55,7 @@ int main() {
     } else if (validateWord(tempWord, "HELP")) {
 
     } else {
-      printf("Masukkan Tidak Valid.\n")
+      printf("Masukkan Tidak Valid.\n");
     }
   }
 
