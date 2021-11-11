@@ -35,6 +35,7 @@ int main() {
   MOBITA mob;        // Mobita
   Tas tas;           // Tas berisi Item
   LIST_GADGET inv;   // Inventory berisi Gadget
+  LIST_GADGET gadgetbuy; // List Gadget yang ada di HQ
   Todolist todo;     // TodoList
   InprogressList ip; // In Progress List
 
@@ -48,6 +49,7 @@ int main() {
       CreateMobita(&mob, ELMTListB(LBMap(PT), 0));
       CreateTas(&tas);
       MakeListGadget(&inv);
+      MakeListGadgetHQ(&gadgetbuy);
       CreateTodoList(&todo);
       CreateInProgress(&ip);
 
@@ -90,7 +92,7 @@ int main() {
     } else if (validateWord(tempWord, "IN_PROGRESS")) {
       displayInProgress(ip);
     } else if (validateWord(tempWord, "BUY")) {
-      printf("BUY\n");
+      buyGadget(&inv,gadgetbuy,&mob);
     } else if (validateWord(tempWord, "INVENTORY")) {
       printf("INVENTORY\n");
     } else if (validateWord(tempWord, "HELP")) {

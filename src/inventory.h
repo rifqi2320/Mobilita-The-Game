@@ -25,7 +25,7 @@ void MakeListGadgetHQ(LIST_GADGET *l);
 int lengthListGadget(LIST_GADGET l);
 boolean isIdxEff(LIST_GADGET l, int i);
 boolean isLGFull(LIST_GADGET l);
-void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,MOBITA *MOB);
+void buyGadget(LIST_GADGET *l,LIST_GADGET buy,MOBITA *MOB);
 void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,InprogressList *ip, ListBuilding h);
 void displayBuy(LIST_GADGET l);
 void displayInventory(LIST_GADGET l);

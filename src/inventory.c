@@ -47,34 +47,49 @@ int lengthListGadget(LIST_GADGET l) {
 }
 
 boolean isIdxEff(LIST_GADGET l, int i) {
-  if (NAMAGADGET(l, i) != "-") {
+  if(i<0 || i>=JUMLAHGADGET){
+    return false;
+  }
+  else if (NAMAGADGET(l, i) != "-") {
     return true;
   }
   return false;
 }
+
 boolean isLGFull(LIST_GADGET l) {
   if (lengthListGadget(l) == JUMLAHGADGET) {
     return true;
   }
   return false;
 }
-void buyGadget(LIST_GADGET *l, LIST_GADGET buy, int i, MOBITA *MOB) {
+void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
+  printf("Uang anda sekarang: %d Yen",Uang(*MOB));
+  displayBuy(buy);
+  int i;
+  printf("Gadget mana yang ingin kau beli? (Ketik 0 jika ingin kembali)\n");
+  printf("ENTER COMMAND: ");
+  scanf("%d",&i);
   if (isLGFull(*l)) {
     printf("Inventory sudah penuh!\n");
-  } else if (isIdxEff(buy, i)) {
-    if (HARGAGADGET(buy, i) > Uang(*MOB)) {
-      printf("Uang tidak cukup untuk membeli Gadget!\n");
-    } else {
-      Uang(*MOB) -= HARGAGADGET(buy, i);
-      for (int j = 0; j < JUMLAHGADGET; j++) {
-        if (NAMAGADGET(*l, j) == "-") {
-          NAMAGADGET(*l, j) = getName(GADGET(buy, i));
-          HARGAGADGET(*l, j) = getPrice(GADGET(buy, i));
-        }
+  } 
+  else{
+    if(isIdxEff(buy,i-1)){
+      if (HARGAGADGET(buy, i) > Uang(*MOB)) {
+        printf("Uang tidak cukup untuk membeli Gadget!\n");
+      } 
+      else {
+          Uang(*MOB) -= HARGAGADGET(buy, i);
+          for (int j = 0; j < JUMLAHGADGET; j++) {
+            if (NAMAGADGET(*l, j) == "-") {
+              NAMAGADGET(*l, j) = getName(GADGET(buy, i));
+              HARGAGADGET(*l, j) = getPrice(GADGET(buy, i));
+            }
+          }
       }
     }
-  } else {
-    printf("Gadget tidak ditemukan.\n");
+    else{
+      printf("Gadget tidak ditemukan.");
+    }
   }
 }
 
