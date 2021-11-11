@@ -113,9 +113,9 @@ boolean isInPickupSpot(Building b, Todolist l) {
   boolean found; // menghasilkan true jika ada item di building tersebut
   // algoritma
   found = false;
-  if (!isListEmpty(l) && !found) {
+  if (!isListEmpty(l)) {
     p = FIRST(l);
-    while (p != NULL) {
+    while (p != NULL && !found) {
       if (p->info.lPickup == b.name) { // kalau ketemu
         found = true;
       } else {
@@ -144,11 +144,15 @@ void pickUpItem(Building b, Todolist *l, Item *item, InprogressList *ip) {
     }
   }
 }
-boolean isInDropoffSpot(Building b, Tas t) {
+boolean isInDropoffSpot(Building b, InprogressList ip) {
   // menghasilkan true jika di spot tersebut ada item yang bisa di dropoff
   // kamus lokal
   // algoritma
-  return (TOP(t).lDropoff == b.name);
+  if (isListEmpty(ip)) {
+    return false;
+  } else {
+    return (INFO(FIRST(ip)).lDropoff == b.name);
+  }
 }
 
 void dropOffItem(Building b, InprogressList *ip, Tas *t) {

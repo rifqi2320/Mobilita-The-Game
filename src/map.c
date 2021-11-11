@@ -20,7 +20,7 @@ void CreateMap(Map *PT, int N, int M, int L) {
   LBMap(*PT) = LB;
 };
 
-void displayMap(Map PT, Building NobitaLoc, Todolist l, Tas t) {
+void displayMap(Map PT, Building NobitaLoc, Todolist l, InprogressList ip) {
   int i, j;
   Building tempB;
   for (i = 0; i < WIDTHMap(PT) + 2; i++) {
@@ -32,7 +32,7 @@ void displayMap(Map PT, Building NobitaLoc, Todolist l, Tas t) {
         if (!isMARKBuilding(tempB)) {
           if (isEqualBuilding(NobitaLoc, tempB)) {
             print_yellow(NAMEBUILDING(tempB));
-          } else if (isInDropoffSpot(tempB,t)) {
+          } else if (isInDropoffSpot(tempB, ip)) {
             print_blue(NAMEBUILDING(tempB));
           } else if (isInPickupSpot(tempB, l)) {
             print_red(NAMEBUILDING(tempB));
@@ -59,4 +59,37 @@ boolean isConnected(Map PT, Building B1, Building B2) {
 void addBuilding(Map *PT, Building B, int idx) {
   appendBuilding(&(LBMap(*PT)), B);
   setVal(&(MBMap(*PT)), NAMEBUILDING(B), idx);
+}
+
+int displayIsReachable(Map PT, Building NobitaLoc) {
+  printf("Posisi yang dapat dicapai:\n");
+  int idx = 1;
+  int i;
+  Building tempB;
+  for (i = 0; i < NBMap(PT); i++) {
+    tempB = ELMTListB(LBMap(PT), i);
+    if (isConnected(PT, tempB, NobitaLoc)) {
+      printf("%d. %c (%d,%d)\n", idx, NAMEBUILDING(tempB), XCOORD(tempB),
+             YCOORD(tempB));
+      idx++;
+    }
+  }
+  return idx;
+}
+
+Building getReachable(Map PT, Building NobitaLoc, int i) {
+  int idx = 1;
+  int j;
+  Building tempB;
+  for (j = 0; j < NBMap(PT); j++) {
+    tempB = ELMTListB(LBMap(PT), j);
+    if (isConnected(PT, tempB, NobitaLoc)) {
+      if (idx == i) {
+        return tempB;
+      } else {
+        idx++;
+      }
+    }
+  }
+  return MARKBuilding();
 }

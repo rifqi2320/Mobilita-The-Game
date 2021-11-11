@@ -31,7 +31,7 @@ void copyToken() {
   }
 }
 
-void startToken(char dir[]) {
+void startToken(char *dir) {
   /* I.S. : currentChar sembarang
      F.S. : endToken = true, dan currentChar = MARK;
             atau endToken = false, currentToken adalah Token yang sudah

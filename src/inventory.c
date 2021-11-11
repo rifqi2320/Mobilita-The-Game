@@ -121,8 +121,7 @@ void PintuKemanaSaja(MOBITA *MOB, ListBuilding h) {
       pindah = true;
       printf("Mobita berhasil pindah ke (%d %d).\n",
              XCOORD(ELMTListB(h, x - 1)), YCOORD(ELMTListB(h, x - 1)));
-      Absis(Posisi(*MOB)) = XCOORD(ELMTListB(h, x - 1));
-      Ordinat(Posisi(*MOB)) = YCOORD(ELMTListB(h, x - 1));
+      Posisi(*MOB) = ELMTListB(h, x - 1);
     } else {
       printf("Lokasi tidak ditemukan, silahkan ulangi.\n");
     }

@@ -1,19 +1,19 @@
 #ifndef MOBITA_H
 #define MOBITA_H
 
-#include "point.h"
 #include "engine.h"
 #include "listbuilding.h"
+#include "point.h"
 #include "tas.h"
 #include "todolist.h"
 
-typedef struct{
-    POINT Posisi;
-    int Uang;
-    float Speed;
-    float speedBoost;
-    int incCapacity;
-    int returnToSender;
+typedef struct {
+  Building Posisi;
+  int Uang;
+  float Speed;
+  float speedBoost;
+  int incCapacity;
+  int returnToSender;
 } MOBITA;
 
 #define Posisi(P) (P).Posisi
@@ -23,16 +23,17 @@ typedef struct{
 #define incCapacity(P) (P).incCapacity
 #define returnToSender(P) (P).returnToSender
 
-
-void CreateMobita(MOBITA *MOB);
+void CreateMobita(MOBITA *MOB, Building HQ);
 /*Membentuk mobita dengan posisi di headquarters dan uang = 0*/
 /*I.S. MOB sudah terdefinisi*/
 /*F.S. Terbentuk mobita sesuai definisi diatas*/
 
 void move(MOBITA *MOB, Building dest);
-/*Memindahkan mobita ke posisi dest dan menambah waktu sesuai item dan ability yang dimiliki*/
+/*Memindahkan mobita ke posisi dest dan menambah waktu sesuai item dan ability
+ * yang dimiliki*/
 /*I.S. MOB terdefinisi dan dest ada di listbuilding*/
-/*F.S. Posisi MOB berubah jadi dest dan waktu bertambah sesuai item dan ability yang dimiliki*/
+/*F.S. Posisi MOB berubah jadi dest dan waktu bertambah sesuai item dan ability
+ * yang dimiliki*/
 
 void addAbility(MOBITA *MOB, char s);
 

@@ -1,5 +1,6 @@
 #include "io.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 char currentChar;
 boolean endToken;
@@ -19,12 +20,13 @@ boolean validateWord(Word w, char a[]) {
 }
 
 char *wordToString(Word w) {
-  char *buffer;
+  char *buffer = (char *)malloc(sizeof(char) * w.length);
   int i;
   for (i = 0; i < w.length; i++) {
-    buffer[i] = w.contents[i];
+    buffer[i] = (char)w.contents[i];
   }
-  buffer[w.length] = 0;
+  // buffer[w.length] = '\x00';
+  // printf("%s", buffer);
   return buffer;
 }
 
@@ -58,6 +60,9 @@ void inputMain(Word dir, Map *PT, Queue *DP) {
   int L;       // Jumlah Gedung (4 <= L <= 26)
   int P;       // Jumlah Pesanan (5 <= P <= 30)
 
+  // Variable Sementara
+  char *tempString;
+
   // Item sementara
   char temptype;
   int temptArrival;
@@ -68,9 +73,8 @@ void inputMain(Word dir, Map *PT, Queue *DP) {
 
   // Building sementara
   Building tempB;
-
-  startToken(wordToString(dir));
-
+  tempString = wordToString(dir);
+  startToken(tempString);
   // Input Ukuran Matriks
   N = nextToken().val;
   M = nextToken().val;

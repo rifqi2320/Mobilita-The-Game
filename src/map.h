@@ -36,11 +36,15 @@ typedef struct
 /* ********** KONSTRUKTOR ********** */
 void CreateMap(Map *PT, int N, int M, int L);
 
-void displayMap(Map PT, Building NobitaLoc, Todolist l);
+void displayMap(Map PT, Building NobitaLoc, Todolist l, InprogressList ip);
 
 boolean isConnected(Map PT, Building B1, Building B2);
 
 void addBuilding(Map *PT, Building B, int idx);
+
+int displayIsReachable(Map PT, Building NobitaLoc);
+
+Building getReachable(Map PT, Building NobitaLoc, int i);
 
 #endif
 

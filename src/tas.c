@@ -19,4 +19,13 @@ void pop(Tas *t, Item *val) {
   IDX_TOP(*t) -= 1;
 }
 
+void deleteTasAt(Tas *t, int i) {
+  int j = i;
+  while (j < IDX_TOP(*t)) {
+    t->buffer[j] = t->buffer[j + 1];
+    j++;
+  }
+  IDX_TOP(*t) -= 1;
+}
+
 void increaseCapacity(Tas *t) { t->capacity += 1; }

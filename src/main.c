@@ -20,9 +20,14 @@ int main() {
 
   // Temp Variable
   int tempInt;
+  int tempInt2;
   char tempChar;
   char *tempString;
   Word tempWord;
+
+  // Engine Variable
+  extern int waktu;
+  extern int skor;
 
   // Object atau ADT
   Queue DP;          // Daftar Pesanan
@@ -40,7 +45,7 @@ int main() {
       tempWord = nextInput();
       // Inisialisasi seluruh object dan adt
       inputMain(tempWord, &PT, &DP); // Berdasarkan config
-      CreateMobita(&mob);
+      CreateMobita(&mob, ELMTListB(LBMap(PT), 0));
       CreateTas(&tas);
       MakeListGadget(&inv);
       CreateTodoList(&todo);
@@ -57,20 +62,33 @@ int main() {
   // Game Started
   while (started) {
     // Print situasi mobita
+    printf("Waktu: %d\n", waktu);
+    printf("Lokasi Mobita: %c (%d,%d)\n\n", NAMEBUILDING(Posisi(mob)),
+           XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
     printf("ENTER COMMAND: ");
     tempWord = nextInput();
+    system("@cls||clear");
     if (validateWord(tempWord, "MOVE")) {
-      printf("MOVE\n");
+      displayMap(PT, Posisi(mob), todo, ip);
+      tempInt = displayIsReachable(PT, Posisi(mob));
+      do {
+        printf("Masukkan no lokasi yang ingin dituju: ");
+        tempInt2 = wordToInt(nextInput());
+      } while (tempInt2 < 0 && tempInt2 >= tempInt);
+      if (tempInt2 > 0) {
+        move(&mob, getReachable(PT, Posisi(mob), tempInt2));
+        updateData(&tas, &ip, &todo, &DP);
+      }
     } else if (validateWord(tempWord, "PICK_UP")) {
       printf("PICK_UP\n");
     } else if (validateWord(tempWord, "DROP_OFF")) {
       printf("DROP_OFF\n");
     } else if (validateWord(tempWord, "MAP")) {
-      printf("MAP\n");
+      displayMap(PT, Posisi(mob), todo, ip);
     } else if (validateWord(tempWord, "TO_DO")) {
-      printf("TO_DO\n");
+      displayTodoList(todo);
     } else if (validateWord(tempWord, "IN_PROGRESS")) {
-      printf("IN_PROGRESS\n");
+      displayInProgress(ip);
     } else if (validateWord(tempWord, "BUY")) {
       printf("BUY\n");
     } else if (validateWord(tempWord, "INVENTORY")) {
@@ -78,7 +96,8 @@ int main() {
     } else if (validateWord(tempWord, "HELP")) {
       displayHelp();
     } else {
-      printf("Masukkan Tidak Valid.\n");
+      printf("Masukkan Tidak Valid.\nGunakan command \"HELP\" untuk petunjuk "
+             "penggunaan.\n");
     }
   }
 

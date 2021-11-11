@@ -23,7 +23,7 @@ void start() {
   adv();
 }
 
-void startWithPath(char dir[]) {
+void startWithPath(char *dir) {
   /* Algoritma */
   // fopen diganti PATH
   tape = fopen(dir, "r");

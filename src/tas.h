@@ -2,21 +2,22 @@
 #define TAS_H
 
 #include "boolean.h"
-#include "item.h"
 #include "constant.h"
+#include "item.h"
+
 
 #define MAXCAPACITY 100
 
 typedef struct {
   Item buffer[MAXCAPACITY]; /* tabel penyimpan elemen */
-  int idxTop;              /* alamat TOP: elemen puncak */
+  int idxTop;               /* alamat TOP: elemen puncak */
   int capacity;
 } Tas;
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika t adalah Tas, maka akses elemen : */
 #define IDX_TOP(t) (t).idxTop
-#define     TOP(t) (t).buffer[(t).idxTop]
+#define TOP(t) (t).buffer[(t).idxTop]
 
 /* *** Konstruktor/Kreator *** */
 void CreateTas(Tas *t);
@@ -43,6 +44,10 @@ void pop(Tas *t, Item *val);
 /* Menghapus val dari Tas t */
 /* I.S. t tidak mungkin kosong */
 /* F.S. val adalah nilai elemen TOP yang lama, IDX_TOP berkurang 1 */
+
+void deleteTasAt(Tas *t, int i);
+/* I.S. t terdefinisi dan i > 0 <= IDX_TOP(t) */
+/* F.S. item dengan index ke-i di tas dihapus */
 
 void increaseCapacity(Tas *t);
 /* Meningkatkan kapasitas dari tas */
