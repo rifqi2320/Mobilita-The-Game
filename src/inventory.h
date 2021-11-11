@@ -21,10 +21,11 @@ typedef struct{
 #define GADGET(G,i) (G).contents[(i)]
 
 void MakeListGadget(LIST_GADGET *l);
+void MakeListGadgetHQ(LIST_GADGET *l);
 int lengthListGadget(LIST_GADGET l);
 boolean isIdxEff(LIST_GADGET l, int i);
 boolean isLGFull(LIST_GADGET l);
-void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,int harga);
+void buyGadget(LIST_GADGET *l,LIST_GADGET buy,int i,MOBITA *MOB);
 void useGadget(LIST_GADGET *l,int i,Tas *t, MOBITA *MOB,InprogressList *ip, ListBuilding h);
 void displayBuy(LIST_GADGET l);
 void displayInventory(LIST_GADGET l);

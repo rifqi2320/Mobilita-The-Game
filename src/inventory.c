@@ -11,6 +11,31 @@ void MakeListGadget(LIST_GADGET *l) {
   }
 }
 
+void MakeListGadgetHQ(LIST_GADGET *l) {
+  for (int i = 0; i < JUMLAHGADGET; i++) {
+    if(i==0){
+      NAMAGADGET(*l, i) = "Kain Pembungkus Waktu";
+      HARGAGADGET(*l, i) = 800;
+    }
+    else if(i==1){
+      NAMAGADGET(*l, i) = "Senter Pembesar";
+      HARGAGADGET(*l, i) = 1200;
+    }
+    else if(i==2){
+      NAMAGADGET(*l, i) = "Pintu Kemana Saja";
+      HARGAGADGET(*l, i) = 1500;
+    }
+    else if(i==3){
+      NAMAGADGET(*l, i) = "Mesin Waktu";
+      HARGAGADGET(*l, i) = 3000;
+    }
+    else{
+      NAMAGADGET(*l, i) = "Senter Pengecil";
+      HARGAGADGET(*l, i) = 800;
+    }
+  }
+}
+
 int lengthListGadget(LIST_GADGET l) {
   int ctr = 0;
   for (int i = 0; i < JUMLAHGADGET; i++) {
@@ -33,14 +58,14 @@ boolean isLGFull(LIST_GADGET l) {
   }
   return false;
 }
-void buyGadget(LIST_GADGET *l, LIST_GADGET buy, int i, int harga) {
+void buyGadget(LIST_GADGET *l, LIST_GADGET buy, int i, MOBITA *MOB) {
   if (isLGFull(*l)) {
     printf("Inventory sudah penuh!\n");
   } else if (isIdxEff(buy, i)) {
-    if (HARGAGADGET(buy, i) > harga) {
+    if (HARGAGADGET(buy, i) > Uang(*MOB)) {
       printf("Uang tidak cukup untuk membeli Gadget!\n");
     } else {
-      harga -= HARGAGADGET(buy, i);
+      Uang(*MOB) -= HARGAGADGET(buy, i);
       for (int j = 0; j < JUMLAHGADGET; j++) {
         if (NAMAGADGET(*l, j) == "-") {
           NAMAGADGET(*l, j) = getName(GADGET(buy, i));
