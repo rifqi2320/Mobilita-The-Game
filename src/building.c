@@ -4,7 +4,7 @@
 
 void CreateBuilding(Building *B, int N, int M, char name) {
   NAMEBUILDING(*B) = name;
-  COORD(*B) = MakePOINT(N, M);
+  COORD(*B) = MakePOINT(M, N);
 }
 
 Building MARKBuilding() {

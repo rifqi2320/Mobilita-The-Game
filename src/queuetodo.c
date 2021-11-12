@@ -21,29 +21,41 @@ int lengthQueue(Queue q) {
 }
 
 void enqueue(Queue *q, Item val) {
-  if (isQueueEmpty(*q)) {
+  // ngecek tail nya mentok
+  if (IDX_TAIL(*q) == 100 - 1) {
+    int i;
+    Queue tempq;
+    Item tempval;
+    CreateQueue(&tempq);
+    for (i = IDX_HEAD(*q); i <= IDX_TAIL(*q); i++) {
+      dequeue(q, &tempval);
+      enqueue(&tempq, tempval);
+    }
+    *q = tempq;
+  } else if (isQueueEmpty(*q)) {
     IDX_HEAD(*q) = 0;
-    IDX_TAIL(*q) = 0;
+    IDX_TAIL(*q) = -1;
+  }
+  int j = IDX_HEAD(*q);
+  int idx = -1;
+
+  while ((idx == -1) && (j <= IDX_TAIL(*q))) {
+    if ((*q).buffer[j].tArrival < val.tArrival) {
+      idx = j;
+    } else {
+      j++;
+    }
+  }
+
+  IDX_TAIL(*q) += 1;
+  if (idx == -1) {
     TAIL(*q) = val;
   } else {
-    if (IDX_TAIL(*q) == 100 - 1) {
-      int i;
-      for (i = IDX_HEAD(*q); i <= IDX_TAIL(*q); i++) {
-        (*q).buffer[i - IDX_HEAD(*q)] = (*q).buffer[i];
-      }
-      IDX_TAIL(*q) -= IDX_HEAD(*q);
-      IDX_HEAD(*q) = 0;
+    int k;
+    for (k = IDX_TAIL(*q) - 1; k >= idx; k--) {
+      (*q).buffer[k + 1] = (*q).buffer[k];
     }
-    IDX_TAIL(*q)++;
-    TAIL(*q) = val;
-
-    int j = IDX_TAIL(*q);
-    while (((*q).buffer[j - 1].tArrival > val.tArrival) &&
-           (j != IDX_HEAD(*q))) {
-      (*q).buffer[j] = (*q).buffer[j - 1];
-      (*q).buffer[j - 1] = val;
-      j--;
-    }
+    (*q).buffer[idx] = val;
   }
 }
 
