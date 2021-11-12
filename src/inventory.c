@@ -2,8 +2,6 @@
 #include "engine.h"
 #include <stdio.h>
 
-int waktu;
-
 void MakeListGadget(LIST_GADGET *l) {
   for (int i = 0; i < JUMLAHGADGET; i++) {
     NAMAGADGET(*l, i) = "-";
@@ -69,38 +67,50 @@ void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
   printf("Gadget mana yang ingin kau beli? (Ketik 0 jika ingin kembali)\n");
   printf("ENTER COMMAND: ");
   scanf("%d",&i);
-  if (isLGFull(*l)) {
+  if(i==0){
+      printf("Kembali ke menu.\n");
+  }
+  else if (isLGFull(*l)) {
     printf("Inventory sudah penuh!\n");
   } 
   else{
-    if(isIdxEff(buy,i-1)){
-      if (HARGAGADGET(buy, i) > Uang(*MOB)) {
+    if(i>0 && i<=JUMLAHGADGET){
+      if (HARGAGADGET(buy, i-1) > Uang(*MOB)) {
         printf("Uang tidak cukup untuk membeli Gadget!\n");
       } 
       else {
-          Uang(*MOB) -= HARGAGADGET(buy, i);
+          Uang(*MOB) -= HARGAGADGET(buy, i-1);
           for (int j = 0; j < JUMLAHGADGET; j++) {
             if (NAMAGADGET(*l, j) == "-") {
-              NAMAGADGET(*l, j) = getName(GADGET(buy, i));
-              HARGAGADGET(*l, j) = getPrice(GADGET(buy, i));
+              NAMAGADGET(*l, j) = getName(GADGET(buy, i-1));
+              HARGAGADGET(*l, j) = getPrice(GADGET(buy, i-1));
+              break;
             }
           }
       }
     }
     else{
-      printf("Gadget tidak ditemukan.");
+      printf("Gadget tidak ditemukan, kembali ke menu.\n");
     }
   }
 }
 
-void useGadget(LIST_GADGET *l, int i, Tas *t, MOBITA *MOB, InprogressList *ip,
+void useGadget(LIST_GADGET *l, Tas *t, MOBITA *MOB, InprogressList *ip,
                ListBuilding h) {
   GADGET gad;
-  if (isIdxEff(*l, i)) {
-    NAMA(gad) = NAMAGADGET(*l, i);
-    HARGA(gad) = HARGAGADGET(*l, i);
-    NAMAGADGET(*l, i) = "-";
-    HARGAGADGET(*l, i) = VAL_UNDEF;
+  int i;
+  displayInventory(*l);
+  printf("Gadget mana yang ingin digunakan? (Ketik 0 jika ingin kembali)\n");
+  printf("ENTER COMMAND: ");
+  scanf("%d",&i);
+  if(i==0){
+    printf("Kembali ke main menu.\n");
+  }
+  else if (isIdxEff(*l, i-1)) {
+    NAMA(gad) = NAMAGADGET(*l, i-1);
+    HARGA(gad) = HARGAGADGET(*l, i-1);
+    NAMAGADGET(*l, i-1) = "-";
+    HARGAGADGET(*l, i-1) = VAL_UNDEF;
     process(gad, t, MOB, ip, h);
   } else {
     printf("Tidak ada gadget yang dapat digunakan");

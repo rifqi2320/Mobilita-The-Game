@@ -43,13 +43,13 @@ int main() {
     // Ngeoutput menu
     tempInt = wordToInt(nextInput());
     if (tempInt == 1) {
+      MakeListGadgetHQ(&gadgetbuy);
       tempWord = nextInput();
       // Inisialisasi seluruh object dan adt
       inputMain(tempWord, &PT, &DP); // Berdasarkan config
       CreateMobita(&mob, ELMTListB(LBMap(PT), 0));
       CreateTas(&tas);
       MakeListGadget(&inv);
-      MakeListGadgetHQ(&gadgetbuy);
       CreateTodoList(&todo);
       CreateInProgress(&ip);
 
@@ -94,7 +94,7 @@ int main() {
     } else if (validateWord(tempWord, "BUY")) {
       buyGadget(&inv,gadgetbuy,&mob);
     } else if (validateWord(tempWord, "INVENTORY")) {
-      printf("INVENTORY\n");
+      useGadget(&inv,&tas,&mob,&ip,LBMap(PT));
     } else if (validateWord(tempWord, "HELP")) {
       displayHelp();
     } else {
