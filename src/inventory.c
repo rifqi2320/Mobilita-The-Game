@@ -66,7 +66,7 @@ void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
   int i;
   printf("Gadget mana yang ingin kau beli? (Ketik 0 jika ingin kembali)\n");
   printf("ENTER COMMAND: ");
-  scanf("%d",&i);
+  i = wordToInt(nextInput()); 
   if(i==0){
       printf("Kembali ke menu.\n");
   }
@@ -87,6 +87,7 @@ void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
               break;
             }
           }
+          printf("%s berhasil dibeli!\n",getName(GADGET(buy,i-1)));
       }
     }
     else{
@@ -102,7 +103,7 @@ void useGadget(LIST_GADGET *l, Tas *t, MOBITA *MOB, InprogressList *ip,
   displayInventory(*l);
   printf("Gadget mana yang ingin digunakan? (Ketik 0 jika ingin kembali)\n");
   printf("ENTER COMMAND: ");
-  scanf("%d",&i);
+  i = wordToInt(nextInput());
   if(i==0){
     printf("Kembali ke main menu.\n");
   }
@@ -165,12 +166,14 @@ void PintuKemanaSaja(MOBITA *MOB, ListBuilding h) {
   boolean pindah = false;
   while (!pindah) {
     displayListBuilding(h);
+    printf("ENTER COMMAND: ");
     int x;
-    scanf("%d", &x);
+    x = wordToInt(nextInput());
     if (x > 0 && x <= lengthListBuilding(h)) {
       pindah = true;
       printf("Mobita berhasil pindah ke (%d %d).\n",
              XCOORD(ELMTListB(h, x - 1)), YCOORD(ELMTListB(h, x - 1)));
+      move(MOB,ELMTListB(h, x - 1));
       Posisi(*MOB) = ELMTListB(h, x - 1);
     } else {
       printf("Lokasi tidak ditemukan, silahkan ulangi.\n");
@@ -183,7 +186,7 @@ void MesinWaktu() {
   if (waktu < 0) {
     waktu = 0;
   }
-  printf("Mesin Waktu berhasil digunakan!");
+  printf("Mesin Waktu berhasil digunakan!\n");
 }
 
 void SenterPengecil(Tas *t) {
