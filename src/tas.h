@@ -54,4 +54,6 @@ void increaseCapacity(Tas *t);
 /* I.S. t terdefinisi dan capacity != MAXCAPACITY */
 /* F.S. capacity tas t meningkat 1 */
 
+int numOfHeavy(Tas t);
+/* Mengembalikan jumlah item heavy di tas */
 #endif

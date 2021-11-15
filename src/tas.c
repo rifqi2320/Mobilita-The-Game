@@ -29,3 +29,17 @@ void deleteTasAt(Tas *t, int i) {
 }
 
 void increaseCapacity(Tas *t) { t->capacity += 1; }
+
+int numOfHeavy(Tas t){
+  //kamus lokal
+  int counter;//jumlah item heavy
+  int i;//variabel untuk looping
+  //algoritma
+  counter = 0;
+  for(i=0;i<t.capacity;i++){
+    if(t.buffer[i].type=='H'){
+      counter++;
+    }
+  }
+  return counter;
+}

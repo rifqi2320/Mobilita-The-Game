@@ -78,7 +78,7 @@ int main() {
            XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
     printf("ENTER COMMAND: ");
     tempWord = nextInput();
-    system("@cls||clear");
+    //system("@cls||clear");
     if (validateWord(tempWord, "MOVE")) {
       displayMap(PT, Posisi(mob), todo, ip);
       tempInt = displayIsReachable(PT, Posisi(mob));
@@ -93,6 +93,7 @@ int main() {
     } else if (validateWord(tempWord, "PICK_UP")) {
       if (isInPickupSpot(Posisi(mob), todo)) {
         pick_up(Posisi(mob), &todo, &tas, &ip);
+        changeSpeed(&mob,(1+numOfHeavy(tas)));
       } else {
         printf("Tidak ada item yang bisa di pickup\n");
       }
