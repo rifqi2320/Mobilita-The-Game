@@ -29,7 +29,7 @@ void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP) {
   Item tempItem;
   // Update daftar pesanan dan todolist
   if (!isQueueEmpty(*DP)) {
-    while (HEAD(*DP).tArrival <= waktu) {
+    while (HEAD(*DP).tArrival <= waktu && IDX_HEAD(*DP)!=-1) {
       dequeue(DP, &tempItem);
       addTodoList(todo, tempItem);
     }
