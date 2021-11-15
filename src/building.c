@@ -1,5 +1,6 @@
-#include "building.h"
 #include "point.h"
+#include "point.c"
+#include "building.h"
 #include <stdio.h>
 
 void CreateBuilding(Building *B, int N, int M, char name) {
