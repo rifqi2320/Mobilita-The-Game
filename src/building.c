@@ -1,5 +1,4 @@
 #include "point.h"
-#include "point.c"
 #include "building.h"
 #include <stdio.h>
 

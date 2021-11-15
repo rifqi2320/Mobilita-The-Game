@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char currentChar;
 boolean endToken = false;
 Token currentToken;
 

@@ -2,11 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char currentChar;
-boolean endToken;
-Token currentToken;
-Word currentWord;
-
 boolean validateWord(Word w, char a[]) {
   boolean eq = true;
   int i = 0;
