@@ -95,7 +95,7 @@ int main() {
         printf("Tidak ada item yang bisa di pickup\n");
       }
     } else if (validateWord(tempWord, "DROP_OFF")) {
-      printf("DROP_OFF\n");
+      dropOffItem(Posisi(mob),&ip,&tas);
     } else if (validateWord(tempWord, "MAP")) {
       displayMap(PT, Posisi(mob), todo, ip);
     } else if (validateWord(tempWord, "TO_DO")) {
