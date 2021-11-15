@@ -53,10 +53,7 @@ void advToken() {
      menggunakan procedure salinToken */
   ignoreBlank();
   copyToken();
-  ignoreBlank();
   if (currentChar == TEXTMARK) {
     endToken = true;
   }
-  // printf("%d %c %d %d\n", currentChar, currentToken.tkn, currentToken.val,
-  // endToken);
 }

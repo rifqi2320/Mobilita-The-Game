@@ -125,19 +125,21 @@ boolean isInPickupSpot(Building b, Todolist l) {
   }
   return found;
 }
-void pickUpItem(Building b, Todolist *l, Item *item, InprogressList *ip) {
+void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip) {
   // mendequeue item paling awal di list
   // asumsi:Item sudah dipastikan ada melalui fungsi isInPickupSpot
   // kamus lokal
-  Address p; // pointer untuk traversal
-  int idx;   // variabel untuk kounter
+  Address p;     // pointer untuk traversal
+  int idx;       // variabel untuk kounter
+  Item tempItem; // Variable temporary utk item
   // algoritma
   p = FIRST(*l);
   idx = 0;
   while (p != NULL) {
     if (p->info.lPickup == b.name) {
-      deleteAt(l, idx, item);
-      insertFirst(ip, *item);
+      deleteAt(l, idx, &tempItem);
+      insertFirst(ip, tempItem);
+      push(t, tempItem);
     } else {
       p = NEXT(p);
       idx++;

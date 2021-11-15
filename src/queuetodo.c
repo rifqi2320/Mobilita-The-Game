@@ -40,7 +40,7 @@ void enqueue(Queue *q, Item val) {
   int idx = -1;
 
   while ((idx == -1) && (j <= IDX_TAIL(*q))) {
-    if ((*q).buffer[j].tArrival < val.tArrival) {
+    if ((*q).buffer[j].tArrival > val.tArrival) {
       idx = j;
     } else {
       j++;

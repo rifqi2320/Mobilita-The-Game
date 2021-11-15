@@ -25,8 +25,7 @@ char *wordToString(Word w) {
   for (i = 0; i < w.length; i++) {
     buffer[i] = (char)w.contents[i];
   }
-  // buffer[w.length] = '\x00';
-  // printf("%s", buffer);
+  buffer[w.length] = '\x00';
   return buffer;
 }
 
@@ -45,20 +44,11 @@ Word nextInput() {
   return currentWord;
 }
 
-Token nextToken() {
-  Token tempToken;
-  if (!endToken) {
-    advToken();
-    tempToken = currentToken;
-  }
-  return tempToken;
-}
-
-void inputMain(Word dir, Map *PT, Queue *DP) {
-  int i, j, k; // Iterator
-  int N, M;    // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
-  int L;       // Jumlah Gedung (4 <= L <= 26)
-  int P;       // Jumlah Pesanan (5 <= P <= 30)
+void inputConfig(char *dir, Map *PT, Queue *DP) {
+  int k = 0, j = 0, i, m, n;
+  int N, M; // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
+  int L;    // Jumlah Gedung (4 <= L <= 26)
+  int P;    // Jumlah Pesanan (5 <= P <= 30)
 
   // Variable Sementara
   char *tempString;
@@ -73,17 +63,22 @@ void inputMain(Word dir, Map *PT, Queue *DP) {
 
   // Building sementara
   Building tempB;
-  tempString = wordToString(dir);
-  startToken(tempString);
-  // Input Ukuran Matriks
-  N = nextToken().val;
-  M = nextToken().val;
 
-  // Input lokasi HQ
-  CreateBuilding(&tempB, nextToken().val, nextToken().val, '8');
+  Token config[999];
+  startToken(dir);
+  while (!endToken) {
+    advToken();
+    config[k] = currentToken;
+    k++;
+  }
+  N = config[j++].val;
+  M = config[j++].val;
+
+  // Membuat Headquarter
+  CreateBuilding(&tempB, config[j++].val, config[j++].val, '8');
 
   // Input jumlah bangunan
-  L = nextToken().val;
+  L = config[j++].val;
 
   // Inisialisasi Map
   CreateMap(PT, N, M, L);
@@ -91,36 +86,36 @@ void inputMain(Word dir, Map *PT, Queue *DP) {
 
   // Input karakter dan lokasi bangunan
   for (i = 1; i <= L; i++) {
-    char name = nextToken().tkn;
-    CreateBuilding(&tempB, nextToken().val, nextToken().val, name);
+    char name = config[j++].tkn;
+    CreateBuilding(&tempB, config[j++].val, config[j++].val, name);
     addBuilding(PT, tempB, i);
   }
 
   // Input adjacency matrix ke map
-  for (i = 0; i <= L; i++) {
-    for (j = 0; j <= L; j++) {
-      ELMTMap(*PT, i, j) = nextToken().val;
+  for (m = 0; m <= L; m++) {
+    for (n = 0; n <= L; n++) {
+      ELMTMap(*PT, m, n) = config[j++].val;
     }
   }
 
   // Menginisialisasi List Item
   CreateQueue(DP);
   // Input jumlah pesanan
-  P = nextToken().val;
+  P = config[j++].val;
 
   // Input item pesanan
   for (i = 0; i < P; i++) {
-    temptArrival = nextToken().val;
-    templPickup = nextToken().tkn;
-    templDropoff = nextToken().tkn;
-    temptype = nextToken().tkn;
+    temptArrival = config[j++].val;
+    templPickup = config[j++].tkn;
+    templDropoff = config[j++].tkn;
+    temptype = config[j++].tkn;
     if (temptype != 'P') {
       temptPerish = TIME_UNDEF;
     } else {
-      temptPerish = nextToken().val;
+      temptPerish = config[j++].val;
     }
     CreateItem(&tempItem, temptype, temptArrival, temptPerish, templPickup,
                templDropoff);
     enqueue(DP, tempItem);
   }
-};
+}

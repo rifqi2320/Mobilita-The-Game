@@ -30,28 +30,28 @@ int main() {
   extern int skor;
 
   // Object atau ADT
-  Queue DP;          // Daftar Pesanan
-  Map PT;            // Map
-  MOBITA mob;        // Mobita
-  Tas tas;           // Tas berisi Item
-  LIST_GADGET inv;   // Inventory berisi Gadget
+  Queue DP;              // Daftar Pesanan
+  Map PT;                // Map
+  MOBITA mob;            // Mobita
+  Tas tas;               // Tas berisi Item
+  LIST_GADGET inv;       // Inventory berisi Gadget
   LIST_GADGET gadgetbuy; // List Gadget yang ada di HQ
-  Todolist todo;     // TodoList
-  InprogressList ip; // In Progress List
+  Todolist todo;         // TodoList
+  InprogressList ip;     // In Progress List
 
   while (!started) {
     // Ngeoutput menu
     tempInt = wordToInt(nextInput());
     if (tempInt == 1) {
-      MakeListGadgetHQ(&gadgetbuy);
-      tempWord = nextInput();
+      tempString = wordToString(nextInput());
       // Inisialisasi seluruh object dan adt
-      inputMain(tempWord, &PT, &DP); // Berdasarkan config
+      inputConfig(tempString, &PT, &DP); // Berdasarkan config
       CreateMobita(&mob, ELMTListB(LBMap(PT), 0));
       CreateTas(&tas);
       MakeListGadget(&inv);
       CreateTodoList(&todo);
       CreateInProgress(&ip);
+      MakeListGadgetHQ(&gadgetbuy);
 
       started = true;
     } else if (tempInt == 2) {
@@ -63,7 +63,14 @@ int main() {
 
   // Game Started
   while (started) {
-    // Print situasi mobita
+    // int i;
+    // printf("%d %c %c %c\n", TAIL(DP).tArrival, TAIL(DP).lPickup,
+    //        TAIL(DP).lDropoff, TAIL(DP).type);
+    // for (i = IDX_HEAD(DP); i <= IDX_TAIL(DP); i++) {
+    //   printf("%d %c %c %c\n", DP.buffer[i].tArrival, DP.buffer[i].lPickup,
+    //          DP.buffer[i].lDropoff, DP.buffer[i].type);
+    // }
+    updateData(&tas, &ip, &todo, &DP);
     printf("Waktu: %d\n", waktu);
     printf("Lokasi Mobita: %c (%d,%d)\n\n", NAMEBUILDING(Posisi(mob)),
            XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
@@ -82,7 +89,11 @@ int main() {
         updateData(&tas, &ip, &todo, &DP);
       }
     } else if (validateWord(tempWord, "PICK_UP")) {
-      printf("PICK_UP\n");
+      if (isInPickupSpot(Posisi(mob), todo)) {
+        pick_up(Posisi(mob), &todo, &tas, &ip);
+      } else {
+        printf("Tidak ada item yang bisa di pickup\n");
+      }
     } else if (validateWord(tempWord, "DROP_OFF")) {
       printf("DROP_OFF\n");
     } else if (validateWord(tempWord, "MAP")) {
@@ -92,9 +103,9 @@ int main() {
     } else if (validateWord(tempWord, "IN_PROGRESS")) {
       displayInProgress(ip);
     } else if (validateWord(tempWord, "BUY")) {
-      buyGadget(&inv,gadgetbuy,&mob);
+      buyGadget(&inv, gadgetbuy, &mob);
     } else if (validateWord(tempWord, "INVENTORY")) {
-      useGadget(&inv,&tas,&mob,&ip,LBMap(PT));
+      useGadget(&inv, &tas, &mob, &ip, LBMap(PT));
     } else if (validateWord(tempWord, "HELP")) {
       displayHelp();
     } else {

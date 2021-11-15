@@ -6,7 +6,6 @@
 #include "list_linked.h"
 #include "tas.h"
 
-
 typedef List Todolist;
 
 typedef List InprogressList;
@@ -37,7 +36,7 @@ void displayInProgress(InprogressList l);
 boolean isInPickupSpot(Building b, Todolist l);
 // menghasilkan true jika di spot tersebut ada item yang bisa di pick up
 
-void pickUpItem(Building b, Todolist *l, Item *item, InprogressList *ip);
+void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip);
 // mendequeue item paling awal masuk di lokasi b pada list
 
 boolean isInDropoffSpot(Building b, InprogressList ip);
