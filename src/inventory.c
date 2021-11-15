@@ -61,7 +61,7 @@ boolean isLGFull(LIST_GADGET l) {
   return false;
 }
 void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
-  printf("Uang anda sekarang: %d Yen",Uang(*MOB));
+  printf("Uang anda sekarang: %d Yen\n",Uang(*MOB));
   displayBuy(buy);
   int i;
   printf("Gadget mana yang ingin kau beli? (Ketik 0 jika ingin kembali)\n");
@@ -113,7 +113,7 @@ void useGadget(LIST_GADGET *l, Tas *t, MOBITA *MOB, InprogressList *ip,
     HARGAGADGET(*l, i-1) = VAL_UNDEF;
     process(gad, t, MOB, ip, h);
   } else {
-    printf("Tidak ada gadget yang dapat digunakan");
+    printf("Tidak ada gadget yang dapat digunakan\n");
   }
 }
 
@@ -147,9 +147,9 @@ void KainWaktu(Tas *t, InprogressList *ip) {
       now = NEXT(now);
     }
     INFO(now).tPerish += waktu - TOP(*t).tPickup;
-    printf("Senter Pengecil berhasil digunakan!");
+    printf("Senter Pengecil berhasil digunakan!\n");
   } else {
-    printf("Kain Pembungkus Waktu gagal digunakan!Kain terbuang.");
+    printf("Kain Pembungkus Waktu gagal digunakan!Kain terbuang.\n");
   }
 }
 
@@ -158,7 +158,7 @@ void SenterPembesar(Tas *t) {
   if (t->capacity > 100) {
     t->capacity = 100;
   }
-  printf("Senter Pembesar berhasil digunakan!");
+  printf("Senter Pembesar berhasil digunakan!\n");
 }
 
 void PintuKemanaSaja(MOBITA *MOB, ListBuilding h) {
@@ -189,9 +189,9 @@ void MesinWaktu() {
 void SenterPengecil(Tas *t) {
   if (TOP(*t).type == 'H') {
     TOP(*t).type = 'S';
-    printf("Senter Pengecil berhasil digunakan!");
+    printf("Senter Pengecil berhasil digunakan!\n");
   } else {
-    printf("Senter Pengecil gagal digunakan!Senter terbuang.");
+    printf("Senter Pengecil gagal digunakan!Senter terbuang.\n");
   }
 }
 
