@@ -79,7 +79,7 @@ void displayInProgress(InprogressList l) {
   if (!isListEmpty(l)) { // jika list tidak kosong
     idx = 1;
     x = FIRST(l);
-    printf("1. Normal Item (Tujuan: H)");
+    //printf("1. Normal Item (Tujuan: H)");
     while (x != NULL) { // selama masih ada elemen
       printf("%d. ", idx);
       switch (x->info.type) {
@@ -112,9 +112,10 @@ boolean isInPickupSpot(Building b, Todolist l) {
   Address p;     // pointer untuk traversal
   boolean found; // menghasilkan true jika ada item di building tersebut
   // algoritma
+  //printf("Cekcek\n");
   found = false;
   if (!isListEmpty(l)) {
-    p = FIRST(l);
+    p = l;
     while (p != NULL && !found) {
       if (p->info.lPickup == b.name) { // kalau ketemu
         found = true;
@@ -126,20 +127,24 @@ boolean isInPickupSpot(Building b, Todolist l) {
   return found;
 }
 void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip) {
+  //pick_up(Posisi(mob), &todo, &tas, &ip)
   // mendequeue item paling awal di list
   // asumsi:Item sudah dipastikan ada melalui fungsi isInPickupSpot
   // kamus lokal
   Address p;     // pointer untuk traversal
   int idx;       // variabel untuk kounter
   Item tempItem; // Variable temporary utk item
+  boolean found;//bernilai true item sudah terpickup
   // algoritma
   p = FIRST(*l);
   idx = 0;
+  found = false;
   while (p != NULL) {
-    if (p->info.lPickup == b.name) {
+    if (INFO(p).lPickup == b.name && !found) {
       deleteAt(l, idx, &tempItem);
       insertFirst(ip, tempItem);
       push(t, tempItem);
+      found = true;
     } else {
       p = NEXT(p);
       idx++;
