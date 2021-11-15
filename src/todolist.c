@@ -162,11 +162,12 @@ boolean isInDropoffSpot(Building b, InprogressList ip) {
   }
 }
 
-void dropOffItem(Building b, InprogressList *ip, Tas *t) {
+void dropOffItem(Building b, InprogressList *ip, Tas *t,int *score) {
   // drop isi tas paling atas
   // kamus lokal
   Item val; // variabel dummy untuk menyimpan hasil yang di pop
   // algoritma
   pop(t, &val);
   deleteFirst(ip, &val);
+  *score = VALUE(val);
 }

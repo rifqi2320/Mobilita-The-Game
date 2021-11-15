@@ -24,6 +24,7 @@ int main() {
   char tempChar;
   char *tempString;
   Word tempWord;
+  int gainedScore;//skor yang didapatkan setelah menyelesaikan misi
 
   // Engine Variable
   extern int waktu;
@@ -72,6 +73,7 @@ int main() {
     // }
     updateData(&tas, &ip, &todo, &DP);
     printf("Waktu: %d\n", waktu);
+    printf("Skor: %d\n",skor);
     printf("Lokasi Mobita: %c (%d,%d)\n\n", NAMEBUILDING(Posisi(mob)),
            XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
     printf("ENTER COMMAND: ");
@@ -95,7 +97,8 @@ int main() {
         printf("Tidak ada item yang bisa di pickup\n");
       }
     } else if (validateWord(tempWord, "DROP_OFF")) {
-      dropOffItem(Posisi(mob),&ip,&tas);
+      dropOffItem(Posisi(mob),&ip,&tas,&gainedScore);
+      addScore(gainedScore);
     } else if (validateWord(tempWord, "MAP")) {
       displayMap(PT, Posisi(mob), todo, ip);
     } else if (validateWord(tempWord, "TO_DO")) {
