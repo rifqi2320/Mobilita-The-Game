@@ -85,7 +85,7 @@ int main() {
       do {
         printf("Masukkan no lokasi yang ingin dituju: ");
         tempInt2 = wordToInt(nextInput());
-      } while (tempInt2 < 0 && tempInt2 >= tempInt);
+      } while (tempInt2 < 0 || tempInt2 >= tempInt);
       if (tempInt2 > 0) {
         move(&mob, getReachable(PT, Posisi(mob), tempInt2));
         updateData(&tas, &ip, &todo, &DP);
