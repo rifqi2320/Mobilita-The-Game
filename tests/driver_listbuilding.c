@@ -3,11 +3,18 @@
 
 int main() {
     ListBuilding LB;
-    CreateListBuilding(&LB, 17);
+    CreateListBuilding(&LB, 2);
     Building B;
-    CreateBuilding(&B, 1, 2, 'A');
+    int n, m;
+    char name;
+    scanf("%d %d", &n, &m);
+    scanf(" %c", &name);
+    CreateBuilding(&B, n, m, name);
     appendBuilding(&LB, B);
-    Building search = searchCoord(LB, 1, 2);
-    printf("%c", NAMEBUILDING(search));
-    printf("nilai kebenaran Building Mark = %d", isMARKBuilding(search));
+    int len1 = lengthListBuilding(LB);
+    printf("panjang List Building = %d\n", len1);
+    shrinkListBuilding(&LB, 2);
+    len1 = lengthListBuilding(LB);
+    printf("panjang List Building setelah shrink = %d\n", len1);
+    displayListBuilding(LB);
 }
