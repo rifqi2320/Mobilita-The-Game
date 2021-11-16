@@ -46,8 +46,8 @@ void removeAbility(MOBITA *MOB, char s) {
   }
 }
 
-void mobitaReturn(MOBITA *MOB, Tas *t, Todolist *td, InprogressList *ip) {
-  if (returnToSender(*MOB) == 0) {
+void mobitaReturn(MOBITA MOB, Tas *t, Todolist *td, InprogressList *ip) {
+  if (returnToSender(MOB) == 0) {
     printf("Mobita tidak memiliki Ability Return To Sender!\n");
   } else {
     Item tmp = TOP(*t);

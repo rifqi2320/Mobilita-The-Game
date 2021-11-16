@@ -141,7 +141,9 @@ int main() {
         useGadget(&inv, &tas, &mob, &ip, LBMap(PT));
       } else if (validateWord(tempWord, "HELP")) {
         displayHelp();
-      } else {
+      } else if (validateWord(tempWord, "RETURN")) {
+        mobitaReturn(mob, &tas, &todo, &ip);
+      }else {
         printf("Masukkan Tidak Valid.\nGunakan command \"HELP\" untuk petunjuk "
                "penggunaan.\n");
       }
