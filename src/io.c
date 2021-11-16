@@ -81,7 +81,7 @@ void inputConfig(char *dir, Map *PT, Queue *DP,int* jumlahPesanan) {
   // Membuat Headquarter
   tempInt1 = config[j++].val;
   tempInt2 = config[j++].val;
-  CreateBuilding(&tempB, tempInt1, tempInt2, '8');
+  CreateBuilding(&tempB, tempInt2, tempInt1, '8');
 
   // Input jumlah bangunan
   L = config[j++].val;
@@ -95,7 +95,7 @@ void inputConfig(char *dir, Map *PT, Queue *DP,int* jumlahPesanan) {
     char name = config[j++].tkn;
     tempInt1 = config[j++].val;
     tempInt2 = config[j++].val;
-    CreateBuilding(&tempB, tempInt1, tempInt2, name);
+    CreateBuilding(&tempB, tempInt2, tempInt1, name);
     addBuilding(PT, tempB, i);
   }
 
