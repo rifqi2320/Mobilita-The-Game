@@ -124,6 +124,7 @@ int main() {
           dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney);
           changeMoney(&mob, gainedMoney);
           changeSpeed(&mob, (1 + numOfHeavy(tas)));
+          checkEffectSenter(&tas,&mob);
           finishedOrder++;
         } else {
           printf("Tidak ada pesanan yang dapat diantarkan!\n\n");
@@ -142,6 +143,7 @@ int main() {
         displayHelp();
       } else if (validateWord(tempWord, "RETURN")) {
         mobitaReturn(mob, &tas, &todo, &ip);
+        checkEffectSenter(&tas,&mob);
       }else {
         printf("Masukkan Tidak Valid.\nGunakan command \"HELP\" untuk petunjuk "
                "penggunaan.\n");
