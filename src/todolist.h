@@ -36,12 +36,12 @@ void displayInProgress(InprogressList l);
 boolean isInPickupSpot(Building b, Todolist l);
 // menghasilkan true jika di spot tersebut ada item yang bisa di pick up
 
-void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip);
+void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu);
 // mendequeue item paling awal masuk di lokasi b pada list
 
 boolean isInDropoffSpot(Building b, InprogressList ip);
 // menghasilkan true jika di spot tersebut ada item yang bisa di dropoff
 
-void dropOffItem(Building b, InprogressList *ip, Tas *t,int *money);
+void dropOffItem(Building b, InprogressList *ip, Tas *t, int *money);
 // drop isi tas paling atas
 #endif

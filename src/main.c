@@ -24,7 +24,7 @@ int main() {
   char tempChar;
   char *tempString;
   Word tempWord;
-  int gainedMoney;//uang yang didapatkan setelah menyelesaikan misi
+  int gainedMoney; // uang yang didapatkan setelah menyelesaikan misi
 
   // Engine Variable
   extern int waktu;
@@ -72,12 +72,12 @@ int main() {
     // }
     updateData(&tas, &ip, &todo, &DP);
     printf("Waktu: %d\n", waktu);
-    printf("Uang: %d Yen\n",Uang(mob));
+    printf("Uang: %d Yen\n", Uang(mob));
     printf("Lokasi Mobita: %c (%d,%d)\n\n", NAMEBUILDING(Posisi(mob)),
            XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
     printf("ENTER COMMAND: ");
     tempWord = nextInput();
-    //system("@cls||clear");
+    // system("@cls||clear");
     if (validateWord(tempWord, "MOVE")) {
       displayMap(PT, Posisi(mob), todo, ip);
       tempInt = displayIsReachable(PT, Posisi(mob));
@@ -92,18 +92,16 @@ int main() {
     } else if (validateWord(tempWord, "PICK_UP")) {
       if (isInPickupSpot(Posisi(mob), todo)) {
         pick_up(Posisi(mob), &todo, &tas, &ip);
-        changeSpeed(&mob,(1+numOfHeavy(tas)));
+        changeSpeed(&mob, (1 + numOfHeavy(tas)));
       } else {
         printf("Pesanan tidak ditemukan!\n");
       }
     } else if (validateWord(tempWord, "DROP_OFF")) {
-      if(isInDropoffSpot(Posisi(mob),ip)){
-        dropOffItem(Posisi(mob),&ip,&tas,&gainedMoney);
-        changeMoney(&mob,gainedMoney);
-        changeSpeed(&mob,(1+numOfHeavy(tas)));
-        checkEffectSenter(&tas,&mob);
-      }
-      else{
+      if (isInDropoffSpot(Posisi(mob), ip)) {
+        dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney, waktu);
+        changeMoney(&mob, gainedMoney);
+        changeSpeed(&mob, (1 + numOfHeavy(tas)));
+      } else {
         printf("Tidak ada pesanan yang dapat diantarkan!\n");
       }
     } else if (validateWord(tempWord, "MAP")) {

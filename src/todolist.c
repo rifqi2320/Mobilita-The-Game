@@ -79,7 +79,7 @@ void displayInProgress(InprogressList l) {
   if (!isListEmpty(l)) { // jika list tidak kosong
     idx = 1;
     x = FIRST(l);
-    //printf("1. Normal Item (Tujuan: H)");
+    // printf("1. Normal Item (Tujuan: H)");
     while (x != NULL) { // selama masih ada elemen
       printf("%d. ", idx);
       switch (x->info.type) {
@@ -112,7 +112,7 @@ boolean isInPickupSpot(Building b, Todolist l) {
   Address p;     // pointer untuk traversal
   boolean found; // menghasilkan true jika ada item di building tersebut
   // algoritma
-  //printf("Cekcek\n");
+  // printf("Cekcek\n");
   found = false;
   if (!isListEmpty(l)) {
     p = l;
@@ -126,43 +126,43 @@ boolean isInPickupSpot(Building b, Todolist l) {
   }
   return found;
 }
-void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip) {
-  //pick_up(Posisi(mob), &todo, &tas, &ip)
-  // mendequeue item paling awal di list
-  // asumsi:Item sudah dipastikan ada melalui fungsi isInPickupSpot
-  // kamus lokal
+void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu) {
+  // pick_up(Posisi(mob), &todo, &tas, &ip)
+  //  mendequeue item paling awal di list
+  //  asumsi:Item sudah dipastikan ada melalui fungsi isInPickupSpot
+  //  kamus lokal
   Address p;     // pointer untuk traversal
   int idx;       // variabel untuk kounter
   Item tempItem; // Variable temporary utk item
-  boolean found;//bernilai true item sudah terpickup
+  boolean found; // bernilai true item sudah terpickup
   // algoritma
   p = FIRST(*l);
   idx = 0;
   found = false;
   while (p != NULL) {
     if (INFO(p).lPickup == b.name && !found) {
-      if(t->capacity > IDX_TOP(*t)+1){//tas belum penuh
+      if (t->capacity > IDX_TOP(*t) + 1) { // tas belum penuh
         deleteAt(l, idx, &tempItem);
+        pickupItem(&tempItem, waktu);
         insertFirst(ip, tempItem);
         push(t, tempItem);
         printf("Pesanan berupa ");
         switch (tempItem.type) {
-          case 'N':
-            printf("Normal Item");
-            break;
-          case 'H':
-            printf("Heavy Item");
-            break;
-          case 'P':
-            printf("Perishable Item");
-            break;
-          case 'V':
-            printf("VIP Item");
-            break;
-          }
+        case 'N':
+          printf("Normal Item");
+          break;
+        case 'H':
+          printf("Heavy Item");
+          break;
+        case 'P':
+          printf("Perishable Item");
+          break;
+        case 'V':
+          printf("VIP Item");
+          break;
+        }
         printf(" berhasil diambil!\n");
-      }
-      else{//tas penuh
+      } else { // tas penuh
         printf("Tas Penuh! Kirimkan paket yang ada di tas terlebih dahulu!\n");
       }
       found = true;
@@ -183,7 +183,7 @@ boolean isInDropoffSpot(Building b, InprogressList ip) {
   }
 }
 
-void dropOffItem(Building b, InprogressList *ip, Tas *t,int *money) {
+void dropOffItem(Building b, InprogressList *ip, Tas *t, int *money) {
   // drop isi tas paling atas
   // kamus lokal
   Item val; // variabel dummy untuk menyimpan hasil yang di pop
@@ -192,19 +192,19 @@ void dropOffItem(Building b, InprogressList *ip, Tas *t,int *money) {
   deleteFirst(ip, &val);
   *money = VALUE(val);
   printf("Pesanan ");
-    switch (val.type) {
-      case 'N':
-        printf("Normal Item");
-        break;
-      case 'H':
-        printf("Heavy Item");
-        break;
-      case 'P':
-        printf("Perishable Item");
-        break;
-      case 'V':
-        printf("VIP Item");
-        break;
-  }  
+  switch (val.type) {
+  case 'N':
+    printf("Normal Item");
+    break;
+  case 'H':
+    printf("Heavy Item");
+    break;
+  case 'P':
+    printf("Perishable Item");
+    break;
+  case 'V':
+    printf("VIP Item");
+    break;
+  }
   printf(" berhasil diantarkan\n");
 }
