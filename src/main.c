@@ -1,3 +1,4 @@
+#include "charmachine.h"
 #include "engine.h"
 #include "inventory.h"
 #include "io.h"
@@ -8,12 +9,11 @@
 #include "queuetodo.h"
 #include "tas.h"
 #include "todolist.h"
-#include "charmachine.h"
 
 #include <stdio.h>
 
 void displayHelp();
-boolean finishedState(Building b,int finishedOrder,int jumlahPesanan);
+boolean finishedState(Building b, int finishedOrder, int jumlahPesanan);
 
 int main() {
   boolean started = false;
@@ -25,11 +25,11 @@ int main() {
   Word tempWord;
   int gainedMoney; // uang yang didapatkan setelah menyelesaikan misi
   int jumlahPesanan;
-  int finishedOrder;//jumlah pesanan yang selesai
+  int finishedOrder; // jumlah pesanan yang selesai
 
   // Engine Variable
   extern int waktu;
-  //extern int skor;
+  // extern int skor;
 
   // Object atau ADT
   Queue DP;              // Daftar Pesanan
@@ -42,22 +42,24 @@ int main() {
   InprogressList ip;     // In Progress List
 
   while (!started) {
-    printf("=============================MOBILITA===============================\n");
-    printf("\"Bisakah Kamu Mengantarkan Semua Paket Ini dan Membantu Keluargamu?\"\n");
+    printf("=============================MOBILITA=============================="
+           "=\n");
+    printf("\"Bisakah Kamu Mengantarkan Semua Paket Ini dan Membantu "
+           "Keluargamu?\"\n");
     printf("List Command:\n");
     printf("1.NEW GAME\n");
     printf("2.EXIT\n");
     printf("Pilih Command(dalam angka): ");
-  // start screen
+    // start screen
     // Ngeoutput menu
     tempInt = wordToInt(nextInput());
     if (tempInt == 1) {
-      do{
+      do {
         printf("Masukkan nama file config: ");
         tempString = wordToString(nextInput());
-      }while(!isFileExist(tempString));
+      } while (!isFileExist(tempString));
       // Inisialisasi seluruh object dan adt
-      inputConfig(tempString, &PT, &DP,&jumlahPesanan); // Berdasarkan config
+      inputConfig(tempString, &PT, &DP, &jumlahPesanan); // Berdasarkan config
       CreateMobita(&mob, ELMTListB(LBMap(PT), 0));
       CreateTas(&tas);
       MakeListGadget(&inv);
@@ -83,28 +85,27 @@ int main() {
     //          DP.buffer[i].lDropoff, DP.buffer[i].type);
     // }
     updateData(&tas, &ip, &todo, &DP);
-    if (finishedState(Posisi(mob),finishedOrder,jumlahPesanan)){
-        started = false;
-    }
-    else{
-      //printf("Skor: %d\n", skor);
+    if (finishedState(Posisi(mob), finishedOrder, jumlahPesanan)) {
+      started = false;
+    } else {
+      // printf("Skor: %d\n", skor);
       printf("Waktu: %d\n", waktu);
       printf("Uang: %d Yen\n", Uang(mob));
       printf("Lokasi Mobita: %c (%d,%d)\n", NAMEBUILDING(Posisi(mob)),
-           XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
-      printf("Jumlah pesanan yang harus dikerjakan: %d\n\n",jumlahPesanan-finishedOrder);
+             XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
+      printf("Jumlah pesanan yang harus dikerjakan: %d\n\n",
+             jumlahPesanan - finishedOrder);
       printf("ENTER COMMAND: ");
       tempWord = nextInput();
       system("@cls||clear");
-      printf("");
-      if (finishedState(Posisi(mob),finishedOrder,jumlahPesanan)){
+      if (finishedState(Posisi(mob), finishedOrder, jumlahPesanan)) {
         started = false;
-      }
-      else if (validateWord(tempWord, "MOVE")) {
+      } else if (validateWord(tempWord, "MOVE")) {
         displayMap(PT, Posisi(mob), todo, ip);
         tempInt = displayIsReachable(PT, Posisi(mob));
         do {
-          printf("Masukkan no lokasi yang ingin dituju (Ketik 0 jika ingin kembali): ");
+          printf("Masukkan no lokasi yang ingin dituju (Ketik 0 jika ingin "
+                 "kembali): ");
           tempInt2 = wordToInt(nextInput());
         } while (tempInt2 < 0 || tempInt2 >= tempInt);
         if (tempInt2 > 0) {
@@ -132,7 +133,7 @@ int main() {
       } else if (validateWord(tempWord, "TO_DO")) {
         displayTodoList(todo);
       } else if (validateWord(tempWord, "IN_PROGRESS")) {
-        displayInProgress(ip);
+        displayInProgress(ip, waktu);
       } else if (validateWord(tempWord, "BUY")) {
         buyGadget(&inv, gadgetbuy, &mob);
       } else if (validateWord(tempWord, "INVENTORY")) {
@@ -140,14 +141,14 @@ int main() {
       } else if (validateWord(tempWord, "HELP")) {
         displayHelp();
       } else {
-        printf("Masukkan Tidak Valid.\n\nGunakan command \"HELP\" untuk petunjuk "
-             "penggunaan.\n");
+        printf("Masukkan Tidak Valid.\nGunakan command \"HELP\" untuk petunjuk "
+               "penggunaan.\n");
       }
     }
   }
   printf("\nOTSUKARE!!!\n");
   printf("SELAMAT, ANDA TELAH MENYELESAIKAN PERMAINAN INI!!\n");
-  printf("WAKTU YANG ANDA HABISKAN: %d",waktu);
+  printf("WAKTU YANG ANDA HABISKAN: %d", waktu);
   return 0;
 }
 
@@ -165,6 +166,6 @@ void displayHelp() {
          "menggunakannya\n");
   printf("9. HELP -> Untuk mengeluarkan list command dan kegunaannya\n");
 }
-boolean finishedState(Building b,int finishedOrder,int jumlahPesanan){
-  return (NAMEBUILDING(b)=='8')&&(finishedOrder==jumlahPesanan);
+boolean finishedState(Building b, int finishedOrder, int jumlahPesanan) {
+  return (NAMEBUILDING(b) == '8') && (finishedOrder == jumlahPesanan);
 }

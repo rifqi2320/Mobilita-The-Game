@@ -28,7 +28,7 @@ void CreateItem(Item *I, char type, int tArrival, int tPerish, char lPickup,
 boolean isItemArrived(Item I, int time) { return time >= I.tArrival; }
 
 boolean isItemExpired(Item I, int time) {
-  return time > (I.tPickup + I.tPerish);
+  return time >= (I.tPickup + I.tPerish);
 }
 
 boolean isItemPickedUp(Item I) { return I.tPickup != TIME_UNDEF; }

@@ -66,12 +66,11 @@ void displayTodoList(Todolist l) {
       idx++;
     }
     printf("\n");
-  }
-  else{//list kosong
+  } else { // list kosong
     printf("Belum ada item yang perlu diantarkan!\n\n");
   }
 }
-void displayInProgress(InprogressList l) {
+void displayInProgress(InprogressList l, int waktu) {
   // mencetak in progress list
   // kamus lokal
   Address x; // pointer untuk traversal
@@ -99,7 +98,8 @@ void displayInProgress(InprogressList l) {
       }
       printf("Tujuan: %c", x->info.lDropoff);
       if (x->info.type == 'P') { // menampilkan waktu tersisa sampai hangus
-        printf(", Sisa Waktu: %d)\n", x->info.tPerish);
+        printf(", Sisa Waktu: %d)\n",
+               x->info.tPerish + x->info.tPickup - waktu);
       } else {
         printf(")\n");
       }
@@ -107,8 +107,7 @@ void displayInProgress(InprogressList l) {
       idx++;
     }
     printf("\n");
-  }
-  else{//list kosong
+  } else { // list kosong
     printf("Tidak ada item yang sedang diantarkan.\n\n");
   }
 }
@@ -168,9 +167,10 @@ void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu) {
           break;
         }
         printf(" berhasil diambil!\n");
-        printf("Tujuan pesanan: %c\n\n",tempItem.lDropoff);
+        printf("Tujuan pesanan: %c\n\n", tempItem.lDropoff);
       } else { // tas penuh
-        printf("Tas Penuh! Kirimkan paket yang ada di tas terlebih dahulu!\n\n");
+        printf(
+            "Tas Penuh! Kirimkan paket yang ada di tas terlebih dahulu!\n\n");
       }
       found = true;
     } else {
@@ -214,5 +214,5 @@ void dropOffItem(Building b, InprogressList *ip, Tas *t, int *money) {
     break;
   }
   printf(" berhasil diantarkan\n");
-  printf("Uang yang didapatkan: %d Yen\n\n",val.value);
+  printf("Uang yang didapatkan: %d Yen\n\n", val.value);
 }

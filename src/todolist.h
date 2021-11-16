@@ -31,7 +31,7 @@ void addInProgress(InprogressList *l, Item task);
 
 void deleteInProgressAt(InprogressList *l, Item *task);
 
-void displayInProgress(InprogressList l);
+void displayInProgress(InprogressList l, int waktu);
 
 boolean isInPickupSpot(Building b, Todolist l);
 // menghasilkan true jika di spot tersebut ada item yang bisa di pick up
