@@ -47,7 +47,7 @@ Word nextInput() {
   return currentWord;
 }
 
-void inputConfig(char *dir, Map *PT, Queue *DP) {
+void inputConfig(char *dir, Map *PT, Queue *DP,int* jumlahPesanan) {
   int k = 0, j = 0, i, m, n;
   int N, M; // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
   int L;    // Jumlah Gedung (4 <= L <= 26)
@@ -110,7 +110,7 @@ void inputConfig(char *dir, Map *PT, Queue *DP) {
   CreateQueue(DP);
   // Input jumlah pesanan
   P = config[j++].val;
-
+  *jumlahPesanan = P;
   // Input item pesanan
   for (i = 0; i < P; i++) {
     temptArrival = config[j++].val;

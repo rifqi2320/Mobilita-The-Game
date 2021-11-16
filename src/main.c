@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 void displayHelp();
+boolean finishedState(Building b,int finishedOrder,int jumlahPesanan);
 
 int main() {
   boolean started = false;
@@ -24,6 +25,8 @@ int main() {
   char *tempString;
   Word tempWord;
   int gainedMoney; // uang yang didapatkan setelah menyelesaikan misi
+  int jumlahPesanan;
+  int finishedOrder;//jumlah pesanan yang selesai
 
   // Engine Variable
   extern int waktu;
@@ -45,7 +48,7 @@ int main() {
     if (tempInt == 1) {
       tempString = wordToString(nextInput());
       // Inisialisasi seluruh object dan adt
-      inputConfig(tempString, &PT, &DP); // Berdasarkan config
+      inputConfig(tempString, &PT, &DP,&jumlahPesanan); // Berdasarkan config
       CreateMobita(&mob, ELMTListB(LBMap(PT), 0));
       CreateTas(&tas);
       MakeListGadget(&inv);
@@ -53,6 +56,7 @@ int main() {
       CreateInProgress(&ip);
       MakeListGadgetHQ(&gadgetbuy);
       started = true;
+      finishedOrder = 0;
     } else if (tempInt == 2) {
       return 0;
     } else {
@@ -78,7 +82,11 @@ int main() {
     printf("ENTER COMMAND: ");
     tempWord = nextInput();
     // system("@cls||clear");
-    if (validateWord(tempWord, "MOVE")) {
+    if (finishedState(Posisi(mob),finishedOrder,jumlahPesanan)){
+        printf("aman");
+        started = false;
+    }
+    else if (validateWord(tempWord, "MOVE")) {
       displayMap(PT, Posisi(mob), todo, ip);
       tempInt = displayIsReachable(PT, Posisi(mob));
       do {
@@ -101,6 +109,7 @@ int main() {
         dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney);
         changeMoney(&mob, gainedMoney);
         changeSpeed(&mob, (1 + numOfHeavy(tas)));
+        finishedOrder++;
       } else {
         printf("Tidak ada pesanan yang dapat diantarkan!\n");
       }
@@ -121,9 +130,9 @@ int main() {
              "penggunaan.\n");
     }
   }
-
   printf("OTSUKARE!!!\n");
   printf("SELAMAT, ANDA TELAH MENYELESAIKAN PERMAINAN INI!!\n");
+  printf("WAKTU YANG ANDA HABISKAN: %d",waktu);
   return 0;
 }
 
@@ -140,4 +149,7 @@ void displayHelp() {
   printf("8. INVENTORY -> Untuk melihat gadget yang dimiliki dan "
          "menggunakannya\n");
   printf("9. HELP -> Untuk mengeluarkan list command dan kegunaannya\n");
+}
+boolean finishedState(Building b,int finishedOrder,int jumlahPesanan){
+  return (NAMEBUILDING(b)=='8')&&(finishedOrder==jumlahPesanan);
 }

@@ -138,12 +138,17 @@ void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu) {
   idx = 0;
   found = false;
   while (p != NULL) {
+      printf("hime\n");
     if (INFO(p).lPickup == b.name && !found) {
+      printf("manstab\n");
       if (t->capacity > IDX_TOP(*t) + 1) { // tas belum penuh
         deleteAt(l, idx, &tempItem);
-        pickupItem(&tempItem, waktu);
+        printf("Cek1\n");
+        //pickupItem(&tempItem, waktu);
         insertFirst(ip, tempItem);
+        printf("Cek1\n");
         push(t, tempItem);
+        printf("Cek1\n");
         printf("Pesanan berupa ");
         switch (tempItem.type) {
         case 'N':
