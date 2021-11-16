@@ -146,9 +146,9 @@ void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu) {
         printf("Cek1\n");
         //pickupItem(&tempItem, waktu);
         insertFirst(ip, tempItem);
-        printf("Cek1\n");
+        printf("Cek2\n");
         push(t, tempItem);
-        printf("Cek1\n");
+        printf("Cek3\n");
         printf("Pesanan berupa ");
         switch (tempItem.type) {
         case 'N':

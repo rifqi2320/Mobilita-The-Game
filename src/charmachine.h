@@ -20,7 +20,10 @@ void start();
           Jika currentChar != MARK maka EOP akan padam (false)
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
-void startWithPath();
+void startWithPath(char *dir);
+
+boolean isFileExist(char *dir);
+/* Menghasilkan true jika file dengan path dir bisa dibuka */
 
 void adv();
 /* Pita dimajukan satu karakter. 

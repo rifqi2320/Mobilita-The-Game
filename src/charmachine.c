@@ -30,6 +30,11 @@ void startWithPath(char *dir) {
   adv();
 }
 
+boolean isFileExist(char *dir){
+  /* Menghasilkan true jika file dengan path dir bisa dibuka */
+  return(fopen(dir,"r")!=NULL);
+}
+
 void adv() {
   /* Pita dimajukan satu karakter.
   I.S. : Karakter pada jendela = currentChar, currentChar != MARK
