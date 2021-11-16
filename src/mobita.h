@@ -43,4 +43,6 @@ void mobitaReturn(MOBITA *MOB, Tas *t, Todolist *td, InprogressList *ip);
 
 void changeSpeed(MOBITA *MOB, float val);
 
+void changeMoney(MOBITA *MOB,float money);
+
 #endif

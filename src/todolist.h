@@ -42,6 +42,6 @@ void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip);
 boolean isInDropoffSpot(Building b, InprogressList ip);
 // menghasilkan true jika di spot tersebut ada item yang bisa di dropoff
 
-void dropOffItem(Building b, InprogressList *ip, Tas *t,int *score);
+void dropOffItem(Building b, InprogressList *ip, Tas *t,int *money);
 // drop isi tas paling atas
 #endif

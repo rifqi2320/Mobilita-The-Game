@@ -72,3 +72,6 @@ void mobitaReturn(MOBITA *MOB, Tas *t, Todolist *td, InprogressList *ip) {
     }
   }
 }
+void changeMoney(MOBITA *MOB,float money){
+  Uang(*MOB) += money;
+}

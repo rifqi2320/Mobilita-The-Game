@@ -24,7 +24,7 @@ int main() {
   char tempChar;
   char *tempString;
   Word tempWord;
-  int gainedScore;//skor yang didapatkan setelah menyelesaikan misi
+  int gainedMoney;//uang yang didapatkan setelah menyelesaikan misi
 
   // Engine Variable
   extern int waktu;
@@ -73,12 +73,12 @@ int main() {
     // }
     updateData(&tas, &ip, &todo, &DP);
     printf("Waktu: %d\n", waktu);
-    printf("Skor: %d\n",skor);
+    printf("Uang: %d Yen\n",Uang(mob));
     printf("Lokasi Mobita: %c (%d,%d)\n\n", NAMEBUILDING(Posisi(mob)),
            XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
     printf("ENTER COMMAND: ");
     tempWord = nextInput();
-    //system("@cls||clear");
+    system("@cls||clear");
     if (validateWord(tempWord, "MOVE")) {
       displayMap(PT, Posisi(mob), todo, ip);
       tempInt = displayIsReachable(PT, Posisi(mob));
@@ -87,8 +87,11 @@ int main() {
         tempInt2 = wordToInt(nextInput());
       } while (tempInt2 < 0 || tempInt2 >= tempInt);
       if (tempInt2 > 0) {
+        printf("Sebelum move\n");
         move(&mob, getReachable(PT, Posisi(mob), tempInt2));
+        printf("Diantara move\n");
         updateData(&tas, &ip, &todo, &DP);
+        printf("Setelah move\n");
       }
     } else if (validateWord(tempWord, "PICK_UP")) {
       if (isInPickupSpot(Posisi(mob), todo)) {
@@ -98,8 +101,9 @@ int main() {
         printf("Tidak ada item yang bisa di pickup\n");
       }
     } else if (validateWord(tempWord, "DROP_OFF")) {
-      dropOffItem(Posisi(mob),&ip,&tas,&gainedScore);
-      addScore(gainedScore);
+      dropOffItem(Posisi(mob),&ip,&tas,&gainedMoney);
+     changeMoney(&mob,gainedMoney);
+      changeSpeed(&mob,(1+numOfHeavy(tas)));
     } else if (validateWord(tempWord, "MAP")) {
       displayMap(PT, Posisi(mob), todo, ip);
     } else if (validateWord(tempWord, "TO_DO")) {
