@@ -4,7 +4,7 @@
 
 boolean validateString(char *a, char *b) {
   int i = 0;
-  while (a[i] == b[i] && a[i] == '\x00' && b[i] == '\x00') {
+  while (a[i] == b[i] && a[i] != '\x00' && b[i] != '\x00') {
     i++;
   }
   return (a[i] == '\x00' && b[i] == '\x00');
