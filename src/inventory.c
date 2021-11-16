@@ -36,7 +36,7 @@ int lengthListGadget(LIST_GADGET l) {
   int ctr = 0;
   int i;
   for (i = 0; i < JUMLAHGADGET; i++) {
-    if (NAMAGADGET(l, i) != "-") {
+    if (NAMAGADGET(l, i)[0] != '-') {
       ctr++;
     }
   }
@@ -46,7 +46,7 @@ int lengthListGadget(LIST_GADGET l) {
 boolean isIdxEff(LIST_GADGET l, int i) {
   if (i < 0 || i >= JUMLAHGADGET) {
     return false;
-  } else if (NAMAGADGET(l, i) != "-") {
+  } else if (NAMAGADGET(l, i)[0] != '-') {
     return true;
   }
   return false;
@@ -77,7 +77,7 @@ void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
         } else {
           Uang(*MOB) -= HARGAGADGET(buy, i - 1);
           for (j = 0; j < JUMLAHGADGET; j++) {
-            if (NAMAGADGET(*l, j) == "-") {
+            if (NAMAGADGET(*l, j)[0] == '-') {
               NAMAGADGET(*l, j) = getName(GADGET(buy, i - 1));
               HARGAGADGET(*l, j) = getPrice(GADGET(buy, i - 1));
               break;
@@ -125,16 +125,16 @@ void displayBuy(LIST_GADGET l) {
 
 void process(GADGET gad, Tas *t, MOBITA *MOB, InprogressList *ip,
              ListBuilding h) {
-  if (NAMA(gad) == "Kain Pembungkus Waktu") {
+  if (validateString(NAMA(gad), "Kain Pembungkus Waktu")) {
     KainWaktu(t, ip);
-  } else if (NAMA(gad) == "Senter Pembesar") {
+  } else if (validateString(NAMA(gad), "Senter Pembesar")) {
     SenterPembesar(t);
-  } else if (NAMA(gad) == "Pintu Kemana Saja") {
+  } else if (validateString(NAMA(gad), "Pintu Kemana Saja")) {
     PintuKemanaSaja(MOB, h);
-  } else if (NAMA(gad) == "Mesin Waktu") {
+  } else if (validateString(NAMA(gad), "Mesin Waktu")) {
     MesinWaktu();
-  } else if (NAMA(gad) == "Senter Pengecil") {
-    SenterPengecil(t,MOB);
+  } else if (validateString(NAMA(gad), "Senter Pengecil")) {
+    SenterPengecil(t, MOB);
   }
 }
 
@@ -187,7 +187,7 @@ void MesinWaktu() {
   printf("Mesin Waktu berhasil digunakan!\n");
 }
 
-void SenterPengecil(Tas *t,MOBITA *mob) {
+void SenterPengecil(Tas *t, MOBITA *mob) {
   if (TOP(*t).type == 'H') {
     TOP(*t).type = 'S';
     Speed(*mob) -= 1;
@@ -197,14 +197,13 @@ void SenterPengecil(Tas *t,MOBITA *mob) {
   }
 }
 
-void checkEffectSenter(Tas *t,MOBITA *mob){
+void checkEffectSenter(Tas *t, MOBITA *mob) {
   if (!isTasEmpty(*t)) {
     int i;
-    for (i = IDX_TOP(*t) ; i>=0 ; i--){
-      if ((*t).buffer[i].type == 'S'){
-        (*t).buffer[i].type == 'H';
+    for (i = IDX_TOP(*t); i >= 0; i--) {
+      if ((*t).buffer[i].type == 'S') {
+        (*t).buffer[i].type = 'H';
         Speed(*mob) += 1;
-        break;
       }
     }
   }

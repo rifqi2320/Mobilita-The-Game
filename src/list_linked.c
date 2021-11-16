@@ -301,9 +301,8 @@ List concat(List l1, List l2) {
    */
   /* Tidak ada alokasi/dealokasi pada prosedur ini */
   // kamus lokal
-  Address x; // pointer untuk traversal
-  List l3;   // list hasil konkatenasi l1 dan l2
-  int i;     // indeks untuk iterasi
+  List l3; // list hasil konkatenasi l1 dan l2
+  int i;   // indeks untuk iterasi
   // algoritma
   if (isListEmpty(l1)) { // jika list 11 kosong
     return l2;

@@ -21,7 +21,6 @@ int main() {
   // Temp Variable
   int tempInt;
   int tempInt2;
-  char tempChar;
   char *tempString;
   Word tempWord;
   int gainedMoney; // uang yang didapatkan setelah menyelesaikan misi
@@ -71,6 +70,7 @@ int main() {
     //          DP.buffer[i].lDropoff, DP.buffer[i].type);
     // }
     updateData(&tas, &ip, &todo, &DP);
+    printf("Skor: %d\n", skor);
     printf("Waktu: %d\n", waktu);
     printf("Uang: %d Yen\n", Uang(mob));
     printf("Lokasi Mobita: %c (%d,%d)\n\n", NAMEBUILDING(Posisi(mob)),
@@ -91,14 +91,14 @@ int main() {
       }
     } else if (validateWord(tempWord, "PICK_UP")) {
       if (isInPickupSpot(Posisi(mob), todo)) {
-        pick_up(Posisi(mob), &todo, &tas, &ip);
+        pick_up(Posisi(mob), &todo, &tas, &ip, waktu);
         changeSpeed(&mob, (1 + numOfHeavy(tas)));
       } else {
         printf("Pesanan tidak ditemukan!\n");
       }
     } else if (validateWord(tempWord, "DROP_OFF")) {
       if (isInDropoffSpot(Posisi(mob), ip)) {
-        dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney, waktu);
+        dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney);
         changeMoney(&mob, gainedMoney);
         changeSpeed(&mob, (1 + numOfHeavy(tas)));
       } else {
