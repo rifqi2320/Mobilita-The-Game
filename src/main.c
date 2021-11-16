@@ -17,13 +17,6 @@ boolean finishedState(Building b,int finishedOrder,int jumlahPesanan);
 
 int main() {
   boolean started = false;
-  printf("=============================MOBILITA===============================\n");
-  printf("\"Bisakah Kamu Mengantarkan Semua Paket Ini dan Membantu Keluargamu?\"\n");
-  printf("List Command:\n");
-  printf("1.NEW GAME\n");
-  printf("2.EXIT\n");
-  printf("Pilih Command(dalam angka): ");
-  // start screen
 
   // Temp Variable
   int tempInt;
@@ -36,7 +29,7 @@ int main() {
 
   // Engine Variable
   extern int waktu;
-  extern int skor;
+  //extern int skor;
 
   // Object atau ADT
   Queue DP;              // Daftar Pesanan
@@ -49,6 +42,13 @@ int main() {
   InprogressList ip;     // In Progress List
 
   while (!started) {
+    printf("=============================MOBILITA===============================\n");
+    printf("\"Bisakah Kamu Mengantarkan Semua Paket Ini dan Membantu Keluargamu?\"\n");
+    printf("List Command:\n");
+    printf("1.NEW GAME\n");
+    printf("2.EXIT\n");
+    printf("Pilih Command(dalam angka): ");
+  // start screen
     // Ngeoutput menu
     tempInt = wordToInt(nextInput());
     if (tempInt == 1) {
@@ -87,14 +87,16 @@ int main() {
         started = false;
     }
     else{
-      printf("Skor: %d\n", skor);
+      //printf("Skor: %d\n", skor);
       printf("Waktu: %d\n", waktu);
       printf("Uang: %d Yen\n", Uang(mob));
-      printf("Lokasi Mobita: %c (%d,%d)\n\n", NAMEBUILDING(Posisi(mob)),
+      printf("Lokasi Mobita: %c (%d,%d)\n", NAMEBUILDING(Posisi(mob)),
            XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
+      printf("Jumlah pesanan yang harus dikerjakan: %d\n\n",jumlahPesanan-finishedOrder);
       printf("ENTER COMMAND: ");
       tempWord = nextInput();
       system("@cls||clear");
+      printf("");
       if (finishedState(Posisi(mob),finishedOrder,jumlahPesanan)){
         printf("aman");
         started = false;
@@ -115,7 +117,7 @@ int main() {
           pick_up(Posisi(mob), &todo, &tas, &ip, waktu);
           changeSpeed(&mob, (1 + numOfHeavy(tas)));
         } else {
-          printf("Pesanan tidak ditemukan!\n");
+          printf("Pesanan tidak ditemukan!\n\n");
         }
       } else if (validateWord(tempWord, "DROP_OFF")) {
         if (isInDropoffSpot(Posisi(mob), ip)) {
@@ -124,7 +126,7 @@ int main() {
           changeSpeed(&mob, (1 + numOfHeavy(tas)));
           finishedOrder++;
         } else {
-          printf("Tidak ada pesanan yang dapat diantarkan!\n");
+          printf("Tidak ada pesanan yang dapat diantarkan!\n\n");
         }
       } else if (validateWord(tempWord, "MAP")) {
         displayMap(PT, Posisi(mob), todo, ip);
