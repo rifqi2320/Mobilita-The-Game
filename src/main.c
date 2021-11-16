@@ -53,7 +53,7 @@ int main() {
       CreateTodoList(&todo);
       CreateInProgress(&ip);
       MakeListGadgetHQ(&gadgetbuy);
-
+      Uang(mob) = 5000;
       started = true;
     } else if (tempInt == 2) {
       return 0;
@@ -102,7 +102,7 @@ int main() {
         dropOffItem(Posisi(mob),&ip,&tas,&gainedMoney);
         changeMoney(&mob,gainedMoney);
         changeSpeed(&mob,(1+numOfHeavy(tas)));
-        checkEffectSenter(&tas);
+        checkEffectSenter(&tas,&mob);
       }
       else{
         printf("Tidak ada pesanan yang dapat diantarkan!\n");

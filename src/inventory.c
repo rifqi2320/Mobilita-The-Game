@@ -134,7 +134,7 @@ void process(GADGET gad, Tas *t, MOBITA *MOB, InprogressList *ip,
   } else if (NAMA(gad) == "Mesin Waktu") {
     MesinWaktu();
   } else if (NAMA(gad) == "Senter Pengecil") {
-    SenterPengecil(t);
+    SenterPengecil(t,MOB);
   }
 }
 
@@ -146,7 +146,7 @@ void KainWaktu(Tas *t, InprogressList *ip) {
       now = NEXT(now);
     }
     INFO(now).tPerish += waktu - TOP(*t).tPickup;
-    printf("Senter Pengecil berhasil digunakan!\n");
+    printf("Kain Pembungkus Waktu berhasil digunakan!\n");
   } else {
     printf("Kain Pembungkus Waktu gagal digunakan!Kain terbuang.\n");
   }
@@ -187,21 +187,23 @@ void MesinWaktu() {
   printf("Mesin Waktu berhasil digunakan!\n");
 }
 
-void SenterPengecil(Tas *t) {
+void SenterPengecil(Tas *t,MOBITA *mob) {
   if (TOP(*t).type == 'H') {
     TOP(*t).type = 'S';
+    Speed(*mob) -= 1;
     printf("Senter Pengecil berhasil digunakan!\n");
   } else {
     printf("Senter Pengecil gagal digunakan!Senter terbuang.\n");
   }
 }
 
-void checkEffectSenter(Tas *t){
+void checkEffectSenter(Tas *t,MOBITA *mob){
   if (!isTasEmpty(*t)) {
     int i;
     for (i = IDX_TOP(*t) ; i>=0 ; i--){
       if ((*t).buffer[i].type == 'S'){
         (*t).buffer[i].type == 'H';
+        Speed(*mob) += 1;
         break;
       }
     }

@@ -35,7 +35,7 @@ void KainWaktu(Tas *t, InprogressList *ip);
 void SenterPembesar(Tas *t);
 void PintuKemanaSaja(MOBITA *MOB,ListBuilding h);
 void MesinWaktu();
-void SenterPengecil(Tas *t);
-void checkEffectSenter(Tas *t);
+void SenterPengecil(Tas *t,MOBITA *mob);
+void checkEffectSenter(Tas *t,MOBITA *mob);
 
 #endif
