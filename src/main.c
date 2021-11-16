@@ -53,7 +53,6 @@ int main() {
       CreateTodoList(&todo);
       CreateInProgress(&ip);
       MakeListGadgetHQ(&gadgetbuy);
-      Uang(mob) = 5000;
       started = true;
     } else if (tempInt == 2) {
       return 0;
