@@ -142,9 +142,6 @@ void KainWaktu(Tas *t, InprogressList *ip) {
   if (TOP(*t).type == 'P') {
     TOP(*t).tPerish += waktu - TOP(*t).tPickup;
     Address now = FIRST(*ip);
-    while (NEXT(now) != NULL) {
-      now = NEXT(now);
-    }
     INFO(now).tPerish += waktu - TOP(*t).tPickup;
     printf("Kain Pembungkus Waktu berhasil digunakan!\n");
   } else {
