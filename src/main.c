@@ -102,6 +102,7 @@ int main() {
         dropOffItem(Posisi(mob),&ip,&tas,&gainedMoney);
         changeMoney(&mob,gainedMoney);
         changeSpeed(&mob,(1+numOfHeavy(tas)));
+        checkEffectSenter(&tas);
       }
       else{
         printf("Tidak ada pesanan yang dapat diantarkan!\n");

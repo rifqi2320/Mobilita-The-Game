@@ -36,5 +36,6 @@ void SenterPembesar(Tas *t);
 void PintuKemanaSaja(MOBITA *MOB,ListBuilding h);
 void MesinWaktu();
 void SenterPengecil(Tas *t);
+void checkEffectSenter(Tas *t);
 
 #endif

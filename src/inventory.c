@@ -196,6 +196,18 @@ void SenterPengecil(Tas *t) {
   }
 }
 
+void checkEffectSenter(Tas *t){
+  if (!isTasEmpty(*t)) {
+    int i;
+    for (i = IDX_TOP(*t) ; i>=0 ; i--){
+      if ((*t).buffer[i].type == 'S'){
+        (*t).buffer[i].type == 'H';
+        break;
+      }
+    }
+  }
+}
+
 void displayInventory(LIST_GADGET l) {
   int i;
   for (i = 0; i < JUMLAHGADGET; i++) {
