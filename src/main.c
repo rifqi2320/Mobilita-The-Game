@@ -98,7 +98,6 @@ int main() {
       system("@cls||clear");
       printf("");
       if (finishedState(Posisi(mob),finishedOrder,jumlahPesanan)){
-        printf("aman");
         started = false;
       }
       else if (validateWord(tempWord, "MOVE")) {
@@ -141,7 +140,7 @@ int main() {
       } else if (validateWord(tempWord, "HELP")) {
         displayHelp();
       } else {
-        printf("Masukkan Tidak Valid.\nGunakan command \"HELP\" untuk petunjuk "
+        printf("Masukkan Tidak Valid.\n\nGunakan command \"HELP\" untuk petunjuk "
              "penggunaan.\n");
       }
     }
