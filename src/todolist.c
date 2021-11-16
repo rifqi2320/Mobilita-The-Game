@@ -43,8 +43,8 @@ void displayTodoList(Todolist l) {
   Address x; // pointer untuk traversal
   int idx;   // variabel untuk mencetak posisi urutan to do list
   // algoritma
-  printf("Pesanan pada To Do List:\n");
   if (!isListEmpty(l)) { // jika list tidak kosong
+    printf("Pesanan pada To Do List:\n");
     idx = 1;
     x = FIRST(l);
     while (x != NULL) { // selama masih ada elemen
@@ -65,6 +65,9 @@ void displayTodoList(Todolist l) {
       x = NEXT(x);
       idx++;
     }
+  }
+  else{//list kosong
+    printf("Belum ada item yang perlu diantarkan!\n");
   }
 }
 void displayInProgress(InprogressList l) {
@@ -102,6 +105,9 @@ void displayInProgress(InprogressList l) {
       x = NEXT(x);
       idx++;
     }
+  }
+  else{//list kosong
+    printf("Tidak ada item yang sedang diantarkan.\n");
   }
 }
 boolean isInPickupSpot(Building b, Todolist l) {
@@ -165,6 +171,7 @@ void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu) {
           break;
         }
         printf(" berhasil diambil!\n");
+        printf("Tujuan pesanan: %c\n",tempItem.lDropoff);
       } else { // tas penuh
         printf("Tas Penuh! Kirimkan paket yang ada di tas terlebih dahulu!\n");
       }
@@ -210,4 +217,5 @@ void dropOffItem(Building b, InprogressList *ip, Tas *t, int *money) {
     break;
   }
   printf(" berhasil diantarkan\n");
+  printf("Uang yang didapatkan: %d Yen\n",val.value);
 }

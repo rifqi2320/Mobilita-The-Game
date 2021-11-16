@@ -103,7 +103,7 @@ int main() {
         displayMap(PT, Posisi(mob), todo, ip);
         tempInt = displayIsReachable(PT, Posisi(mob));
         do {
-          printf("Masukkan no lokasi yang ingin dituju: ");
+          printf("Masukkan no lokasi yang ingin dituju (Ketik 0 jika ingin kembali): ");
           tempInt2 = wordToInt(nextInput());
         } while (tempInt2 < 0 || tempInt2 >= tempInt);
         if (tempInt2 > 0) {
