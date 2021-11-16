@@ -1,4 +1,4 @@
-#include "charmachine.h"
+#include "../src/charmachine.h"
 #include <stdio.h>
 
 int main() {

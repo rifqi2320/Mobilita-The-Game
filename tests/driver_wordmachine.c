@@ -1,5 +1,5 @@
-#include "charmachine.h"
-#include "wordmachine.h"
+#include "../src/charmachine.h"
+#include "../src/wordmachine.h"
 #include <stdio.h>
 
 boolean endWord;
