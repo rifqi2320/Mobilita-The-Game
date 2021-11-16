@@ -16,7 +16,7 @@
 #include "tokenmachine.h"
 #include "wordmachine.h"
 
-void inputConfig(char* dir, Map *PT, Queue *DP);
+void inputConfig(char *dir, Map *PT, Queue *DP,int* jumlahPesanan);
 /* Menerima konfigurasi file */
 
 /* Menerima input matriks adjacency dan membuat matriks peta sejumlah
