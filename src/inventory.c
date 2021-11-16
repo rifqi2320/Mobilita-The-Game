@@ -132,7 +132,7 @@ void process(GADGET gad, Tas *t, MOBITA *MOB, InprogressList *ip,
   } else if (validateString(NAMA(gad), "Pintu Kemana Saja")) {
     PintuKemanaSaja(MOB, h);
   } else if (validateString(NAMA(gad), "Mesin Waktu")) {
-    MesinWaktu();
+    MesinWaktu(t,ip);
   } else if (validateString(NAMA(gad), "Senter Pengecil")) {
     SenterPengecil(t, MOB);
   }
@@ -176,10 +176,29 @@ void PintuKemanaSaja(MOBITA *MOB, ListBuilding h) {
   }
 }
 
-void MesinWaktu() {
+void MesinWaktu(Tas *t, InprogressList *ip) {
+  Address x;
+  int tmpwaktu = waktu;
   waktu -= 50;
   if (waktu < 0) {
     waktu = 0;
+  }
+  int i = 0;
+  if (!isTasEmpty(*t)) {
+    for (i = 0; i <= IDX_TOP(*t); i++) {
+      if ((*t).buffer[i].type == 'P') {
+        (*t).buffer[i].tPickup -= (tmpwaktu - waktu);
+      }
+    }
+  }
+  if (!isListEmpty(*ip)) {
+    x = FIRST(*ip);
+    while (x!=NULL) {
+      if (x->info.type == 'P') {
+        x->info.tPickup -= (tmpwaktu - waktu);
+      }
+      x = NEXT(x);
+    }
   }
   printf("Mesin Waktu berhasil digunakan!\n");
 }

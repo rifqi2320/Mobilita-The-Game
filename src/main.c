@@ -68,6 +68,7 @@ int main() {
       MakeListGadgetHQ(&gadgetbuy);
       started = true;
       finishedOrder = 0;
+      Uang(mob) = 7000;
     } else if (tempInt == 2) {
       return 0;
     } else {
