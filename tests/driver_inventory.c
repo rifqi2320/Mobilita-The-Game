@@ -5,14 +5,30 @@ int main(){
     LIST_GADGET l1,l2;
     Tas t;
     MOBITA M;
-    MakeListGadget(&l1);
+    ListBuilding LB;
+    InprogressList ip;
+    Building a;
+    XCOORD(a) = 3;
+    YCOORD(a) = 3;
+    NAMEBUILDING(a) = '8';
+
     MakeListGadget(&l2);
     CreateTas(&t);
     MakeListGadgetHQ(&l1);
-    printf("%d",lengthListGadget(l2));
-    buyGadget(&l2,l1,2,&M);
-    buyGadget(&l2,l1,2,&M);
-    printf("%d",lengthListGadget(l2));
-    displayBuy(l1);
+    CreateInProgress(&ip);
+    CreateMobita(&M,a);
+    CreateListBuilding(&LB,50);
+
+    Uang(M) = 7000;
+
+    if(isLGFull(l1)){
+        printf("List L1 penuh.\n");
+        printf("%d %d\n",lengthListGadget(l1),lengthListGadget(l2));
+    }
+    int i;
+    for (i = 0; i < 6; i++) {
+        buyGadget(&l2,l1,&M);
+    }
     displayInventory(l2);
+    useGadget(&l2,&t,&M,&ip,LB);
 }

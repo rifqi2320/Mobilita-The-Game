@@ -4,7 +4,10 @@
 
 int main(){
     MOBITA MOB;
-    CreateMobita(&MOB);
+    Building hq;
+    XCOORD(hq) = 2;
+    YCOORD(hq) = 2;
+    CreateMobita(&MOB,hq);
     addAbility(&MOB,'s');
     addAbility(&MOB,'i');
     addAbility(&MOB,'r');

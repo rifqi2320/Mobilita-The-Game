@@ -1,7 +1,5 @@
 #include "../src/engine.h"
 #include <stdio.h>
-float waktu;
-int skor;
 
 int main(){
     waktu = 0;
