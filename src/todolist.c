@@ -149,7 +149,7 @@ void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu) {
     if (INFO(p).lPickup == b.name && !found) {
       if (t->capacity > IDX_TOP(*t) + 1) { // tas belum penuh
         deleteAt(l, idx, &tempItem);
-        //pickupItem(&tempItem, waktu);
+        pickupItem(&tempItem, waktu);
         insertFirst(ip, tempItem);
         push(t, tempItem);
         printf("Pesanan berupa ");
