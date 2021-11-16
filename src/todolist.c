@@ -141,9 +141,30 @@ void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip) {
   found = false;
   while (p != NULL) {
     if (INFO(p).lPickup == b.name && !found) {
-      deleteAt(l, idx, &tempItem);
-      insertFirst(ip, tempItem);
-      push(t, tempItem);
+      if(t->capacity > IDX_TOP(*t)+1){//tas belum penuh
+        deleteAt(l, idx, &tempItem);
+        insertFirst(ip, tempItem);
+        push(t, tempItem);
+        printf("Pesanan berupa ");
+        switch (tempItem.type) {
+          case 'N':
+            printf("Normal Item");
+            break;
+          case 'H':
+            printf("Heavy Item");
+            break;
+          case 'P':
+            printf("Perishable Item");
+            break;
+          case 'V':
+            printf("VIP Item");
+            break;
+          }
+        printf(" berhasil diambil!\n");
+      }
+      else{//tas penuh
+        printf("Tas Penuh! Kirimkan paket yang ada di tas terlebih dahulu!\n");
+      }
       found = true;
     } else {
       p = NEXT(p);
@@ -170,4 +191,20 @@ void dropOffItem(Building b, InprogressList *ip, Tas *t,int *money) {
   pop(t, &val);
   deleteFirst(ip, &val);
   *money = VALUE(val);
+  printf("Pesanan ");
+    switch (val.type) {
+      case 'N':
+        printf("Normal Item");
+        break;
+      case 'H':
+        printf("Heavy Item");
+        break;
+      case 'P':
+        printf("Perishable Item");
+        break;
+      case 'V':
+        printf("VIP Item");
+        break;
+  }  
+  printf(" berhasil diantarkan\n");
 }

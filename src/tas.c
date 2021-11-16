@@ -36,7 +36,7 @@ int numOfHeavy(Tas t){
   int i;//variabel untuk looping
   //algoritma
   counter = 0;
-  for(i=0;i<t.capacity;i++){
+  for(i=0;i<=IDX_TOP(t);i++){
     if(t.buffer[i].type=='H'){
       counter++;
     }

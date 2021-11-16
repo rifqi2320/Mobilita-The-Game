@@ -78,7 +78,7 @@ int main() {
            XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
     printf("ENTER COMMAND: ");
     tempWord = nextInput();
-    system("@cls||clear");
+    //system("@cls||clear");
     if (validateWord(tempWord, "MOVE")) {
       displayMap(PT, Posisi(mob), todo, ip);
       tempInt = displayIsReachable(PT, Posisi(mob));
@@ -87,23 +87,25 @@ int main() {
         tempInt2 = wordToInt(nextInput());
       } while (tempInt2 < 0 || tempInt2 >= tempInt);
       if (tempInt2 > 0) {
-        printf("Sebelum move\n");
         move(&mob, getReachable(PT, Posisi(mob), tempInt2));
-        printf("Diantara move\n");
         updateData(&tas, &ip, &todo, &DP);
-        printf("Setelah move\n");
       }
     } else if (validateWord(tempWord, "PICK_UP")) {
       if (isInPickupSpot(Posisi(mob), todo)) {
         pick_up(Posisi(mob), &todo, &tas, &ip);
         changeSpeed(&mob,(1+numOfHeavy(tas)));
       } else {
-        printf("Tidak ada item yang bisa di pickup\n");
+        printf("Pesanan tidak ditemukan!\n");
       }
     } else if (validateWord(tempWord, "DROP_OFF")) {
-      dropOffItem(Posisi(mob),&ip,&tas,&gainedMoney);
-     changeMoney(&mob,gainedMoney);
-      changeSpeed(&mob,(1+numOfHeavy(tas)));
+      if(isInDropoffSpot(Posisi(mob),ip)){
+        dropOffItem(Posisi(mob),&ip,&tas,&gainedMoney);
+        changeMoney(&mob,gainedMoney);
+        changeSpeed(&mob,(1+numOfHeavy(tas)));
+      }
+      else{
+        printf("Tidak ada pesanan yang dapat diantarkan!\n");
+      }
     } else if (validateWord(tempWord, "MAP")) {
       displayMap(PT, Posisi(mob), todo, ip);
     } else if (validateWord(tempWord, "TO_DO")) {
