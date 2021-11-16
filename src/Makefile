@@ -1,5 +1,5 @@
 main:
-	gcc *.c -o main -O1
+	gcc *.c -o main -Wall
 
 clean:
 	rm *.exe

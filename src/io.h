@@ -35,6 +35,12 @@ tersebut Format input misalny "1 M B H" berarti waktu pesanan masuk yaitu waktu
 ke-1, lokasi pick-up di M dan lokasi drop-off di B, dan merupakan heavy item
 */
 
+boolean validateString(char *a, char *b);
+/* 
+Fungsi untuk membandingkan 2 string, mengembalikan true jika benar,
+mengembalikan false jika tidak
+*/
+
 boolean validateWord(Word w, char a[]);
 /*
 Fungsi untuk membandingkan ADT Word dengan string yang diinput juga,

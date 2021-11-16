@@ -2,6 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+boolean validateString(char *a, char *b) {
+  int i = 0;
+  while (a[i] == b[i] && a[i] == '\x00' && b[i] == '\x00') {
+    i++;
+  }
+  return (a[i] == '\x00' && b[i] == '\x00');
+}
+
 boolean validateWord(Word w, char a[]) {
   boolean eq = true;
   int i = 0;
@@ -46,7 +54,8 @@ void inputConfig(char *dir, Map *PT, Queue *DP) {
   int P;    // Jumlah Pesanan (5 <= P <= 30)
 
   // Variable Sementara
-  char *tempString;
+  int tempInt1;
+  int tempInt2;
 
   // Item sementara
   char temptype;
@@ -70,7 +79,9 @@ void inputConfig(char *dir, Map *PT, Queue *DP) {
   M = config[j++].val;
 
   // Membuat Headquarter
-  CreateBuilding(&tempB, config[j++].val, config[j++].val, '8');
+  tempInt1 = config[j++].val;
+  tempInt2 = config[j++].val;
+  CreateBuilding(&tempB, tempInt1, tempInt2, '8');
 
   // Input jumlah bangunan
   L = config[j++].val;
@@ -82,7 +93,9 @@ void inputConfig(char *dir, Map *PT, Queue *DP) {
   // Input karakter dan lokasi bangunan
   for (i = 1; i <= L; i++) {
     char name = config[j++].tkn;
-    CreateBuilding(&tempB, config[j++].val, config[j++].val, name);
+    tempInt1 = config[j++].val;
+    tempInt2 = config[j++].val;
+    CreateBuilding(&tempB, tempInt1, tempInt2, name);
     addBuilding(PT, tempB, i);
   }
 

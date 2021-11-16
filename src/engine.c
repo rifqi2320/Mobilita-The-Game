@@ -25,11 +25,10 @@ void addTime(float multiplier) {
 
 void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP) {
   int i;
-  int j;
   Item tempItem;
   // Update daftar pesanan dan todolist
   if (!isQueueEmpty(*DP)) {
-    while (HEAD(*DP).tArrival <= waktu && IDX_HEAD(*DP)!=-1) {
+    while (HEAD(*DP).tArrival <= waktu && IDX_HEAD(*DP) != -1) {
       dequeue(DP, &tempItem);
       addTodoList(todo, tempItem);
     }

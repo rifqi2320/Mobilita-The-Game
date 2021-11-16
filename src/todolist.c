@@ -44,7 +44,6 @@ void displayTodoList(Todolist l) {
   int idx;   // variabel untuk mencetak posisi urutan to do list
   // algoritma
   printf("Pesanan pada To Do List:\n");
-  char *type;            // tipe item di to do list
   if (!isListEmpty(l)) { // jika list tidak kosong
     idx = 1;
     x = FIRST(l);
@@ -75,7 +74,6 @@ void displayInProgress(InprogressList l) {
   int idx;   // variabel untuk mencetak posisi urutan to do list
   // algoritma
   printf("Pesanan yang sedang diantarkan:\n");
-  char *type;            // tipe item di to do list
   if (!isListEmpty(l)) { // jika list tidak kosong
     idx = 1;
     x = FIRST(l);
