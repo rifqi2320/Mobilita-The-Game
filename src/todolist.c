@@ -98,7 +98,7 @@ void displayInProgress(InprogressList l) {
         printf("VIP Item (");
       }
       printf("Tujuan: %c", x->info.lDropoff);
-      if (x->info.type == 'V') { // menampilkan waktu tersisa sampai hangus
+      if (x->info.type == 'P') { // menampilkan waktu tersisa sampai hangus
         printf(", Sisa Waktu: %d)\n", x->info.tPerish);
       } else {
         printf(")\n");
@@ -146,17 +146,12 @@ void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu) {
   idx = 0;
   found = false;
   while (p != NULL) {
-      printf("hime\n");
     if (INFO(p).lPickup == b.name && !found) {
-      printf("manstab\n");
       if (t->capacity > IDX_TOP(*t) + 1) { // tas belum penuh
         deleteAt(l, idx, &tempItem);
-        printf("Cek1\n");
         //pickupItem(&tempItem, waktu);
         insertFirst(ip, tempItem);
-        printf("Cek2\n");
         push(t, tempItem);
-        printf("Cek3\n");
         printf("Pesanan berupa ");
         switch (tempItem.type) {
         case 'N':
