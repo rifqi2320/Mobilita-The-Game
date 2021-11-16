@@ -6,7 +6,8 @@
 void CreateListBuilding(ListBuilding *l, int capacity) {
   BUFFERListB(*l) = (Building *)malloc(capacity * sizeof(Building));
   CAPACITYListB(*l) = capacity;
-  for (int i = 0; i < capacity; i++) {
+  int i;
+  for (i = 0; i < capacity; i++) {
     ELMTListB(*l, i) = MARKBuilding();
   }
 };
@@ -80,12 +81,13 @@ void shrinkListBuilding(ListBuilding *l, int num) {
   dealocateListBuilding(&templ);
 }
 
-void displayListBuilding(ListBuilding l){
+void displayListBuilding(ListBuilding l) {
   printf("Posisi yang dapat dicapai:\n");
 
   int i;
-  for (i = 0; i <  CAPACITYListB(l); i++){
-    printf("%d. %c (%d,%d)\n", i+1, NAMEBUILDING(ELMTListB(l,i)), XCOORD(ELMTListB(l,i)), YCOORD(ELMTListB(l,i)));
+  for (i = 0; i < CAPACITYListB(l); i++) {
+    printf("%d. %c (%d,%d)\n", i + 1, NAMEBUILDING(ELMTListB(l, i)),
+           XCOORD(ELMTListB(l, i)), YCOORD(ELMTListB(l, i)));
   }
 
   printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n");

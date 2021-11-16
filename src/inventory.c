@@ -3,31 +3,29 @@
 #include <stdio.h>
 
 void MakeListGadget(LIST_GADGET *l) {
-  for (int i = 0; i < JUMLAHGADGET; i++) {
+  int i;
+  for (i = 0; i < JUMLAHGADGET; i++) {
     NAMAGADGET(*l, i) = "-";
     HARGAGADGET(*l, i) = VAL_UNDEF;
   }
 }
 
 void MakeListGadgetHQ(LIST_GADGET *l) {
-  for (int i = 0; i < JUMLAHGADGET; i++) {
-    if(i==0){
+  int i;
+  for (i = 0; i < JUMLAHGADGET; i++) {
+    if (i == 0) {
       NAMAGADGET(*l, i) = "Kain Pembungkus Waktu";
       HARGAGADGET(*l, i) = 800;
-    }
-    else if(i==1){
+    } else if (i == 1) {
       NAMAGADGET(*l, i) = "Senter Pembesar";
       HARGAGADGET(*l, i) = 1200;
-    }
-    else if(i==2){
+    } else if (i == 2) {
       NAMAGADGET(*l, i) = "Pintu Kemana Saja";
       HARGAGADGET(*l, i) = 1500;
-    }
-    else if(i==3){
+    } else if (i == 3) {
       NAMAGADGET(*l, i) = "Mesin Waktu";
       HARGAGADGET(*l, i) = 3000;
-    }
-    else{
+    } else {
       NAMAGADGET(*l, i) = "Senter Pengecil";
       HARGAGADGET(*l, i) = 800;
     }
@@ -36,7 +34,8 @@ void MakeListGadgetHQ(LIST_GADGET *l) {
 
 int lengthListGadget(LIST_GADGET l) {
   int ctr = 0;
-  for (int i = 0; i < JUMLAHGADGET; i++) {
+  int i;
+  for (i = 0; i < JUMLAHGADGET; i++) {
     if (NAMAGADGET(l, i) != "-") {
       ctr++;
     }
@@ -45,10 +44,9 @@ int lengthListGadget(LIST_GADGET l) {
 }
 
 boolean isIdxEff(LIST_GADGET l, int i) {
-  if(i<0 || i>=JUMLAHGADGET){
+  if (i < 0 || i >= JUMLAHGADGET) {
     return false;
-  }
-  else if (NAMAGADGET(l, i) != "-") {
+  } else if (NAMAGADGET(l, i) != "-") {
     return true;
   }
   return false;
@@ -61,44 +59,39 @@ boolean isLGFull(LIST_GADGET l) {
   return false;
 }
 void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
-  if(NAMEBUILDING(Posisi(*MOB))=='8'){
-    printf("Uang anda sekarang: %d Yen\n",Uang(*MOB));
+  if (NAMEBUILDING(Posisi(*MOB)) == '8') {
+    printf("Uang anda sekarang: %d Yen\n", Uang(*MOB));
     displayBuy(buy);
-    int i;
+    int i, j;
     printf("Gadget mana yang ingin kau beli? (Ketik 0 jika ingin kembali)\n");
     printf("ENTER COMMAND: ");
-    i = wordToInt(nextInput()); 
-    if(i==0){
-        printf("Kembali ke menu.\n");
-    }
-    else if (isLGFull(*l)) {
+    i = wordToInt(nextInput());
+    if (i == 0) {
+      printf("Kembali ke menu.\n");
+    } else if (isLGFull(*l)) {
       printf("Inventory sudah penuh!\n");
-    } 
-    else{
-      if(i>0 && i<=JUMLAHGADGET){
-        if (HARGAGADGET(buy, i-1) > Uang(*MOB)) {
+    } else {
+      if (i > 0 && i <= JUMLAHGADGET) {
+        if (HARGAGADGET(buy, i - 1) > Uang(*MOB)) {
           printf("Uang tidak cukup untuk membeli Gadget!\n");
-        } 
-        else {
-            Uang(*MOB) -= HARGAGADGET(buy, i-1);
-            for (int j = 0; j < JUMLAHGADGET; j++) {
-              if (NAMAGADGET(*l, j) == "-") {
-                NAMAGADGET(*l, j) = getName(GADGET(buy, i-1));
-                HARGAGADGET(*l, j) = getPrice(GADGET(buy, i-1));
-                break;
-              }
+        } else {
+          Uang(*MOB) -= HARGAGADGET(buy, i - 1);
+          for (j = 0; j < JUMLAHGADGET; j++) {
+            if (NAMAGADGET(*l, j) == "-") {
+              NAMAGADGET(*l, j) = getName(GADGET(buy, i - 1));
+              HARGAGADGET(*l, j) = getPrice(GADGET(buy, i - 1));
+              break;
             }
-            printf("%s berhasil dibeli!\n",getName(GADGET(buy,i-1)));
+          }
+          printf("%s berhasil dibeli!\n", getName(GADGET(buy, i - 1)));
         }
-      }
-      else{
+      } else {
         printf("Gadget tidak ditemukan, kembali ke menu.\n");
       }
     }
-  }
-  else{
+  } else {
     printf("Anda sedang tidak berada di HeadQuarters.\n");
-  } 
+  }
 }
 
 void useGadget(LIST_GADGET *l, Tas *t, MOBITA *MOB, InprogressList *ip,
@@ -109,14 +102,13 @@ void useGadget(LIST_GADGET *l, Tas *t, MOBITA *MOB, InprogressList *ip,
   printf("Gadget mana yang ingin digunakan? (Ketik 0 jika ingin kembali)\n");
   printf("ENTER COMMAND: ");
   i = wordToInt(nextInput());
-  if(i==0){
+  if (i == 0) {
     printf("Kembali ke main menu.\n");
-  }
-  else if (isIdxEff(*l, i-1)) {
-    NAMA(gad) = NAMAGADGET(*l, i-1);
-    HARGA(gad) = HARGAGADGET(*l, i-1);
-    NAMAGADGET(*l, i-1) = "-";
-    HARGAGADGET(*l, i-1) = VAL_UNDEF;
+  } else if (isIdxEff(*l, i - 1)) {
+    NAMA(gad) = NAMAGADGET(*l, i - 1);
+    HARGA(gad) = HARGAGADGET(*l, i - 1);
+    NAMAGADGET(*l, i - 1) = "-";
+    HARGAGADGET(*l, i - 1) = VAL_UNDEF;
     process(gad, t, MOB, ip, h);
   } else {
     printf("Tidak ada gadget yang dapat digunakan.\n");
@@ -125,7 +117,8 @@ void useGadget(LIST_GADGET *l, Tas *t, MOBITA *MOB, InprogressList *ip,
 
 void displayBuy(LIST_GADGET l) {
   printf("Gadget yang tersedia:\n");
-  for (int i = 0; i < JUMLAHGADGET; i++) {
+  int i;
+  for (i = 0; i < JUMLAHGADGET; i++) {
     printf("%d. %s (%d Yen)\n", i + 1, NAMAGADGET(l, i), HARGAGADGET(l, i));
   }
 }
@@ -178,7 +171,7 @@ void PintuKemanaSaja(MOBITA *MOB, ListBuilding h) {
       pindah = true;
       printf("Mobita berhasil pindah ke (%d %d).\n",
              XCOORD(ELMTListB(h, x - 1)), YCOORD(ELMTListB(h, x - 1)));
-      move(MOB,ELMTListB(h, x - 1));
+      move(MOB, ELMTListB(h, x - 1));
       Posisi(*MOB) = ELMTListB(h, x - 1);
     } else {
       printf("Lokasi tidak ditemukan, silahkan ulangi.\n");
@@ -204,7 +197,8 @@ void SenterPengecil(Tas *t) {
 }
 
 void displayInventory(LIST_GADGET l) {
-  for (int i = 0; i < JUMLAHGADGET; i++) {
+  int i;
+  for (i = 0; i < JUMLAHGADGET; i++) {
     printf("%d. %s\n", i + 1, NAMAGADGET(l, i));
   }
 }
