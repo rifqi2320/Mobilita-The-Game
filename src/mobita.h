@@ -39,7 +39,7 @@ void addAbility(MOBITA *MOB, char s);
 
 void removeAbility(MOBITA *MOB, char s);
 
-void mobitaReturn(MOBITA *MOB, Tas *t, Todolist *td, InprogressList *ip);
+void mobitaReturn(MOBITA MOB, Tas *t, Todolist *td, InprogressList *ip);
 
 void changeSpeed(MOBITA *MOB, float val);
 
