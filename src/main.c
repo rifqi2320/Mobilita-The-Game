@@ -91,14 +91,14 @@ int main() {
       }
     } else if (validateWord(tempWord, "PICK_UP")) {
       if (isInPickupSpot(Posisi(mob), todo)) {
-        pick_up(Posisi(mob), &todo, &tas, &ip);
+        pick_up(Posisi(mob), &todo, &tas, &ip, waktu);
         changeSpeed(&mob, (1 + numOfHeavy(tas)));
       } else {
         printf("Pesanan tidak ditemukan!\n");
       }
     } else if (validateWord(tempWord, "DROP_OFF")) {
       if (isInDropoffSpot(Posisi(mob), ip)) {
-        dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney, waktu);
+        dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney);
         changeMoney(&mob, gainedMoney);
         changeSpeed(&mob, (1 + numOfHeavy(tas)));
       } else {
