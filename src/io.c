@@ -47,7 +47,7 @@ Word nextInput() {
   return currentWord;
 }
 
-void inputConfig(char *dir, Map *PT, Queue *DP,int* jumlahPesanan) {
+void inputConfig(char *dir, Map *PT, Queue *DP, int *jumlahPesanan) {
   int k = 0, j = 0, i, m, n;
   int N, M; // tempItemkuran Peta (10 <= N <= 20; 10 <= M <= 30)
   int L;    // Jumlah Gedung (4 <= L <= 26)
@@ -87,7 +87,7 @@ void inputConfig(char *dir, Map *PT, Queue *DP,int* jumlahPesanan) {
   L = config[j++].val;
 
   // Inisialisasi Map
-  CreateMap(PT, N, M, L);
+  CreateMap(PT, N, M, L + 1);
   addBuilding(PT, tempB, 0);
 
   // Input karakter dan lokasi bangunan
