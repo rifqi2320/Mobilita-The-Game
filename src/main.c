@@ -12,8 +12,6 @@
 
 #include <stdio.h>
 
-void displayHelp();
-
 int main() {
   boolean started = false;
 
@@ -43,8 +41,18 @@ int main() {
   Item droppedItem;      // Item yang baru saja diturunkan
 
   while (!started) {
-    printf("=============================MOBILITA=============================="
-           "=\n");
+    printf(
+        "  /$$      /$$  /$$$$$$  /$$$$$$$  /$$$$$$ /$$       /$$$$$$ "
+        "/$$$$$$$$ "
+        "/$$$$$$ \n | $$$    /$$$ /$$__  $$| $$__  $$|_  $$_/| $$      |_  "
+        "$$_/|__  $$__//$$__  $$\n | $$$$  /$$$$| $$  \\ $$| $$  \\ $$  | $$  "
+        "| $$        | $$     | $$  | $$  \\ $$\n | $$ $$/$$ $$| $$  | $$| "
+        "$$$$$$$   | $$  | $$        | $$     | $$  | $$$$$$$$\n | $$  $$$| "
+        "$$| $$  | $$| $$__  $$  | $$  | $$        | $$     | $$  | $$__  $$\n "
+        "| $$\\  $ | $$| $$  | $$| $$  \\ $$  | $$  | $$        | $$     | $$  "
+        "| $$  | $$\n | $$ \\/  | $$|  $$$$$$/| $$$$$$$/ /$$$$$$| $$$$$$$$ "
+        "/$$$$$$   | $$  | $$  | $$\n |__/     |__/ \\______/ |_______/ "
+        "|______/|________/|______/   |__/  |__/  |__/\n");
     printf("\"Bisakah Kamu Mengantarkan Semua Paket Ini dan Membantu "
            "Keluargamu?\"\n");
     printf("List Command:\n");
@@ -70,7 +78,6 @@ int main() {
       started = true;
       finishedOrder = 0;
       Expired = 0;
-      Uang(mob) = 7500;
     } else if (tempInt == 2) {
       return 0;
     } else {
@@ -160,7 +167,23 @@ int main() {
       } else if (validateWord(tempWord, "INVENTORY")) {
         useGadget(&inv, &tas, &mob, &ip, LBMap(PT));
       } else if (validateWord(tempWord, "HELP")) {
-        displayHelp();
+        printf("1. MOVE -> Untuk berpindah ke lokasi selanjutnya\n");
+        printf("2. PICK_UP -> Untuk mengambil item di lokasi sekarang\n");
+        printf("3. DROP_OFF -> Untuk mengantar item ke lokasi sekarang\n");
+        printf("4. MAP -> Untuk memunculkan peta\n");
+        printf(
+            "5. TO_DO -> Untuk menampilkan pesanan yang masuk ke To Do List\n");
+        printf("6. IN_PROGRESS -> Untuk menampilkan pesanan yang sedang "
+               "dikerjakan\n");
+        printf("7. BUY -> Untuk menampilkan gadget yang dapat dibeli lalu "
+               "membelinya. Hanya dapat digunakan di Headquarter\n");
+        printf("8. INVENTORY -> Untuk melihat gadget yang dimiliki dan "
+               "menggunakannya\n");
+        printf(
+            "9. RETURN -> Untuk menggunakan ability return to sender (setelah "
+            "mengirimkan VIP item)\n");
+        printf(
+            "10. HELP -> Untuk mengeluarkan list command dan kegunaannya\n\n");
       } else if (validateWord(tempWord, "RETURN")) {
         mobitaReturn(mob, &tas, &todo, &ip);
         if (returnToSender(mob) == 1) {
@@ -181,19 +204,4 @@ int main() {
   printf("PESANAN YANG BERHASIL ANDA KIRIMKAN: %d dari %d\n", finishedOrder,
          finishedOrder + Expired);
   return 0;
-}
-
-void displayHelp() {
-  printf("1. MOVE -> Untuk berpindah ke lokasi selanjutnya\n");
-  printf("2. PICK_UP -> Untuk mengambil item di lokasi sekarang\n");
-  printf("3. DROP_OFF -> Untuk mengantar item ke lokasi sekarang\n");
-  printf("4. MAP -> Untuk memunculkan peta\n");
-  printf("5. TO_DO -> Untuk menampilkan pesanan yang masuk ke To Do List\n");
-  printf(
-      "6. IN_PROGRESS -> Untuk menampilkan pesanan yang sedang dikerjakan\n");
-  printf("7. BUY -> Untuk menampilkan gadget yang dapat dibeli lalu "
-         "membelinya. Hanya dapat digunakan di Headquarter\n");
-  printf("8. INVENTORY -> Untuk melihat gadget yang dimiliki dan "
-         "menggunakannya\n");
-  printf("9. HELP -> Untuk mengeluarkan list command dan kegunaannya\n\n");
 }

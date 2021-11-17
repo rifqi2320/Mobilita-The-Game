@@ -18,21 +18,27 @@ Untuk build project, ikuti langkah berikut:
 git clone https://github.com/rifqi2320/Alstrukdat_Mobilita
 ```
 
-2. Jalankan makefile pada folder main menggunakan command berikut untuk compile program utama
+2. Jalankan makefile pada folder main menggunakan command berikut untuk compile program utama, driver, atau keduanya
 
 ```
-make
+make main
 ```
-
-3. Jalankan makefile menggunakan command berikut untuk compile seluruh driver
 
 ```
 make driver
 ```
 
-4. Jalankan main.exe untuk memulai program utama
-   mengcompile seluruh driver
-5. Jalankan .exe driver pada folder sesuai dengan nama modul untuk memulai driver
+```
+make all
+```
+
+3. Jalankan main.exe untuk memulai program utama
+4. Jalankan .exe driver pada folder sesuai dengan nama modul untuk memulai driver
+5. Untuk menghapus seluruh hasil compile, gunakan command
+
+```
+make clean
+```
 
 ## How-to-Run
 

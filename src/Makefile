@@ -6,6 +6,8 @@ EXECUTABLE := main
 
 all: $(OBJECTS) $(DRIVERS) main
 
+driver: $(DRIVERS)
+
 %.o : %.c
 	gcc -c $< -o $@
 
