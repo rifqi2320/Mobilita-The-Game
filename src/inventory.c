@@ -59,7 +59,8 @@ boolean isLGFull(LIST_GADGET l) {
   return false;
 }
 void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
-  if (NAMEBUILDING(Posisi(*MOB)) == '8') { //Buy Gadget hanya bisa dilakukan di HQ
+  if (NAMEBUILDING(Posisi(*MOB)) ==
+      '8') { // Buy Gadget hanya bisa dilakukan di HQ
     printf("Uang anda sekarang: %d Yen\n", Uang(*MOB));
     displayBuy(buy);
     int i, j;
@@ -69,13 +70,15 @@ void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
     if (i == 0) {
       printf("Kembali ke menu.\n\n");
     } else if (isLGFull(*l)) {
-      printf("Inventory sudah penuh!\n\n"); //Mobita tidak bisa membeli gadget karena sudah penuh
+      printf("Inventory sudah penuh!\n\n"); // Mobita tidak bisa membeli gadget
+                                            // karena sudah penuh
     } else {
-      if (i > 0 && i <= JUMLAHGADGET) { //pengecekan input valid
-        if (HARGAGADGET(buy, i - 1) > Uang(*MOB)) { //Pengecekan uang Mobita tidak cukup
+      if (i > 0 && i <= JUMLAHGADGET) { // pengecekan input valid
+        if (HARGAGADGET(buy, i - 1) >
+            Uang(*MOB)) { // Pengecekan uang Mobita tidak cukup
           printf("Uang tidak cukup untuk membeli Gadget!\n\n");
         } else { // Uang mobita cukup
-          Uang(*MOB) -= HARGAGADGET(buy, i - 1); 
+          Uang(*MOB) -= HARGAGADGET(buy, i - 1);
           for (j = 0; j < JUMLAHGADGET; j++) {
             if (NAMAGADGET(*l, j)[0] == '-') {
               NAMAGADGET(*l, j) = getName(GADGET(buy, i - 1));
@@ -104,13 +107,14 @@ void useGadget(LIST_GADGET *l, Tas *t, MOBITA *MOB, InprogressList *ip,
   i = wordToInt(nextInput());
   if (i == 0) {
     printf("Kembali ke main menu.\n\n");
-  } else if (isIdxEff(*l, i - 1)) { //pengecekan input valid
+  } else if (isIdxEff(*l, i - 1)) { // pengecekan input valid
     NAMA(gad) = NAMAGADGET(*l, i - 1);
     HARGA(gad) = HARGAGADGET(*l, i - 1);
-    NAMAGADGET(*l, i - 1) = "-"; //Gadget yang dipakai hilang dari list gadget mobita
+    NAMAGADGET(*l, i - 1) =
+        "-"; // Gadget yang dipakai hilang dari list gadget mobita
     HARGAGADGET(*l, i - 1) = VAL_UNDEF;
-    process(gad, t, MOB, ip, h); //Gadget diproses berdasarkan nama 
-  } else { //input tidak valid atau tidak ada gadget
+    process(gad, t, MOB, ip, h); // Gadget diproses berdasarkan nama
+  } else {                       // input tidak valid atau tidak ada gadget
     printf("Tidak ada gadget yang dapat digunakan.\n\n");
   }
 }
@@ -132,16 +136,17 @@ void process(GADGET gad, Tas *t, MOBITA *MOB, InprogressList *ip,
   } else if (validateString(NAMA(gad), "Pintu Kemana Saja")) {
     PintuKemanaSaja(MOB, h);
   } else if (validateString(NAMA(gad), "Mesin Waktu")) {
-    MesinWaktu(t,ip);
+    MesinWaktu(t, ip);
   } else if (validateString(NAMA(gad), "Senter Pengecil")) {
     SenterPengecil(t, MOB);
   }
 }
 
 void KainWaktu(Tas *t, InprogressList *ip) {
-  if (TOP(*t).type == 'P') { //Pengecekan tumpukan teratas tas berupa Perishable item
-    TOP(*t).tPickup = waktu; 
-    Address now = FIRST(*ip); //Update In progress list
+  if (TOP(*t).type ==
+      'P') { // Pengecekan tumpukan teratas tas berupa Perishable item
+    TOP(*t).tPickup = waktu;
+    Address now = FIRST(*ip); // Update In progress list
     INFO(now).tPickup = waktu;
     printf("Kain Pembungkus Waktu berhasil digunakan!\n\n");
   } else {
@@ -159,12 +164,13 @@ void SenterPembesar(Tas *t) {
 
 void PintuKemanaSaja(MOBITA *MOB, ListBuilding h) {
   boolean pindah = false;
-  while (!pindah) { //Pengecekan Mobita belum pindah dengan pintu kemana saja
+  while (!pindah) { // Pengecekan Mobita belum pindah dengan pintu kemana saja
+    printf("YEAH");
     displayListBuilding(h);
     printf("ENTER COMMAND: ");
     int x;
     x = wordToInt(nextInput());
-    if (x > 0 && x <= lengthListBuilding(h)) { //Pengecekan input valid
+    if (x > 0 && x <= lengthListBuilding(h)) { // Pengecekan input valid
       pindah = true;
       printf("Mobita berhasil pindah ke (%d, %d).\n\n",
              XCOORD(ELMTListB(h, x - 1)), YCOORD(ELMTListB(h, x - 1)));
@@ -185,15 +191,17 @@ void MesinWaktu(Tas *t, InprogressList *ip) {
   int i = 0;
   if (!isTasEmpty(*t)) {
     for (i = 0; i <= IDX_TOP(*t); i++) {
-      if ((*t).buffer[i].type == 'P') { //Pengubahan waktu pickup perishable item agar tidak konflik
+      if ((*t).buffer[i].type ==
+          'P') { // Pengubahan waktu pickup perishable item agar tidak konflik
         (*t).buffer[i].tPickup -= (tmpwaktu - waktu);
       }
     }
   }
   if (!isListEmpty(*ip)) {
     x = FIRST(*ip);
-    while (x!=NULL) {
-      if (x->info.type == 'P') { //Pengubahan waktu pickup perishable item agar tidak konflik
+    while (x != NULL) {
+      if (x->info.type ==
+          'P') { // Pengubahan waktu pickup perishable item agar tidak konflik
         x->info.tPickup -= (tmpwaktu - waktu);
       }
       x = NEXT(x);
@@ -203,12 +211,15 @@ void MesinWaktu(Tas *t, InprogressList *ip) {
 }
 
 void SenterPengecil(Tas *t, MOBITA *mob) {
-  if (TOP(*t).type == 'H') { // Pengecekan tumpukan teratas tas berupa Heavy item
-    TOP(*t).type = 'S'; //Item heavy teratas tas diubah tipenya menjadi S, yaitu tipe heavy yang efeknya hilang sementara
-    Speed(*mob) -= 1; //Speed mobita lebih cepat 1 unit karena efek 1 heavy item hilang
+  if (TOP(*t).type ==
+      'H') {            // Pengecekan tumpukan teratas tas berupa Heavy item
+    TOP(*t).type = 'S'; // Item heavy teratas tas diubah tipenya menjadi S,
+                        // yaitu tipe heavy yang efeknya hilang sementara
+    Speed(*mob) -=
+        1; // Speed mobita lebih cepat 1 unit karena efek 1 heavy item hilang
     printf("Senter Pengecil berhasil digunakan!\n\n");
   } else {
-    printf("Senter Pengecil gagal digunakan!Senter terbuang.\n\n");
+    printf("Senter Pengecil gagal digunakan!\nSenter terbuang.\n\n");
   }
 }
 
