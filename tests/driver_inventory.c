@@ -18,8 +18,9 @@ int main() {
   CreateInProgress(&ip);
   CreateMobita(&M, a);
   CreateListBuilding(&LB, 50);
+  ELMTListB(LB, 0) = a;
 
-  Uang(M) = 7000;
+  Uang(M) = 70000;
 
   if (isLGFull(l1)) {
     printf("List L1 penuh.\n");
