@@ -4,6 +4,7 @@
 /* Variabel eksternal*/
 int waktu; // waktu yang dihabiskan Mobita
 int skor;  // skor Mobita
+boolean VIPFlag;
 
 /* Realisasi fungsi dan prosedur*/
 void addScore(int val) {
@@ -23,7 +24,8 @@ void addTime(float multiplier) {
   waktu += multiplier;
 }
 
-void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP,int * finishedItem) {
+void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP,
+                int *Expired) {
   int i;
   Item tempItem;
   // Update daftar pesanan dan todolist
@@ -40,11 +42,17 @@ void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP,int * fini
       if (t->buffer[i].type == 'P' && isItemExpired(t->buffer[i], waktu)) {
         deleteInProgressAt(ip, &(t->buffer[i]));
         deleteTasAt(t, i);
-        *(finishedItem)++;
+        (*Expired)++;
       } else {
         i++;
       }
     }
+  }
+  // Update VIP
+  if (isVIPinList(*todo) || isVIPinList(*ip)) {
+    VIPFlag = true;
+  } else {
+    VIPFlag = false;
   }
 }
 
@@ -69,4 +77,8 @@ void removePerishable(Tas *t, InprogressList *ip) {
       }
     }
   }
+}
+
+boolean finishedState(Building b, int finishedOrder, int jumlahPesanan) {
+  return (NAMEBUILDING(b) == '8') && (finishedOrder == jumlahPesanan);
 }

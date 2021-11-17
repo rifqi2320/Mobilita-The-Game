@@ -23,7 +23,7 @@ void deleteTodoListAt(Todolist *l, Item *task);
 
 void displayTodoList(Todolist l);
 
-boolean isVIPinList(Todolist l);
+boolean isVIPinList(List l);
 
 void CreateInProgress(InprogressList *l);
 
@@ -36,7 +36,8 @@ void displayInProgress(InprogressList l, int waktu);
 boolean isInPickupSpot(Building b, Todolist l);
 // menghasilkan true jika di spot tersebut ada item yang bisa di pick up
 
-void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu);
+void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu,
+             boolean VIPFlag);
 // mendequeue item paling awal masuk di lokasi b pada list
 
 boolean isInDropoffSpot(Building b, InprogressList ip);

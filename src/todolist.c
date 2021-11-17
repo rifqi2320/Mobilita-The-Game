@@ -19,7 +19,7 @@ void addInProgress(InprogressList *l, Item task) { insertLast(l, task); }
 void deleteInProgressAt(InprogressList *l, Item *task) {
   deleteAt(l, indexOf(*l, *task), task);
 }
-boolean isVIPinList(Todolist l) {
+boolean isVIPinList(List l) {
   // memberikan trua jika ada item vip di list
   // kamus lokal
   Address p;     // address yang mengarah ke elemen di indeks idx
@@ -131,7 +131,8 @@ boolean isInPickupSpot(Building b, Todolist l) {
   }
   return found;
 }
-void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu) {
+void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu,
+             boolean VIPFlag) {
   // pick_up(Posisi(mob), &todo, &tas, &ip)
   //  mendequeue item paling awal di list
   //  asumsi:Item sudah dipastikan ada melalui fungsi isInPickupSpot
@@ -145,7 +146,8 @@ void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu) {
   idx = 0;
   found = false;
   while (p != NULL) {
-    if (INFO(p).lPickup == b.name && !found) {
+    if (INFO(p).lPickup == b.name && !found &&
+        (!VIPFlag || INFO(p).type == 'V')) {
       if (t->capacity > IDX_TOP(*t) + 1) { // tas belum penuh
         deleteAt(l, idx, &tempItem);
         pickupItem(&tempItem, waktu);
@@ -177,6 +179,9 @@ void pick_up(Building b, Todolist *l, Tas *t, InprogressList *ip, int waktu) {
       p = NEXT(p);
       idx++;
     }
+  }
+  if (!found) {
+    printf("Tidak ada barang yang bisa di pick-up\n");
   }
 }
 boolean isInDropoffSpot(Building b, InprogressList ip) {

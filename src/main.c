@@ -13,7 +13,6 @@
 #include <stdio.h>
 
 void displayHelp();
-boolean finishedState(Building b, int finishedOrder, int jumlahPesanan);
 
 int main() {
   boolean started = false;
@@ -25,12 +24,12 @@ int main() {
   Word tempWord;
   int gainedMoney; // uang yang didapatkan setelah menyelesaikan misi
   int jumlahPesanan;
-  int finishedOrder; // jumlah pesanan yang sudah selesai diantarkan/hangus
-  int deliveredOrder;//hanya jumlah pesanan yang berhasil diantarkan
+  int finishedOrder; // jumlah pesanan yang selesai
+  int Expired;       // Jumlah pesanan yang gagal diantarkan (perishable)
 
   // Engine Variable
   extern int waktu;
-  // extern int skor;
+  extern boolean VIPFlag;
 
   // Object atau ADT
   Queue DP;              // Daftar Pesanan
@@ -70,7 +69,7 @@ int main() {
       MakeListGadgetHQ(&gadgetbuy);
       started = true;
       finishedOrder = 0;
-      deliveredOrder = 0;
+      Expired = 0;
     } else if (tempInt == 2) {
       return 0;
     } else {
@@ -80,22 +79,18 @@ int main() {
 
   // Game Started
   while (started) {
-    // int i;
-    // printf("%d %c %c %c\n", TAIL(DP).tArrival, TAIL(DP).lPickup,
-    //        TAIL(DP).lDropoff, TAIL(DP).type);
-    // for (i = IDX_HEAD(DP); i <= IDX_TAIL(DP); i++) {
-    //   printf("%d %c %c %c\n", DP.buffer[i].tArrival, DP.buffer[i].lPickup,
-    //          DP.buffer[i].lDropoff, DP.buffer[i].type);
-    // }
-    updateData(&tas, &ip, &todo, &DP,&finishedOrder);
-    if (finishedState(Posisi(mob), finishedOrder, jumlahPesanan)) {
+    updateData(&tas, &ip, &todo, &DP, &Expired);
+    if (finishedState(Posisi(mob), finishedOrder + Expired, jumlahPesanan)) {
       started = false;
     } else {
-      // printf("Skor: %d\n", skor);
       printf("Waktu: %d\n", waktu);
       printf("Uang: %d Yen\n", Uang(mob));
       printf("Lokasi Mobita: %c (%d,%d)\n", NAMEBUILDING(Posisi(mob)),
              XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
+      printf(
+          VIPFlag
+              ? "TERDAPAT PESANAN ZHISUKA, SILAHKAN PRIORITASKAN PESANANNYA\n"
+              : "");
       printf("Jumlah pesanan yang harus dikerjakan: %d\n\n",
              jumlahPesanan - finishedOrder);
       printf("ENTER COMMAND: ");
@@ -113,17 +108,14 @@ int main() {
         } while (tempInt2 < 0 || tempInt2 >= tempInt);
         if (tempInt2 > 0) {
           move(&mob, getReachable(PT, Posisi(mob), tempInt2));
-          updateData(&tas, &ip, &todo, &DP,&finishedOrder);
         }
       } else if (validateWord(tempWord, "PICK_UP")) {
-        if (isInPickupSpot(Posisi(mob), todo) && !isVIPinTop(tas)) {
-          pick_up(Posisi(mob), &todo, &tas, &ip, waktu);
+        if (isInPickupSpot(Posisi(mob), todo)) {
+          pick_up(Posisi(mob), &todo, &tas, &ip, waktu, VIPFlag);
           changeSpeed(&mob, (1 + numOfHeavy(tas)));
-        }
-        else if(isVIPinTop(tas)){
+        } else if (isVIPinTop(tas)) {
           printf("Antarkan pesanan Zhisuka terlebih dahulu!\n");
-        }
-         else {
+        } else {
           printf("Pesanan tidak ditemukan!\n\n");
         }
       } else if (validateWord(tempWord, "DROP_OFF")) {
@@ -132,20 +124,19 @@ int main() {
           dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney);
           changeMoney(&mob, gainedMoney);
           finishedOrder++;
-          deliveredOrder++;
-          if(numOfHeavy(tas)==0 && droppedItem.type=='H'){//gak ada heavy item lagi di tas dan yg baru di drop itu heavy item, maka langsung aktifkan ability
-            addAbility(&mob,'s');
-          }
-          else if(droppedItem.type=='P'){//yg di drop perishable item
-            addAbility(&mob,'i');
-          }
-          else if(droppedItem.type=='V'){//yg di drop VIP
-            addAbility(&mob,'r');
-          }
-          else{//ada heavy item
+          if (numOfHeavy(tas) == 0 &&
+              droppedItem.type ==
+                  'H') { // gak ada heavy item lagi di tas dan yg baru di drop
+                         // itu heavy item, maka langsung aktifkan ability
+            addAbility(&mob, 's');
+          } else if (droppedItem.type == 'P') { // yg di drop perishable item
+            addAbility(&mob, 'i');
+          } else if (droppedItem.type == 'V') { // yg di drop VIP
+            addAbility(&mob, 'r');
+          } else { // ada heavy item
             changeSpeed(&mob, (1 + numOfHeavy(tas)));
           }
-          checkEffectSenter(&tas,&mob);
+          checkEffectSenter(&tas, &mob);
         } else {
           printf("Tidak ada pesanan yang dapat diantarkan!\n\n");
         }
@@ -163,8 +154,8 @@ int main() {
         displayHelp();
       } else if (validateWord(tempWord, "RETURN")) {
         mobitaReturn(mob, &tas, &todo, &ip);
-        checkEffectSenter(&tas,&mob);
-      }else {
+        checkEffectSenter(&tas, &mob);
+      } else {
         printf("Masukkan Tidak Valid.\nGunakan command \"HELP\" untuk petunjuk "
                "penggunaan.\n");
       }
@@ -173,7 +164,8 @@ int main() {
   printf("\nOTSUKARE!!!\n");
   printf("SELAMAT, ANDA TELAH MENYELESAIKAN PERMAINAN INI!!\n");
   printf("WAKTU YANG ANDA HABISKAN: %d\n", waktu);
-  printf("PESANAN YANG BERHASIL ANDA KIRIMKAN: %d dari %d\n", deliveredOrder, jumlahPesanan);
+  printf("PESANAN YANG BERHASIL ANDA KIRIMKAN: %d dari %d\n", finishedOrder,
+         finishedOrder + Expired);
   return 0;
 }
 
@@ -190,7 +182,4 @@ void displayHelp() {
   printf("8. INVENTORY -> Untuk melihat gadget yang dimiliki dan "
          "menggunakannya\n");
   printf("9. HELP -> Untuk mengeluarkan list command dan kegunaannya\n\n");
-}
-boolean finishedState(Building b, int finishedOrder, int jumlahPesanan) {
-  return (NAMEBUILDING(b) == '8') && (finishedOrder == jumlahPesanan);
 }

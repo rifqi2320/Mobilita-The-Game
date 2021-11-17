@@ -51,9 +51,8 @@ void mobitaReturn(MOBITA MOB, Tas *t, Todolist *td, InprogressList *ip) {
     printf("Mobita tidak memiliki Ability Return To Sender!\n");
   } else {
     Item tmp = TOP(*t);
-
     if (tmp.type == 'V') {
-      printf("VIP Item gagal dikembalikan");
+      printf("VIP Item gagal dikembalikan\n");
     } else {
       pop(t, &tmp);
       deleteInProgressAt(ip, &tmp);
@@ -72,6 +71,4 @@ void mobitaReturn(MOBITA MOB, Tas *t, Todolist *td, InprogressList *ip) {
     }
   }
 }
-void changeMoney(MOBITA *MOB,float money){
-  Uang(*MOB) += money;
-}
+void changeMoney(MOBITA *MOB, float money) { Uang(*MOB) += money; }
