@@ -113,7 +113,12 @@ int main() {
       } else if (validateWord(tempWord, "PICK_UP")) {
         if (isInPickupSpot(Posisi(mob), todo)) {
           pick_up(Posisi(mob), &todo, &tas, &ip, waktu, VIPFlag);
-          changeSpeed(&mob, (1 + numOfHeavy(tas)));
+          if (TOP(tas).type == 'H') {
+            if (speedBoost(mob) > 0) {
+              removeAbility(&mob,'s');
+            }
+            changeSpeed(&mob, (1 + numOfHeavy(tas)));
+          }
         } else if (isVIPinTop(tas)) {
           printf("Antarkan pesanan Zhisuka terlebih dahulu!\n");
         } else {
@@ -124,6 +129,7 @@ int main() {
           droppedItem = TOP(tas);
           dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney);
           changeMoney(&mob, gainedMoney);
+          checkEffectSenter(&tas, &mob);
           finishedOrder++;
           if (droppedItem.type == 'H') {
             if (numOfHeavy(tas) == 0) {
@@ -140,7 +146,6 @@ int main() {
             addAbility(&mob, 'r');
             printf("Ability Return To Sender berhasil diaktifkan.\n\n");
           }
-          checkEffectSenter(&tas, &mob);
         } else {
           printf("Tidak ada pesanan yang dapat diantarkan!\n\n");
         }
@@ -161,7 +166,9 @@ int main() {
         if (returnToSender(mob) == 1) {
           checkEffectSenter(&tas, &mob);
         }
-        changeSpeed(&mob, (1 + numOfHeavy(tas)));
+        if (speedBoost(mob) == 0) {
+          changeSpeed(&mob, (1 + numOfHeavy(tas)));
+        }
       } else {
         printf("Masukkan Tidak Valid.\nGunakan command \"HELP\" untuk petunjuk "
                "penggunaan.\n");
