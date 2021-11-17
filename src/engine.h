@@ -26,7 +26,6 @@ void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP,
 /* I.S. t, ip, todo, DP terdefinisi */
 /* F.S. Tiap item yang sudah waktunya datang akan dimasukkan ke todo */
 /*      Tiap item yang sudah expired dihapus dari ip dan tas */
-void removePerishable(Tas *t, InprogressList *ip);
 
 boolean finishedState(Building b, int finishedOrder, int jumlahPesanan);
 #endif

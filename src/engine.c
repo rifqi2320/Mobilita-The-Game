@@ -57,29 +57,6 @@ void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP,
   }
 }
 
-void removePerishable(Tas *t, InprogressList *ip) {
-  // menghapus semua elemen perishable di tas yang waktunya dah habis
-  // kamus lokal
-  int i; // variabel untuk kounter
-  int j; // variabel untuk kounter
-  // algoritma
-  if (!isTasEmpty(*t)) {
-    i = 0;
-    while (i <= IDX_TOP(*t)) {
-      if (t->buffer[i].type == 'P' && isItemExpired(t->buffer[i], waktu)) {
-        // delete dari in progress list
-        deleteInProgressAt(ip, &(t->buffer[i]));
-        // delete isi
-        j = i;
-        while (j < IDX_TOP(*t)) {
-          t->buffer[j] = t->buffer[j + 1];
-          j++;
-        }
-      }
-    }
-  }
-}
-
 boolean finishedState(Building b, int finishedOrder, int jumlahPesanan) {
   return (NAMEBUILDING(b) == '8') && (finishedOrder == jumlahPesanan);
 }
