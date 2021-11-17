@@ -3,19 +3,31 @@
 
 int main() {
   ListBuilding LB;
-  CreateListBuilding(&LB, 2);
+  CreateListBuilding(&LB, 1);
   Building B;
-  int n, m;
+  int n, m, len;
   char name;
   scanf("%d %d", &n, &m);
   scanf(" %c", &name);
   CreateBuilding(&B, n, m, name);
   appendBuilding(&LB, B);
-  int len1 = lengthListBuilding(LB);
+
+  // Test panjang LB setelah di append
+  len = lengthListBuilding(LB);
   printf("panjang List Building = %d\n", len1);
-  shrinkListBuilding(&LB, 2);
-  len1 = lengthListBuilding(LB);
+
+  // Test panjang LB setelah dishrink
+  shrinkListBuilding(&LB, 1);
+  len = lengthListBuilding(LB);
   printf("panjang List Building setelah shrink = %d\n", len1);
+  displayListBuilding(LB);
+
+  // Test panjang LB setelah dishrink lalu digrow lagi
+  growListBuilding(&LB, 1);
+  len = lengthListBuilding(LB);
+  printf("panjang List Building setelah di grow lagi = %d\n", len1);
+  CreateBuilding(&B, n, m, name);
+  appendBuilding(&LB, B);
   displayListBuilding(LB);
   return 0;
 }
