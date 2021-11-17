@@ -5,6 +5,7 @@
 int waktu; // waktu yang dihabiskan Mobita
 int skor;  // skor Mobita
 boolean VIPFlag;
+boolean halftime;
 
 /* Realisasi fungsi dan prosedur*/
 void addScore(int val) {
@@ -14,7 +15,7 @@ void addScore(int val) {
   // algoritma
   skor += val;
 }
-void addTime(float multiplier) {
+void addTime(int multiplier) {
   /* I.S. multiplier terdefinisi */
   /* F.S. waktu bertambah sebesar (1*multiplier)*/
   /* multiplier adalah faktor pengali, defaultnya adalah 1, namun bisa diisi 2

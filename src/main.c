@@ -26,8 +26,6 @@ int main() {
   int jumlahPesanan;
   int finishedOrder; // jumlah pesanan yang selesai
   int Expired;       // Jumlah pesanan yang gagal diantarkan (perishable)
-  boolean isSpeedBoosted; //bernilai true jika Mobita sedang mengalami boost speedBoost
-  int speedBoostFullTime;//waktu penuh speedboost,kalau kena yang ini entar nambah 1 waktunya
 
   // Engine Variable
   extern int waktu;
@@ -73,7 +71,6 @@ int main() {
       finishedOrder = 0;
       Expired = 0;
       Uang(mob) = 7500;
-      isSpeedBoosted = false;
     } else if (tempInt == 2) {
       return 0;
     } else {
@@ -111,7 +108,7 @@ int main() {
           tempInt2 = wordToInt(nextInput());
         } while (tempInt2 < 0 || tempInt2 >= tempInt);
         if (tempInt2 > 0) {
-          move(&mob, getReachable(PT, Posisi(mob), tempInt2),isSpeedBoosted,speedBoostFullTime);
+          move(&mob, getReachable(PT, Posisi(mob), tempInt2));
         }
       } else if (validateWord(tempWord, "PICK_UP")) {
         if (isInPickupSpot(Posisi(mob), todo)) {
@@ -128,20 +125,20 @@ int main() {
           dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney);
           changeMoney(&mob, gainedMoney);
           finishedOrder++;
-          if (numOfHeavy(tas) == 0 &&
-              droppedItem.type ==
-                  'H') { // gak ada heavy item lagi di tas dan yg baru di drop
-                         // itu heavy item, maka langsung aktifkan ability
-            addAbility(&mob, 's',&tas,&isSpeedBoosted);
+          if (droppedItem.type == 'H') {
+            if (numOfHeavy(tas) == 0) {
+              addAbility(&mob, 's');
+              printf("Ability Speed Boost berhasil diaktifkan.\n\n");
+            } else {
+              changeSpeed(&mob, (1 + numOfHeavy(tas)));
+            }
           } else if (droppedItem.type == 'P') { // yg di drop perishable item
-            addAbility(&mob, 'i',&tas,&isSpeedBoosted);
-          } else if (droppedItem.type == 'V') { // yg di drop VIP
-            addAbility(&mob, 'r',&tas,&isSpeedBoosted);
-          } else { // ada heavy item
-            changeSpeed(&mob, (1 + numOfHeavy(tas)));
-          }
-          if(isSpeedBoosted){
-            speedBoostFullTime = waktu+1;//+1 biar pas move dari turn sekarang gak langsung nambah
+            increaseCapacity(&tas);
+            printf("Ability Increase Capacity berhasil diaktifkan.\n\n");
+          } else if (droppedItem.type == 'V' &&
+                     returnToSender(mob) != 1) { // yg di drop VIP
+            addAbility(&mob, 'r');
+            printf("Ability Return To Sender berhasil diaktifkan.\n\n");
           }
           checkEffectSenter(&tas, &mob);
         } else {

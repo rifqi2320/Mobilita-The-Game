@@ -1,18 +1,18 @@
 #ifndef MOBITA_H
 #define MOBITA_H
 
+#include "boolean.h"
 #include "engine.h"
 #include "listbuilding.h"
 #include "point.h"
 #include "tas.h"
 #include "todolist.h"
-#include "boolean.h"
 
 typedef struct {
   Building Posisi;
   int Uang;
-  float Speed;
-  float speedBoost;
+  int Speed;
+  int speedBoost;
   int incCapacity;
   int returnToSender;
 } MOBITA;
@@ -29,21 +29,21 @@ void CreateMobita(MOBITA *MOB, Building HQ);
 /*I.S. MOB sudah terdefinisi*/
 /*F.S. Terbentuk mobita sesuai definisi diatas*/
 
-void move(MOBITA *MOB, Building dest,boolean isSpeedBoosted, int startSpeedboostedTime);
+void move(MOBITA *MOB, Building dest);
 /*Memindahkan mobita ke posisi dest dan menambah waktu sesuai item dan ability
  * yang dimiliki*/
 /*I.S. MOB terdefinisi dan dest ada di listbuilding*/
 /*F.S. Posisi MOB berubah jadi dest dan waktu bertambah sesuai item dan ability
  * yang dimiliki*/
 
-void addAbility(MOBITA *MOB, char s, Tas *t,boolean* isSpeedBoosted);
+void addAbility(MOBITA *MOB, char s);
 
 void removeAbility(MOBITA *MOB, char s);
 
 void mobitaReturn(MOBITA MOB, Tas *t, Todolist *td, InprogressList *ip);
 
-void changeSpeed(MOBITA *MOB, float val);
+void changeSpeed(MOBITA *MOB, int val);
 
-void changeMoney(MOBITA *MOB,float money);
+void changeMoney(MOBITA *MOB, float money);
 
 #endif

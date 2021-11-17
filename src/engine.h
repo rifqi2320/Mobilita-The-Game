@@ -9,12 +9,14 @@
 extern int waktu;       // waktu yang dihabiskan Mobita
 extern int skor;        // skor Mobita
 extern boolean VIPFlag; // Flag jika ada VIP
+extern boolean halftime;
+// Jika true berarti terdapat 0.5 detik tambahan pada waktu
 
 /* Fungsi dan Prosedur*/
 void addScore(int val);
 /*I.S. val terdefinisi*/
 /*F.S. nilai skor bertambah sebesar val*/
-void addTime(float multiplier);
+void addTime(int multiplier);
 /* I.S. multiplier terdefinisi */
 /* F.S. waktu bertambah sebesar (1*multiplier)*/
 /* multiplier adalah faktor pengali, defaultnya adalah 1, namun bisa diisi 2
