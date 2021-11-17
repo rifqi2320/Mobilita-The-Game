@@ -1,5 +1,4 @@
-#include "../src/charmachine.c"
-#include "../src/tokenmachine.c"
+#include "../src/tokenmachine.h"
 #include <stdio.h>
 
 int main() {

@@ -1,8 +1,7 @@
-#include "../src/item.c"
-#include "../src/tas.c"
+#include "../src/tas.h"
 #include <stdio.h>
 
-void main() {
+int main() {
   Tas t;
   Item I;
   CreateTas(&t);
@@ -17,4 +16,5 @@ void main() {
   printf(isTasFull(t) ? "Tas penuh\n" : "Tas tidak penuh\n");
   push(&t, I);
   printf(isTasFull(t) ? "Tas penuh\n" : "Tas tidak penuh\n");
+  return 0;
 }
