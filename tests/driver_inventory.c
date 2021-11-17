@@ -25,10 +25,15 @@ int main(){
         printf("List L1 penuh.\n");
         printf("%d %d\n",lengthListGadget(l1),lengthListGadget(l2));
     }
+
     int i;
     for (i = 0; i < 6; i++) {
         buyGadget(&l2,l1,&M);
     }
+
     displayInventory(l2);
-    useGadget(&l2,&t,&M,&ip,LB);
+    int j;
+    for (j = 0; j < JUMLAHGADGET; j++) {
+        useGadget(&l2,&t,&M,&ip,LB);
+    }
 }
