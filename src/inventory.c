@@ -166,9 +166,8 @@ void PintuKemanaSaja(MOBITA *MOB, ListBuilding h) {
     x = wordToInt(nextInput());
     if (x > 0 && x <= lengthListBuilding(h)) { //Pengecekan input valid
       pindah = true;
-      printf("Mobita berhasil pindah ke (%d %d).\n\n",
+      printf("Mobita berhasil pindah ke (%d, %d).\n\n",
              XCOORD(ELMTListB(h, x - 1)), YCOORD(ELMTListB(h, x - 1)));
-      move(MOB, ELMTListB(h, x - 1));
       Posisi(*MOB) = ELMTListB(h, x - 1);
     } else {
       printf("Lokasi tidak ditemukan, silahkan ulangi.\n\n");

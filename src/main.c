@@ -70,7 +70,7 @@ int main() {
       started = true;
       finishedOrder = 0;
       Expired = 0;
-      Uang(mob) = 7000;
+      Uang(mob) = 7500;
     } else if (tempInt == 2) {
       return 0;
     } else {
@@ -93,10 +93,10 @@ int main() {
               ? "TERDAPAT PESANAN ZHISUKA, SILAHKAN PRIORITASKAN PESANANNYA\n"
               : "");
       printf("Jumlah pesanan yang harus dikerjakan: %d\n\n",
-             jumlahPesanan - finishedOrder);
+             jumlahPesanan - finishedOrder - Expired);
       printf("ENTER COMMAND: ");
       tempWord = nextInput();
-      system("@cls||clear");
+      // system("@cls||clear");
       if (finishedState(Posisi(mob), finishedOrder, jumlahPesanan)) {
         started = false;
       } else if (validateWord(tempWord, "MOVE")) {
