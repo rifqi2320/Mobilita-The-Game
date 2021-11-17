@@ -26,6 +26,7 @@ int main() {
   int gainedMoney; // uang yang didapatkan setelah menyelesaikan misi
   int jumlahPesanan;
   int finishedOrder; // jumlah pesanan yang selesai
+  int Expired; // Jumlah pesanan yang gagal diantarkan (perishable)
 
   // Engine Variable
   extern int waktu;
@@ -68,6 +69,7 @@ int main() {
       MakeListGadgetHQ(&gadgetbuy);
       started = true;
       finishedOrder = 0;
+      Expired = 0;
     } else if (tempInt == 2) {
       return 0;
     } else {
@@ -84,8 +86,8 @@ int main() {
     //   printf("%d %c %c %c\n", DP.buffer[i].tArrival, DP.buffer[i].lPickup,
     //          DP.buffer[i].lDropoff, DP.buffer[i].type);
     // }
-    updateData(&tas, &ip, &todo, &DP);
-    if (finishedState(Posisi(mob), finishedOrder, jumlahPesanan)) {
+    updateData(&tas, &ip, &todo, &DP, &Expired);
+    if (finishedState(Posisi(mob), finishedOrder + Expired, jumlahPesanan)) {
       started = false;
     } else {
       // printf("Skor: %d\n", skor);
@@ -94,11 +96,11 @@ int main() {
       printf("Lokasi Mobita: %c (%d,%d)\n", NAMEBUILDING(Posisi(mob)),
              XCOORD(Posisi(mob)), YCOORD(Posisi(mob)));
       printf("Jumlah pesanan yang harus dikerjakan: %d\n\n",
-             jumlahPesanan - finishedOrder);
+             jumlahPesanan - finishedOrder - Expired);
       printf("ENTER COMMAND: ");
       tempWord = nextInput();
       system("@cls||clear");
-      if (finishedState(Posisi(mob), finishedOrder, jumlahPesanan)) {
+      if (finishedState(Posisi(mob), finishedOrder + Expired, jumlahPesanan)) {
         started = false;
       } else if (validateWord(tempWord, "MOVE")) {
         displayMap(PT, Posisi(mob), todo, ip);
@@ -110,7 +112,7 @@ int main() {
         } while (tempInt2 < 0 || tempInt2 >= tempInt);
         if (tempInt2 > 0) {
           move(&mob, getReachable(PT, Posisi(mob), tempInt2));
-          updateData(&tas, &ip, &todo, &DP);
+          updateData(&tas, &ip, &todo, &DP, &Expired);
         }
       } else if (validateWord(tempWord, "PICK_UP")) {
         if (isInPickupSpot(Posisi(mob), todo)) {
@@ -152,7 +154,8 @@ int main() {
   }
   printf("\nOTSUKARE!!!\n");
   printf("SELAMAT, ANDA TELAH MENYELESAIKAN PERMAINAN INI!!\n");
-  printf("WAKTU YANG ANDA HABISKAN: %d", waktu);
+  printf("WAKTU YANG ANDA HABISKAN: %d\n", waktu);
+  printf("PESANAN YANG BERHASIL ANDA KIRIMKAN: %d dari %d\n", finishedOrder, finishedOrder+Expired);
   return 0;
 }
 

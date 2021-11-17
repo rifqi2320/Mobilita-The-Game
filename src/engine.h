@@ -18,7 +18,7 @@ void addTime(float multiplier);
 /* F.S. waktu bertambah sebesar (1*multiplier)*/
 /* multiplier adalah faktor pengali, defaultnya adalah 1, namun bisa diisi 2
  * atau 0.5 misalnya, untuk kasus heavy item atau speed boost*/
-void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP);
+void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP, int *Expired);
 /* I.S. t, ip, todo, DP terdefinisi */
 /* F.S. Tiap item yang sudah waktunya datang akan dimasukkan ke todo */
 /*      Tiap item yang sudah expired dihapus dari ip dan tas */
