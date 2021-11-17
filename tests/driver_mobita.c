@@ -31,7 +31,7 @@ int main(){
     printf("\n");
 
     Building a;
-    CreateBuilding(&hq, 2, 2, '1');
+    CreateBuilding(&a, 2, 2, '1');
 
     move(&MOB, a);
 
