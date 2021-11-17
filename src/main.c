@@ -158,6 +158,7 @@ int main() {
         if (returnToSender(mob) == 1) {
           checkEffectSenter(&tas, &mob);
         }
+        changeSpeed(&mob, (1 + numOfHeavy(tas)));
       } else {
         printf("Masukkan Tidak Valid.\nGunakan command \"HELP\" untuk petunjuk "
                "penggunaan.\n");
