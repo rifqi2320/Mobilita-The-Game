@@ -98,13 +98,4 @@ void deleteAt(List *l, int idx, Item *val);
 
 int lengthList(List l);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
-
-/****************** PROSES TERHADAP LIST ******************/
-List concat(List l1, List l2);
-/* I.S. l1 dan l2 sembarang */
-/* F.S. l1 dan l2 kosong, l3 adalah hasil konkatenasi l1 & l2 */
-/* Konkatenasi dua buah list : l1 dan l2    */
-/* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan). */
-/* Tidak ada alokasi/dealokasi pada prosedur ini */
-
 #endif

@@ -291,31 +291,3 @@ int lengthList(List l) {
   }
   return ctr;
 }
-
-/****************** PROSES TERHADAP LIST ******************/
-List concat(List l1, List l2) {
-  /* I.S. l1 dan l2 sembarang */
-  /* F.S. l1 dan l2 kosong, l3 adalah hasil konkatenasi l1 & l2 */
-  /* Konkatenasi dua buah list : l1 dan l2    */
-  /* menghasilkan l3 yang baru (dengan elemen list l1 dan l2 secara beurutan).
-   */
-  /* Tidak ada alokasi/dealokasi pada prosedur ini */
-  // kamus lokal
-  List l3; // list hasil konkatenasi l1 dan l2
-  int i;   // indeks untuk iterasi
-  // algoritma
-  if (isListEmpty(l1)) { // jika list 11 kosong
-    return l2;
-  } else if (isListEmpty(l2)) { // jika l2 kosong
-    return l1;
-  } else { // l1 dan l2 tidak kosong
-    CreateList(&l3);
-    for (i = 0; i < lengthList(l1); i++) { // isi l1
-      insertLast(&l3, getElmt(l1, i));
-    }
-    for (i = 0; i < lengthList(l2); i++) { // isi l2
-      insertLast(&l3, getElmt(l2, i));
-    }
-  }
-  return l3;
-}
