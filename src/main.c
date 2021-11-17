@@ -1,14 +1,14 @@
-#include "charmachine.h"
-#include "engine.h"
-#include "inventory.h"
-#include "io.h"
-#include "list_linked.h"
-#include "listbuilding.h"
-#include "map.h"
-#include "mobita.h"
-#include "queuetodo.h"
-#include "tas.h"
-#include "todolist.h"
+#include "modules/charmachine/charmachine.h"
+#include "modules/engine/engine.h"
+#include "modules/inventory/inventory.h"
+#include "modules/io/io.h"
+#include "modules/list_linked/list_linked.h"
+#include "modules/listbuilding/listbuilding.h"
+#include "modules/map/map.h"
+#include "modules/mobita/mobita.h"
+#include "modules/queuetodo/queuetodo.h"
+#include "modules/tas/tas.h"
+#include "modules/todolist/todolist.h"
 
 #include <stdio.h>
 
@@ -115,7 +115,7 @@ int main() {
           pick_up(Posisi(mob), &todo, &tas, &ip, waktu, VIPFlag);
           if (TOP(tas).type == 'H') {
             if (speedBoost(mob) > 0) {
-              removeAbility(&mob,'s');
+              removeAbility(&mob, 's');
             }
             changeSpeed(&mob, (1 + numOfHeavy(tas)));
           }
