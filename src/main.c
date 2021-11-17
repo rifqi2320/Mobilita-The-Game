@@ -173,7 +173,7 @@ int main() {
   printf("\nOTSUKARE!!!\n");
   printf("SELAMAT, ANDA TELAH MENYELESAIKAN PERMAINAN INI!!\n");
   printf("WAKTU YANG ANDA HABISKAN: %d\n", waktu);
-  printf("JUMLAH ITEM YANG BERHASIL DIANTARKAN: %d\n",deliveredOrder);
+  printf("PESANAN YANG BERHASIL ANDA KIRIMKAN: %d dari %d\n", deliveredOrder, jumlahPesanan);
   return 0;
 }
 
@@ -189,7 +189,7 @@ void displayHelp() {
          "membelinya. Hanya dapat digunakan di Headquarter\n");
   printf("8. INVENTORY -> Untuk melihat gadget yang dimiliki dan "
          "menggunakannya\n");
-  printf("9. HELP -> Untuk mengeluarkan list command dan kegunaannya\n");
+  printf("9. HELP -> Untuk mengeluarkan list command dan kegunaannya\n\n");
 }
 boolean finishedState(Building b, int finishedOrder, int jumlahPesanan) {
   return (NAMEBUILDING(b) == '8') && (finishedOrder == jumlahPesanan);
