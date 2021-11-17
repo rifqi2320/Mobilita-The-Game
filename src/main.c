@@ -171,7 +171,7 @@ void displayHelp() {
          "membelinya. Hanya dapat digunakan di Headquarter\n");
   printf("8. INVENTORY -> Untuk melihat gadget yang dimiliki dan "
          "menggunakannya\n");
-  printf("9. HELP -> Untuk mengeluarkan list command dan kegunaannya\n");
+  printf("9. HELP -> Untuk mengeluarkan list command dan kegunaannya\n\n");
 }
 boolean finishedState(Building b, int finishedOrder, int jumlahPesanan) {
   return (NAMEBUILDING(b) == '8') && (finishedOrder == jumlahPesanan);

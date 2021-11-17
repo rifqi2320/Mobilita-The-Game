@@ -67,13 +67,13 @@ void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
     printf("ENTER COMMAND: ");
     i = wordToInt(nextInput());
     if (i == 0) {
-      printf("Kembali ke menu.\n");
+      printf("Kembali ke menu.\n\n");
     } else if (isLGFull(*l)) {
-      printf("Inventory sudah penuh!\n"); //Mobita tidak bisa membeli gadget karena sudah penuh
+      printf("Inventory sudah penuh!\n\n"); //Mobita tidak bisa membeli gadget karena sudah penuh
     } else {
       if (i > 0 && i <= JUMLAHGADGET) { //pengecekan input valid
         if (HARGAGADGET(buy, i - 1) > Uang(*MOB)) { //Pengecekan uang Mobita tidak cukup
-          printf("Uang tidak cukup untuk membeli Gadget!\n");
+          printf("Uang tidak cukup untuk membeli Gadget!\n\n");
         } else { // Uang mobita cukup
           Uang(*MOB) -= HARGAGADGET(buy, i - 1); 
           for (j = 0; j < JUMLAHGADGET; j++) {
@@ -83,14 +83,14 @@ void buyGadget(LIST_GADGET *l, LIST_GADGET buy, MOBITA *MOB) {
               break;
             }
           }
-          printf("%s berhasil dibeli!\n", getName(GADGET(buy, i - 1)));
+          printf("%s berhasil dibeli!\n\n", getName(GADGET(buy, i - 1)));
         }
       } else {
-        printf("Gadget tidak ditemukan, kembali ke menu.\n");
+        printf("Gadget tidak ditemukan, kembali ke menu.\n\n");
       }
     }
   } else {
-    printf("Anda sedang tidak berada di HeadQuarters.\n");
+    printf("Anda sedang tidak berada di HeadQuarters.\n\n");
   }
 }
 
@@ -103,7 +103,7 @@ void useGadget(LIST_GADGET *l, Tas *t, MOBITA *MOB, InprogressList *ip,
   printf("ENTER COMMAND: ");
   i = wordToInt(nextInput());
   if (i == 0) {
-    printf("Kembali ke main menu.\n");
+    printf("Kembali ke main menu.\n\n");
   } else if (isIdxEff(*l, i - 1)) { //pengecekan input valid
     NAMA(gad) = NAMAGADGET(*l, i - 1);
     HARGA(gad) = HARGAGADGET(*l, i - 1);
@@ -111,7 +111,7 @@ void useGadget(LIST_GADGET *l, Tas *t, MOBITA *MOB, InprogressList *ip,
     HARGAGADGET(*l, i - 1) = VAL_UNDEF;
     process(gad, t, MOB, ip, h); //Gadget diproses berdasarkan nama 
   } else { //input tidak valid atau tidak ada gadget
-    printf("Tidak ada gadget yang dapat digunakan.\n");
+    printf("Tidak ada gadget yang dapat digunakan.\n\n");
   }
 }
 
@@ -143,9 +143,9 @@ void KainWaktu(Tas *t, InprogressList *ip) {
     TOP(*t).tPerish += waktu - TOP(*t).tPickup; //Waktu perishable kembali ke semula
     Address now = FIRST(*ip); //Update In progress list
     INFO(now).tPerish += waktu - TOP(*t).tPickup;
-    printf("Kain Pembungkus Waktu berhasil digunakan!\n");
+    printf("Kain Pembungkus Waktu berhasil digunakan!\n\n");
   } else {
-    printf("Kain Pembungkus Waktu gagal digunakan!Kain terbuang.\n");
+    printf("Kain Pembungkus Waktu gagal digunakan!Kain terbuang.\n\n");
   }
 }
 
@@ -154,7 +154,7 @@ void SenterPembesar(Tas *t) {
   if (t->capacity > 100) {
     t->capacity = 100;
   }
-  printf("Senter Pembesar berhasil digunakan!\n");
+  printf("Senter Pembesar berhasil digunakan!\n\n");
 }
 
 void PintuKemanaSaja(MOBITA *MOB, ListBuilding h) {
@@ -166,12 +166,12 @@ void PintuKemanaSaja(MOBITA *MOB, ListBuilding h) {
     x = wordToInt(nextInput());
     if (x > 0 && x <= lengthListBuilding(h)) { //Pengecekan input valid
       pindah = true;
-      printf("Mobita berhasil pindah ke (%d %d).\n",
+      printf("Mobita berhasil pindah ke (%d %d).\n\n",
              XCOORD(ELMTListB(h, x - 1)), YCOORD(ELMTListB(h, x - 1)));
       move(MOB, ELMTListB(h, x - 1));
       Posisi(*MOB) = ELMTListB(h, x - 1);
     } else {
-      printf("Lokasi tidak ditemukan, silahkan ulangi.\n");
+      printf("Lokasi tidak ditemukan, silahkan ulangi.\n\n");
     }
   }
 }
@@ -200,16 +200,16 @@ void MesinWaktu(Tas *t, InprogressList *ip) {
       x = NEXT(x);
     }
   }
-  printf("Mesin Waktu berhasil digunakan!\n");
+  printf("Mesin Waktu berhasil digunakan!\n\n");
 }
 
 void SenterPengecil(Tas *t, MOBITA *mob) {
   if (TOP(*t).type == 'H') { // Pengecekan tumpukan teratas tas berupa Heavy item
     TOP(*t).type = 'S'; //Item heavy teratas tas diubah tipenya menjadi S, yaitu tipe heavy yang efeknya hilang sementara
     Speed(*mob) -= 1; //Speed mobita lebih cepat 1 unit karena efek 1 heavy item hilang
-    printf("Senter Pengecil berhasil digunakan!\n");
+    printf("Senter Pengecil berhasil digunakan!\n\n");
   } else {
-    printf("Senter Pengecil gagal digunakan!Senter terbuang.\n");
+    printf("Senter Pengecil gagal digunakan!Senter terbuang.\n\n");
   }
 }
 
