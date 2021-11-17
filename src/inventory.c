@@ -219,7 +219,7 @@ void checkEffectSenter(Tas *t, MOBITA *mob) {
     for (i = IDX_TOP(*t); i >= 0; i--) {
       if ((*t).buffer[i].type == 'S') {
         (*t).buffer[i].type = 'H';
-        Speed(*mob) -= 1;
+        Speed(*mob) += 1;
       }
     }
   }
