@@ -26,29 +26,29 @@ Permainan ini bertipe single player dan dimainkan dengan cara menginput perintah
 
 | Fitur | Status Pengerjaan |
 | --- | --- |
-| `NEW GAME` | [x] |
-| `EXIT` | [x] |
+| `NEW GAME` | &#10004; |
+| `EXIT` | &#10004; |
 | `SAVE/LOAD GAME` | [ ] |
-| `MOVE` | [x] |
-| `PICK_UP` | [x] |
-| `DROP_OFF` | [x] |
-| `MAP` | [x] |
-| `TO_DO` | [x] |
-| `IN_PROGRESS` | [x] |
-| `BUY` | [x] |
-| `INVENTORY` | [x] |
-| `HELP` | [x] |
+| `MOVE` | &#10004; |
+| `PICK_UP` | &#10004; |
+| `DROP_OFF` | &#10004; |
+| `MAP` | &#10004; |
+| `TO_DO` | &#10004; |
+| `IN_PROGRESS` | &#10004; |
+| `BUY` | &#10004; |
+| `INVENTORY` | &#10004; |
+| `HELP` | &#10004; |
 | `SAVE_GAME` | [ ] |
-| `RETURN` | [x] |
-| `NORMAL ITEM` | [x] |
-| `HEAVY ITEM` | [x] |
-| `PERISHABLE ITEM` | [x] |
-| `VIP ITEM` | [x] |
-| `ABILITY SPEED BOOST` | [x] |
-| `ABILITY INCREASE CAPACITY` | [x] |
-| `ABILITY RETURN TO SENDER` | [x] |
-| `GADGET KAIN PEMBUNGKUS WAKTU` | [x] |
-| `GADGET SENTER PEMBESAR` | [x] |
-| `GADGET PINTU KEMANA SAJA` | [x] |
-| `GADGET MESIN WAKTU` | [x] |
-| `GADGET SENTER PENGECIL` | [x] |
+| `RETURN` | &#10004; |
+| `NORMAL ITEM` | &#10004; |
+| `HEAVY ITEM` | &#10004; |
+| `PERISHABLE ITEM` | &#10004; |
+| `VIP ITEM` | &#10004; |
+| `ABILITY SPEED BOOST` | &#10004; |
+| `ABILITY INCREASE CAPACITY` | &#10004; |
+| `ABILITY RETURN TO SENDER` | &#10004; |
+| `GADGET KAIN PEMBUNGKUS WAKTU` | &#10004; |
+| `GADGET SENTER PEMBESAR` | &#10004; |
+| `GADGET PINTU KEMANA SAJA` | &#10004; |
+| `GADGET MESIN WAKTU` | &#10004; |
+| `GADGET SENTER PENGECIL` | &#10004; |
