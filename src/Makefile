@@ -6,6 +6,9 @@ EXECUTABLE := main
 
 all: $(OBJECTS) $(DRIVERS) main
 
+%.o : %.c
+	gcc -c $< -o $@
+
 driver_%.c: $(OBJECTS)
 	gcc $(OBJECTS) $@ -o $(patsubst %.c, %, $@)
 
