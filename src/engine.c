@@ -23,7 +23,7 @@ void addTime(float multiplier) {
   waktu += multiplier;
 }
 
-void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP) {
+void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP,int * finishedItem) {
   int i;
   Item tempItem;
   // Update daftar pesanan dan todolist
@@ -40,6 +40,7 @@ void updateData(Tas *t, InprogressList *ip, Todolist *todo, Queue *DP) {
       if (t->buffer[i].type == 'P' && isItemExpired(t->buffer[i], waktu)) {
         deleteInProgressAt(ip, &(t->buffer[i]));
         deleteTasAt(t, i);
+        *(finishedItem)++;
       } else {
         i++;
       }

@@ -25,7 +25,8 @@ int main() {
   Word tempWord;
   int gainedMoney; // uang yang didapatkan setelah menyelesaikan misi
   int jumlahPesanan;
-  int finishedOrder; // jumlah pesanan yang selesai
+  int finishedOrder; // jumlah pesanan yang sudah selesai diantarkan/hangus
+  int deliveredOrder;//hanya jumlah pesanan yang berhasil diantarkan
 
   // Engine Variable
   extern int waktu;
@@ -40,6 +41,7 @@ int main() {
   LIST_GADGET gadgetbuy; // List Gadget yang ada di HQ
   Todolist todo;         // TodoList
   InprogressList ip;     // In Progress List
+  Item droppedItem;      // Item yang baru saja diturunkan
 
   while (!started) {
     printf("=============================MOBILITA=============================="
@@ -68,6 +70,7 @@ int main() {
       MakeListGadgetHQ(&gadgetbuy);
       started = true;
       finishedOrder = 0;
+      deliveredOrder = 0;
     } else if (tempInt == 2) {
       return 0;
     } else {
@@ -84,7 +87,7 @@ int main() {
     //   printf("%d %c %c %c\n", DP.buffer[i].tArrival, DP.buffer[i].lPickup,
     //          DP.buffer[i].lDropoff, DP.buffer[i].type);
     // }
-    updateData(&tas, &ip, &todo, &DP);
+    updateData(&tas, &ip, &todo, &DP,&finishedOrder);
     if (finishedState(Posisi(mob), finishedOrder, jumlahPesanan)) {
       started = false;
     } else {
@@ -110,22 +113,39 @@ int main() {
         } while (tempInt2 < 0 || tempInt2 >= tempInt);
         if (tempInt2 > 0) {
           move(&mob, getReachable(PT, Posisi(mob), tempInt2));
-          updateData(&tas, &ip, &todo, &DP);
+          updateData(&tas, &ip, &todo, &DP,&finishedOrder);
         }
       } else if (validateWord(tempWord, "PICK_UP")) {
-        if (isInPickupSpot(Posisi(mob), todo)) {
+        if (isInPickupSpot(Posisi(mob), todo) && !isVIPinTop(tas)) {
           pick_up(Posisi(mob), &todo, &tas, &ip, waktu);
           changeSpeed(&mob, (1 + numOfHeavy(tas)));
-        } else {
+        }
+        else if(isVIPinTop(tas)){
+          printf("Antarkan pesanan Zhisuka terlebih dahulu!\n");
+        }
+         else {
           printf("Pesanan tidak ditemukan!\n\n");
         }
       } else if (validateWord(tempWord, "DROP_OFF")) {
         if (isInDropoffSpot(Posisi(mob), ip)) {
+          droppedItem = TOP(tas);
           dropOffItem(Posisi(mob), &ip, &tas, &gainedMoney);
           changeMoney(&mob, gainedMoney);
-          changeSpeed(&mob, (1 + numOfHeavy(tas)));
-          checkEffectSenter(&tas,&mob);
           finishedOrder++;
+          deliveredOrder++;
+          if(numOfHeavy(tas)==0 && droppedItem.type=='H'){//gak ada heavy item lagi di tas dan yg baru di drop itu heavy item, maka langsung aktifkan ability
+            addAbility(&mob,'s');
+          }
+          else if(droppedItem.type=='P'){//yg di drop perishable item
+            addAbility(&mob,'i');
+          }
+          else if(droppedItem.type=='V'){//yg di drop VIP
+            addAbility(&mob,'r');
+          }
+          else{//ada heavy item
+            changeSpeed(&mob, (1 + numOfHeavy(tas)));
+          }
+          checkEffectSenter(&tas,&mob);
         } else {
           printf("Tidak ada pesanan yang dapat diantarkan!\n\n");
         }
@@ -152,7 +172,8 @@ int main() {
   }
   printf("\nOTSUKARE!!!\n");
   printf("SELAMAT, ANDA TELAH MENYELESAIKAN PERMAINAN INI!!\n");
-  printf("WAKTU YANG ANDA HABISKAN: %d", waktu);
+  printf("WAKTU YANG ANDA HABISKAN: %d\n", waktu);
+  printf("JUMLAH ITEM YANG BERHASIL DIANTARKAN: %d\n",deliveredOrder);
   return 0;
 }
 

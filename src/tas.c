@@ -43,3 +43,7 @@ int numOfHeavy(Tas t){
   }
   return counter;
 }
+boolean isVIPinTop(Tas t){
+  /* Menghasilkan true jika item teratasnya ialah item vip*/
+  return TOP(t).type=='V';
+}

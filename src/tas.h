@@ -56,4 +56,7 @@ void increaseCapacity(Tas *t);
 
 int numOfHeavy(Tas t);
 /* Mengembalikan jumlah item heavy di tas */
+
+boolean isVIPinTop(Tas t);
+/* Menghasilkan true jika item teratasnya ialah item vip*/
 #endif
