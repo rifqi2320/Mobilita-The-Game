@@ -6,6 +6,7 @@
 #include "point.h"
 #include "tas.h"
 #include "todolist.h"
+#include "boolean.h"
 
 typedef struct {
   Building Posisi;
@@ -28,14 +29,14 @@ void CreateMobita(MOBITA *MOB, Building HQ);
 /*I.S. MOB sudah terdefinisi*/
 /*F.S. Terbentuk mobita sesuai definisi diatas*/
 
-void move(MOBITA *MOB, Building dest);
+void move(MOBITA *MOB, Building dest,boolean isSpeedBoosted, int startSpeedboostedTime);
 /*Memindahkan mobita ke posisi dest dan menambah waktu sesuai item dan ability
  * yang dimiliki*/
 /*I.S. MOB terdefinisi dan dest ada di listbuilding*/
 /*F.S. Posisi MOB berubah jadi dest dan waktu bertambah sesuai item dan ability
  * yang dimiliki*/
 
-void addAbility(MOBITA *MOB, char s, Tas *t);
+void addAbility(MOBITA *MOB, char s, Tas *t,boolean* isSpeedBoosted);
 
 void removeAbility(MOBITA *MOB, char s);
 

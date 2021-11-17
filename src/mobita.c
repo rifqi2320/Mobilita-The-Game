@@ -11,9 +11,17 @@ void CreateMobita(MOBITA *MOB, Building HQ) {
 
 void changeSpeed(MOBITA *MOB, float val) { Speed(*MOB) = val; }
 
-void move(MOBITA *MOB, Building dest) {
+void move(MOBITA *MOB, Building dest,boolean isSpeedBoosted, int startSpeedboostedTime) {
   Posisi(*MOB) = dest;
-  addTime(Speed(*MOB));
+  if(isSpeedBoosted){
+    if((waktu-startSpeedboostedTime)%2==0){//di full time
+        addTime(Speed(*MOB));
+    }
+    //kalau bukan di full time, gak ditambah
+  }
+  else{
+    addTime(Speed(*MOB));
+  }
 
   if (speedBoost(*MOB) > 1) {
     speedBoost(*MOB)--;
@@ -24,11 +32,12 @@ void move(MOBITA *MOB, Building dest) {
   }
 }
 
-void addAbility(MOBITA *MOB, char s,Tas *t) {
+void addAbility(MOBITA *MOB, char s, Tas *t,boolean* isSpeedBoosted) {
   if (s == 's') {
     speedBoost(*MOB) = 11;
     changeSpeed(MOB, 0.5);
     printf("Ability Speed Boost berhasil diaktifkan.\n\n");
+    (*isSpeedBoosted)=true;
   } else if (s == 'i') {
     increaseCapacity(t);
     printf("Ability Increase Capacity berhasil diaktifkan.\n\n");
