@@ -24,14 +24,17 @@ void move(MOBITA *MOB, Building dest) {
   }
 }
 
-void addAbility(MOBITA *MOB, char s) {
+void addAbility(MOBITA *MOB, char s,Tas *t) {
   if (s == 's') {
     speedBoost(*MOB) = 11;
     changeSpeed(MOB, 0.5);
+    printf("Ability Speed Boost berhasil diaktifkan.\n\n");
   } else if (s == 'i') {
-    incCapacity(*MOB) = 1;
+    increaseCapacity(t);
+    printf("Ability Increase Capacity berhasil diaktifkan.\n\n");
   } else if (s == 'r') {
     returnToSender(*MOB) = 1;
+    printf("Ability Return To Sender berhasil diaktifkan.\n\n");
   }
 }
 

@@ -35,7 +35,7 @@ void move(MOBITA *MOB, Building dest);
 /*F.S. Posisi MOB berubah jadi dest dan waktu bertambah sesuai item dan ability
  * yang dimiliki*/
 
-void addAbility(MOBITA *MOB, char s);
+void addAbility(MOBITA *MOB, char s, Tas *t);
 
 void removeAbility(MOBITA *MOB, char s);
 

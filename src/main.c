@@ -70,6 +70,7 @@ int main() {
       started = true;
       finishedOrder = 0;
       Expired = 0;
+      Uang(mob) = 7000;
     } else if (tempInt == 2) {
       return 0;
     } else {
@@ -128,11 +129,11 @@ int main() {
               droppedItem.type ==
                   'H') { // gak ada heavy item lagi di tas dan yg baru di drop
                          // itu heavy item, maka langsung aktifkan ability
-            addAbility(&mob, 's');
+            addAbility(&mob, 's',&tas);
           } else if (droppedItem.type == 'P') { // yg di drop perishable item
-            addAbility(&mob, 'i');
+            addAbility(&mob, 'i',&tas);
           } else if (droppedItem.type == 'V') { // yg di drop VIP
-            addAbility(&mob, 'r');
+            addAbility(&mob, 'r',&tas);
           } else { // ada heavy item
             changeSpeed(&mob, (1 + numOfHeavy(tas)));
           }
@@ -154,7 +155,9 @@ int main() {
         displayHelp();
       } else if (validateWord(tempWord, "RETURN")) {
         mobitaReturn(mob, &tas, &todo, &ip);
-        checkEffectSenter(&tas, &mob);
+        if (returnToSender(mob) == 1) {
+          checkEffectSenter(&tas, &mob);
+        }
       } else {
         printf("Masukkan Tidak Valid.\nGunakan command \"HELP\" untuk petunjuk "
                "penggunaan.\n");

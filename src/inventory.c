@@ -140,9 +140,9 @@ void process(GADGET gad, Tas *t, MOBITA *MOB, InprogressList *ip,
 
 void KainWaktu(Tas *t, InprogressList *ip) {
   if (TOP(*t).type == 'P') { //Pengecekan tumpukan teratas tas berupa Perishable item
-    TOP(*t).tPerish += waktu - TOP(*t).tPickup; //Waktu perishable kembali ke semula
+    TOP(*t).tPickup = waktu; 
     Address now = FIRST(*ip); //Update In progress list
-    INFO(now).tPerish += waktu - TOP(*t).tPickup;
+    INFO(now).tPickup = waktu;
     printf("Kain Pembungkus Waktu berhasil digunakan!\n\n");
   } else {
     printf("Kain Pembungkus Waktu gagal digunakan!Kain terbuang.\n\n");
@@ -219,7 +219,7 @@ void checkEffectSenter(Tas *t, MOBITA *mob) {
     for (i = IDX_TOP(*t); i >= 0; i--) {
       if ((*t).buffer[i].type == 'S') {
         (*t).buffer[i].type = 'H';
-        Speed(*mob) -= 1;
+        Speed(*mob) += 1;
       }
     }
   }
