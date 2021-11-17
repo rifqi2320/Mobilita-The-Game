@@ -1,9 +1,6 @@
 #include "../src/wordmachine.h"
 #include <stdio.h>
 
-boolean endWord;
-Word currentWord;
-
 int main() {
   int i;
   startWord();

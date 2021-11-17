@@ -165,7 +165,6 @@ void SenterPembesar(Tas *t) {
 void PintuKemanaSaja(MOBITA *MOB, ListBuilding h) {
   boolean pindah = false;
   while (!pindah) { // Pengecekan Mobita belum pindah dengan pintu kemana saja
-    printf("YEAH");
     displayListBuilding(h);
     printf("ENTER COMMAND: ");
     int x;

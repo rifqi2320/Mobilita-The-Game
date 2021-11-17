@@ -1,5 +1,5 @@
-#include "../src/engine.c"
-#include "../src/mobita.c"
+#include "../src/engine.h"
+#include "../src/mobita.h"
 #include <stdio.h>
 
 int main(){
@@ -19,7 +19,7 @@ int main(){
     push(&t, it);
     addInProgress(&ip, it);
 
-    CreateBuilding(&hq, 1, 1, 'HeadQuarters');
+    CreateBuilding(&hq, 1, 1, 'A');
 
     CreateMobita(&MOB,hq);
     printf("Money Mobita : %d\n", Uang(MOB));

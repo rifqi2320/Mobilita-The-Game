@@ -17,7 +17,7 @@ int main() {
   MakeListGadgetHQ(&l1);
   CreateInProgress(&ip);
   CreateMobita(&M, a);
-  CreateListBuilding(&LB, 50);
+  CreateListBuilding(&LB, 1);
   ELMTListB(LB, 0) = a;
 
   Uang(M) = 70000;
@@ -32,7 +32,6 @@ int main() {
     buyGadget(&l2, l1, &M);
   }
 
-  displayInventory(l2);
   int j;
   for (j = 0; j < JUMLAHGADGET; j++) {
     useGadget(&l2, &t, &M, &ip, LB);
