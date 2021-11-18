@@ -1,9 +1,6 @@
 #include "engine.h"
 #include <stdio.h>
 
-int waktu;
-boolean VIPFlag;
-
 int main() {
   waktu = 0;
   skor = 0;
